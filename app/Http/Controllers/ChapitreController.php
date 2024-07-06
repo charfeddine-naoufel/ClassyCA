@@ -12,7 +12,7 @@ class ChapitreController extends Controller
      */
     public function index()
     {
-        //
+        return view('Teacher.Chapitre.index');
     }
 
     /**

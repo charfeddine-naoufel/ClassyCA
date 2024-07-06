@@ -12,7 +12,7 @@ class OffreController extends Controller
      */
     public function index()
     {
-        //
+       return view('Admin.Offre.index');
     }
 
     /**

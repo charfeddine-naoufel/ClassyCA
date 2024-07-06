@@ -8,20 +8,8 @@
                         </a>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item" >
-                        <a class="nav-item-hold" href="{{route('matieres.index')}}">
-                            <i class="nav-icon i-Library"></i>
-                            <span class="nav-text">Matiere</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
-                    <li class="nav-item" >
-                        <a class="nav-item-hold" href="{{route('offre.index')}}">
-                            <i class="nav-icon i-Suitcase"></i>
-                            <span class="nav-text">Offres</span>
-                        </a>
-                        <div class="triangle"></div>
-                    </li>
+                    
+                    
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('chapitre.index')}}">
                             <i class="nav-icon i-Computer-Secure"></i>

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Accueil Student')
 @section('mega-menu')
 <div class="dropdown mega-menu d-none d-md-block">
                     <a href="#" class="btn text-muted dropdown-toggle mr-3" id="dropdownMegaMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mega Menu</a>

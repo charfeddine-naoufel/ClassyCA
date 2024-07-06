@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('matieres', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_mat');
+            $table->string('nom_matiere');
+            $table->string('label_matiere');
             $table->timestamps();
         });
     }

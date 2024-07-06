@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nom_off');
             $table->string('descr_off');
-            $table->decimal('montant_off',10,2);
+            $table->decimal('montant_off',6,3);
             $table->date('date_deb')->nullable();
             $table->date('date_fin')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

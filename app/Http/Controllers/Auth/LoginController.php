@@ -57,7 +57,7 @@ class LoginController extends Controller
           switch($user)
           {
             case 'admin':
-              return redirect('/');break;
+              return redirect('/admin');break;
             case 'student':
               return redirect('/student');break;
             case 'teacher':

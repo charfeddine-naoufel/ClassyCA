@@ -28,7 +28,18 @@ class MatiereController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('matieres.index')
+                        ->with('success','Nouvelle matière crée avec succés.');
+        dd($request);
+        $matiere=$request->validate([
+            'nom-matiere'=>'required',
+            'label-matiere'=>'required'
+        ]);
+        Matiere::create($request->all());
+     
+        return redirect()->route('matieres.index')
+                        ->with('success','Nouvelle matière crée avec succés.');
+        
     }
 
     /**

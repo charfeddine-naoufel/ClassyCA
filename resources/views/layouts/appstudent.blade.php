@@ -9,21 +9,19 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
     <link id="gull-theme" rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/perfect-scrollbar.css')}}">
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"> --}}
-    <link rel="stylesheet" href="{{asset('assets/styles/vendor/toastr.css')}}">
 
 </head>
 
 <body class="text-left">
     <!-- Pre Loader Strat  -->
-    {{-- <div class='loadscreen' id="preloader">
+    <div class='loadscreen' id="preloader">
 
         <div class="loader spinner-bubble spinner-bubble-primary">
 
 
 
         </div>
-    </div> --}}
+    </div>
     <!-- Pre Loader end  -->
     <div class="app-admin-wrap layout-sidebar-large clearfix">
         <div class="main-header">
@@ -159,15 +157,8 @@
         </div>
 
         <!-- header top menu end -->
-        @if (Auth::user()->role == 'admin')
-             @include('admin.header-admin')
-        @elseif (Auth::user()->role == 'teacher')
-            @include('admin.header-teacher')
-        @elseif (Auth::user()->role == 'student')
-            @include('admin.header-student')
-        @endif
 
-        
+        @include('admin.header-admin')
         <!--=============== Left side End ================-->
 
         <!-- ============ Body content start ============= -->
@@ -196,7 +187,7 @@
                 <div class="card o-hidden flex-row mb-4 d-flex">
                     <div class="list-thumb d-flex">
                         <!-- TUMBNAIL -->
-                        <img src="{{asset('assets/images/products/headphone-1.jpg')}}" alt="">
+                        <img src="./assets/images/products/headphone-1.jpg" alt="">
                     </div>
                     <div class="flex-grow-1 pl-2 d-flex">
                         <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
@@ -217,7 +208,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="list-item col-md-12 p-0">
+            <div class="list-item col-md-12 p-0">
                 <div class="card o-hidden flex-row mb-4 d-flex">
                     <div class="list-thumb d-flex">
                         <!-- TUMBNAIL -->
@@ -291,7 +282,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <!-- PAGINATION CONTROL -->
         <div class="col-md-12 mt-5 text-center">
             <nav aria-label="Page navigation example">
@@ -327,12 +318,6 @@
 
     <script src="{{asset('assets/js/es5/script.min.js')}}"></script>
     <script src="{{asset('assets/js/es5/sidebar.large.script.min.js')}}"></script>
-    {{-- <script src="assets/js/vendor/toastr.min.js"></script> --}}
-    {{-- <script src="assets/js/toastr.script.js"></script> --}}
-    
- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    @yield('scripts')
-    
 </body>
 
 </html>
