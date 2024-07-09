@@ -12,6 +12,11 @@ class TeacherController extends Controller
      */
     public function index()
     {
+        
+      return view('Admin.Enseignant.index');
+    }
+    public function home()
+    {
         $user = Auth::user();
       return view('Teacher.home',compact('user'));
     }

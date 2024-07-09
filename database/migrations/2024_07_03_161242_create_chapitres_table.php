@@ -16,12 +16,11 @@ return new class extends Migration
             $table->string('titre');
             $table->text('description')->nullable();
             $table->integer('trimestre');
-            $table->text('description')->nullable();
             $table->timestamps();
+            $table->foreignId('matiere_id');
 
             // Foreign key constraint
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
-            $table->foreign('mat_id')->references('id')->on('matiers')->onDelete('cascade');
+            $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('cascade');
         });
     }
 

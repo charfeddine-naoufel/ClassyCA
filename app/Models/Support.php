@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Support extends Model
 {
     use HasFactory;
+
+    public function chapitre()
+    {
+        return $this->belongsTo(Chapitre::class);
+    }
 }

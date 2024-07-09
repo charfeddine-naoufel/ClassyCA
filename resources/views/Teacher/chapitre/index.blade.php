@@ -1,4 +1,4 @@
-@extends('layouts.appteacher')
+@extends('layouts.app')
 @section('title', 'Chapitres')
 @section('content')
     <div class="main-content-wrap sidenav-open d-flex flex-column">

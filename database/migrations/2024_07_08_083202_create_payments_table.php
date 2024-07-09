@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('nomg');
+            $table->string('method');
+            $table->decimal('montant',6,3);
+            $table->date('date_pay')->default(date("Y-m-d"));
             $table->timestamps();
+            $table->foreignId('student_id');
+
             // Foreign key constraint
-            $table->foreign('id-mat')->references('id')->on('matiere')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('payments');
     }
 };

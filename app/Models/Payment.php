@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Seance extends Model
+class Payment extends Model
 {
     use HasFactory;
 
-    public function chapitre()
+    public function student()
     {
-        return $this->hasOne(Chapitre::class);
+        return $this->belongsTo(Student::class);
     }
 }

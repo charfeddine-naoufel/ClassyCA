@@ -33,6 +33,7 @@ return new class extends Migration
             
             $table->timestamps();
             $table->softDeletes();
+            $table->foreignId('user_id');
 
             // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

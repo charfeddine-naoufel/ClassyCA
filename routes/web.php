@@ -7,6 +7,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\ChapitreController;
+use App\Http\Controllers\ClasseController;
 
 
 /*
@@ -33,6 +34,9 @@ Auth::routes();
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin-dash');
     Route::resource('/matieres', MatiereController::class);
+    Route::resource('/enseignants', TeacherController::class);
+    Route::resource('/classes', ClasseController::class);
+
     Route::get('/offre', [OffreController::class, 'index'])->name('offre.index');
 
     
@@ -40,12 +44,13 @@ Route::middleware('admin')->prefix('admin')->group(function () {
   });
   // Student routes
   Route::middleware('student')->prefix('student')->group(function () {
-    Route::get('/', [StudentController::class, 'index'])->name('student-dash');
+    Route::get('/', [StudentController::class, 'home'])->name('student-dash');
   
   });
   // Teacher routes
   Route::middleware('teacher')->prefix('teacher')->group(function () {
-    Route::get('/', [TeacherController::class, 'index'])->name('teacher-dash');
+    Route::get('/', [TeacherController::class, 'home'])->name('teacher-dash');
     Route::get('/chapitre', [ChapitreController::class, 'index'])->name('chapitre.index');
   
   });
+

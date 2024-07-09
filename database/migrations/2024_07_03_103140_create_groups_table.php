@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('supports', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('nom');
-            $table->string('chemin');
+            $table->string('nomg');
             $table->timestamps();
-            $table->foreignId('chapitre_id');
-
+            $table->foreignId('classe_id');
             // Foreign key constraint
-            $table->foreign('chapitre_id')->references('id')->on('chapitres')->onDelete('cascade');
+            $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('supports');
+        Schema::dropIfExists('groups');
     }
 };

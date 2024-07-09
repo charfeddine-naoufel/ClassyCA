@@ -16,14 +16,18 @@ return new class extends Migration
             $table->string('plan');
             $table->string('type_abon');
             $table->enum('status', [ 'active', 'canceled','expired'])->default('active');
-            $table->decimal('remise',10,2)->nullable();
+            $table->decimal('remise',6,3)->nullable();
+            $table->decimal('montant',6,3);
             $table->date('date_deb')->nullable();
             $table->date('date_fin')->nullable();
             $table->timestamps();
+            $table->foreignId('student_id');
+            $table->foreignId('offre_id');
+           
 
             // Foreign key constraint
-            $table->foreign('id_student')->references('id')->on('students')->onDelete('cascade');
-            $table->foreign('id_offre')->references('id')->on('offres')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->foreign('offre_id')->references('id')->on('offres')->onDelete('cascade');
         });
     }
 

@@ -30,12 +30,14 @@ return new class extends Migration
 
             
            
-            $table->boolean('status')->default(1)->comment('1 active, 0 inactive');
+            $table->boolean('status')->default(0)->comment('1 active, 0 inactive');
             $table->string('password');
           
             
             $table->timestamps();
             $table->softDeletes();
+            $table->foreignId('user_id');
+            $table->foreignId('group_id');
 
             // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

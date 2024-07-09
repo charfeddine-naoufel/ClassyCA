@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
     <link id="gull-theme" rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/perfect-scrollbar.css')}}">
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/toastr.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/styles/vendor/sweetalert2.min.css')}}">
 
 </head>
 
@@ -162,9 +164,9 @@
         @if (Auth::user()->role == 'admin')
              @include('admin.header-admin')
         @elseif (Auth::user()->role == 'teacher')
-            @include('admin.header-teacher')
+            @include('teacher.header-teacher')
         @elseif (Auth::user()->role == 'student')
-            @include('admin.header-student')
+            @include('student.header-student')
         @endif
 
         
@@ -331,6 +333,14 @@
     {{-- <script src="assets/js/toastr.script.js"></script> --}}
     
  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+ <script>
+
+    $(document).ready(function(){
+      $('.nav-item').click(function(){
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+    });
+        </script>
     @yield('scripts')
     
 </body>

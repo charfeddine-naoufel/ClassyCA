@@ -19,10 +19,12 @@ return new class extends Migration
 			$table->time('heure_fin');
             $table->boolean('live')->default(0)->comment('1 live, 0 recorded');
             $table->timestamps();
+            $table->foreignId('course_id');
+            $table->foreignId('chapitre_id');
+           
 
              // Foreign key constraint
-             $table->foreign('mat_id')->references('id')->on('matiers')->onDelete('cascade');
-             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
              $table->foreign('chapitre_id')->references('id')->on('chapitres')->onDelete('cascade');
         });
     }

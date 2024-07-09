@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Classe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClasseController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $classes = Classe::all();
+        // dd($classes);
+        return view('Admin.Classe.index',compact('classes'));
     }
 
     /**
@@ -28,7 +31,31 @@ class ClasseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+    //    dd($request);
+    $rules = array(
+        'niveau'       => 'required',
+        'section'      => 'required',
+        'slug'      => 'required'
+    );
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+        return redirect()->route('classes.index')
+        ->with('Error','Vérifiez vos champs.');
+    } else {
+        // store
+        $classe = new Classe;
+        $classe->niveau = $request-> niveau;
+        $classe->section      =  $request-> section;
+        $classe->slug      =  $request-> slug;
+        $classe->save();
+
+        // redirect
+        return redirect()->route('classes.index')
+        ->with('success','Nouvelle classe crée avec succés.');
+    }
+
+        
     }
 
     /**
@@ -42,24 +69,57 @@ class ClasseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Classe $classe)
-    {
-        //
+    public function edit($id)
+    { 
+        $classe = Classe::find($id); 
+                return response()->json([
+                               'success' => true,
+                                'data' => $classe 
+                                  ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Classe $classe)
+    public function update(Request $request, $id)
     {
-        //
+        
+        
+               $rules = array(
+                'niveau'       => 'required',
+                'section'      => 'required',
+                'slug'      => 'required'
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect()->route('classes.index')
+                ->with('Error','Vérifiez vos champs.');
+            } else {
+                // update
+                $classe = Classe::find($id);
+                $classe->niveau = $request-> niveau;
+                $classe->section      =  $request-> section;
+                $classe->slug      =  $request-> slug;
+                $classe->save();
+        
+                // redirect
+                // return redirect()->route('classes.index')
+                // ->with('success','Matière modifiée avec succés.');
+
+                return response()->json(['success' => true,    
+                       ]); 
+            }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Classe $classe)
+    public function destroy($id)
     {
-        //
+        $classe=Classe::find($id);
+        $classe->delete();
+    
+        return redirect()->route('classes.index')
+                        ->with('success','Classe supprimée avec succés');
     }
 }

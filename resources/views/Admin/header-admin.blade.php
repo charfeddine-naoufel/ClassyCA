@@ -30,18 +30,18 @@
                         <div class="triangle"></div>
                     </li>
 
-                    <li class="nav-item" data-item="widgets">
-                        <a class="nav-item-hold" href="#">
+                    <li class="nav-item" >
+                        <a class="nav-item-hold" href="{{route('enseignants.index')}}">
                             <i class="nav-icon i-Computer-Secure"></i>
-                            <span class="nav-text">Widgets</span>
+                            <span class="nav-text">Enseignants</span>
                         </a>
                         <div class="triangle"></div>
                     </li>
 
-                    <li class="nav-item " data-item="charts">
-                        <a class="nav-item-hold" href="#">
+                    <li class="nav-item " >
+                        <a class="nav-item-hold" href="{{route('classes.index')}}">
                             <i class="nav-icon i-File-Clipboard-File--Text"></i>
-                            <span class="nav-text">Charts</span>
+                            <span class="nav-text">Classes</span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -159,110 +159,10 @@
                 </ul>
                 
 
-                <ul class="childNav" data-parent="widgets">
-                    <li class="nav-item">
-                        <a class="" href="widget-card.html">
-                            <i class="nav-icon i-Receipt-4"></i>
-                            <span class="item-name">widget card</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-        
-        
-                        <a class=""
-                            href="widgets-statistics.html">
-                            <i class="nav-icon i-Receipt-4"></i>
-                            <span class="item-name">widget statistics</span>
-                        </a>
-                    </li>
-        
-                    <li class="nav-item">
-        
-        
-                        <a class="" href="widget-list.html">
-                            <i class="nav-icon i-Receipt-4"></i>
-                            <span class="item-name">Widget List <span class="ml-2 badge badge-pill badge-danger">
-                                    New</span></span>
-                        </a>
-                    </li>
-        
-                    <li class="nav-item">
-        
-        
-                        <a class="" href="widget-app.html">
-                            <i class="nav-icon i-Receipt-4"></i>
-                            <span class="item-name">Widget App <span class="ml-2 badge badge-pill badge-danger"> New</span>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-        
-        
-                        <a class=""
-                            href="weather-card.html">
-                            <i class="nav-icon i-Receipt-4"></i>
-                            <span class="item-name"> Weather App <span class="ml-2 badge badge-pill badge-danger"> New</span>
-                            </span>
-                        </a>
-                    </li>
-        
-                </ul>
+               
 
 
-                <!-- chartjs -->
-                <ul class="childNav" data-parent="charts">
-                    <li class="nav-item">
-                        <a class="" href="charts.echarts.html">
-                            <i class="nav-icon i-File-Clipboard-Text--Image"></i>
-                            <span class="item-name">echarts</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="" href="charts.chartsjs.html">
-                            <i class="nav-icon i-File-Clipboard-Text--Image"></i>
-                            <span class="item-name">ChartJs</span>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown-sidemenu">
-                        <a class="" href="">
-                            <i class="nav-icon i-File-Clipboard-Text--Image"></i>
-                            <span class="item-name">Apex Charts</span>
-                            <i class="dd-arrow i-Arrow-Down"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li><a class=""
-                                    href="charts.apexAreaCharts.html">Area Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexBarCharts.html">Bar Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexBubbleCharts.html">Bubble Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexColumnCharts.html">Column Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexCandleStickCharts.html">CandleStick Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexLineCharts.html">Line Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexMixCharts.html">Mix Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexPieDonutCharts.html">PieDonut Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexRadarCharts.html">Radar Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexRadialBarCharts.html">RadialBar Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexScatterCharts.html">Scatter Charts</a></li>
-                            <li><a class=""
-                                    href="charts.apexSparklineCharts.html">Sparkline Charts</a></li>
-        
-                        </ul>
-                    </li>
-        
-        
-        
-        
-        
-                </ul>
+                
 
 
                 

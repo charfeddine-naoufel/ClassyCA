@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Matiere;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MatiereController extends Controller
 {
@@ -12,7 +13,9 @@ class MatiereController extends Controller
      */
     public function index()
     {
-        return view('Admin.Matiere.index');
+        $matieres = Matiere::all();
+        // dd($matieres);
+        return view('Admin.Matiere.index',compact('matieres'));
     }
 
     /**
@@ -28,17 +31,28 @@ class MatiereController extends Controller
      */
     public function store(Request $request)
     {
+        
+    //    dd($request);
+    $rules = array(
+        'nom_matiere'       => 'required',
+        'label_matiere'      => 'required'
+    );
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
         return redirect()->route('matieres.index')
-                        ->with('success','Nouvelle matière crée avec succés.');
-        dd($request);
-        $matiere=$request->validate([
-            'nom-matiere'=>'required',
-            'label-matiere'=>'required'
-        ]);
-        Matiere::create($request->all());
-     
+        ->with('Error','Vérifiez vos champs.');
+    } else {
+        // store
+        $matiere = new Matiere;
+        $matiere->nom_matiere = $request-> nom_matiere;
+        $matiere->label_matiere      =  $request-> label_matiere;
+        $matiere->save();
+
+        // redirect
         return redirect()->route('matieres.index')
-                        ->with('success','Nouvelle matière crée avec succés.');
+        ->with('success','Nouvelle matière crée avec succés.');
+    }
+
         
     }
 
@@ -53,9 +67,13 @@ class MatiereController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Matiere $matiere)
-    {
-        //
+    public function edit($id)
+    { 
+        $matiere = Matiere::find($id); 
+                return response()->json([
+                               'success' => true,
+                                'data' => $matiere 
+                                  ]);
     }
 
     /**
@@ -63,7 +81,30 @@ class MatiereController extends Controller
      */
     public function update(Request $request, Matiere $matiere)
     {
-        //
+        
+        
+               $rules = array(
+                'nom_matiere'       => 'required',
+                'label_matiere'      => 'required'
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect()->route('matieres.index')
+                ->with('Error','Vérifiez vos champs.');
+            } else {
+                // update
+                // $matiere = Matiere::find($id);
+                $matiere->nom_matiere = $request-> nom_matiere;
+                $matiere->label_matiere      =  $request-> label_matiere;
+                $matiere->save();
+        
+                // redirect
+                // return redirect()->route('matieres.index')
+                // ->with('success','Matière modifiée avec succés.');
+
+                return response()->json(['success' => true,    
+                       ]); 
+            }
     }
 
     /**
@@ -71,6 +112,9 @@ class MatiereController extends Controller
      */
     public function destroy(Matiere $matiere)
     {
-        //
+        $matiere->delete();
+    
+        return redirect()->route('matieres.index')
+                        ->with('success','Matière supprimée avec succés');
     }
 }
