@@ -8,6 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nom-fr',
+        'nom-ar',
+        'prenom-fr',
+        'prenom-ar',
+        'specialite',
+        'email',
+        'password',
+        'adresse',
+        'tel',
+        'tel2',
+        'bio',
+    ];
    
     public function matiere()
     {

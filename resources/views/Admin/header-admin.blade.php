@@ -16,7 +16,7 @@
                         <div class="triangle"></div>
                     </li>
                     <li class="nav-item" >
-                        <a class="nav-item-hold" href="{{route('offre.index')}}">
+                        <a class="nav-item-hold" href="{{route('offres.index')}}">
                             <i class="nav-icon i-Suitcase"></i>
                             <span class="nav-text">Offres</span>
                         </a>
@@ -25,7 +25,7 @@
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('chapitre.index')}}">
                             <i class="nav-icon i-Computer-Secure"></i>
-                            <span class="nav-text">Chapitre</span>
+                            <span class="nav-text">Packs</span>
                         </a>
                         <div class="triangle"></div>
                     </li>

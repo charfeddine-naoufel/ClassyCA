@@ -13,7 +13,7 @@
 <body class="text-left">
     <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/back.jpg')}});background-size:contain">
         <div class="auth-content">
-            <div class="card o-hidden">
+            <div class="card o-hidden " style="box-shadow: 4px 7px 24px -4px rgba(0,0,0,0.62);">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="p-4">

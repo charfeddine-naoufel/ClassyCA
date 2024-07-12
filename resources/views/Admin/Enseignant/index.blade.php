@@ -21,84 +21,74 @@
                         <div class="d-flex justify-content-between">
 
                             <h4 class="card-title mb-3"> Enseignants</h4>
-                            <button type="button" class="btn btn-primary btn-icon m-1" data-toggle="modal" data-target="#verifyModalContentprof">
+                            <button type="button" class="btn btn-primary btn-icon m-1" data-toggle="modal"
+                                data-target="#verifyModalContent" data-whatever="@mdo" id="toast">
                                 <span class="ul-btn__icon"><i class="i-Add"></i></span>
                                 <span class="ul-btn__text">Ajouter</span>
                             </button>
                         </div>
 
-                        
+                        <p>
+                            Vous pouvez créer, mettre à jour ou supprimer un Enseignant.
+
+                        </p>
                         <div class="table-responsive">
-                            <table id="scroll_horizontal_table" class="table table-sm table-striped " style="width:100%">
+                            <table class="table ">
                                 <thead class="thead-dark">
 
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Code Enseignant</th>
-                                        <th scope="col">Nom Enseignant</th>
-                                        <th scope="col">Matière</th>
-                                        <th scope="col">Grade</th>
-                                        <th scope="col">Type</th>
+                                        <th scope="col">Nom prenom</th>
+                                        <th scope="col">الاسم واللقب</th>
+                                        <th scope="col">Spécialité</th>
+                                        <th scope="col">Adresse</th>
+                                        <th scope="col">Tel1 / Tel2</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Bio</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">User</th>
 
 
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+
+                                    @foreach($enseignants as $enseignant)
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td><strong>2 </strong></td>
+                                        <th scope="row">{{$loop->iteration }}</th>
+                                        
+                                        <td><strong>{{$enseignant->nom_fr}} {{$enseignant->prenom_fr}}</strong></td>
+                                        <td><strong>{{$enseignant->nom_ar}} {{$enseignant->prenom_ar}}</strong></td>
+                                        <td><strong>{{$enseignant->specialite}} </strong></td>
+                                        <td><strong>{{$enseignant->adresse}} </strong></td>
+                                        <td><strong>{{$enseignant->tel}}<i class="text-10 text-warning i-Telephone"></i> {{$enseignant->tel2}}</strong></td>
+                                        <td><strong>{{$enseignant->email}} </strong></td>
+                                        <td><strong>{{$enseignant->bio}} </strong></td>
                                         <td>
-                                            <strong>
-
-                                                3
-                                            </strong>
-
-                                        </td>
-                                        <td>
-                                            <strong>
-
-                                                4
-                                            </strong>
-
-                                        </td>
-                                        <td>
-                                            <strong>
-
-                                                5
-                                            </strong>
-
-                                        </td>
-                                        <td>
-                                            <strong>
-
-                                                6
-                                            </strong>
-
-                                        </td>
+                                            @if($enseignant->status=="1")
+                                            <span class="badge badge-pill badge-success m-2">Active</span>
+                                            @else
+                                            <span class="badge badge-pill badge-danger m-2">Inactive</span>
+                                            @endif
+                                             </td>
+                                        <td><strong>{{$enseignant->user_id}} </strong></td>
 
 
                                         <td class="d-flex">
-                                            <button class="btn text-success bg-transparent btn-icon  mr-2 editbtn" data-id="" data-toggle="modal" data-target="#editModalContent"><i class="nav-icon i-Pen-5 font-weight-bold"></i></button>
+                                            <button class="btn text-success bg-transparent btn-icon  mr-2 editbtn" data-id="{{$enseignant->id}}"  data-toggle="modal" data-target="#editModalContent" ><i class="nav-icon i-Pen-5 font-weight-bold"></i></button>
 
-                                            <!-- <a href="#" class="text-success mr-2">
-                                                    <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                                                </a> -->
-                                            <form action="" method="post" class="inline-block">
+                                            <form action="{{ route('enseignants.destroy', $enseignant->id)}}" method="post" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <!-- <a  class="text-danger mr-2" type="submit">
-                                                    <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                                </a> -->
-                                                <button class="btn text-danger  btn-icon  mr-2 alert-confirm"><i class="nav-icon i-Close-Window font-weight-bold"></i></i></button>
+                                                
+                                                <button class="btn text-danger  btn-icon  mr-2 alert-confirm"   ><i class="nav-icon i-Close-Window font-weight-bold"></i></i></button>
 
                                             </form>
 
                                         </td>
                                     </tr>
-                                   
-
+                                    @endforeach
                                 </tbody>
                             </table>
 
@@ -106,151 +96,281 @@
 
 
                     </div>
-                    <!-- ici     -->
+
                 </div>
             </div>
         </div>
 
 
         <!-- Verify Modal content -->
-        <div class="modal fade" id="verifyModalContentprof" tabindex="-1" role="dialog" aria-labelledby="verifyModalContentprof" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade bd-example-modal-lg" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="verifyModalContentprof_title">Nouveau Enseignant</h5>
+                        <h5 class="modal-title" id="verifyModalContent_title">Nouvelle Classe</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="post" action="{{route('enseignants.store') }}">
+                    <form method="post" action="{{ route('enseignants.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
 
-                            <div class="form-group">
-                                <label for="recipient-name-1" class="col-form-label"> Code Enseignant:</label>
-                                <input type="text" class="form-control" name="CodeEnseignant">
-                            </div>
-                            <div class="form-group">
-                                <label for="NomEnseignant" class="col-form-label">Nom Enseignant:</label>
-                                <input type="text" class="form-control" name="NomEnseignant">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Code Matiere</label>
-                                <select class="form-control" id="Matiere_id" name="Matiere_id">
-                                    <option value="0">Choisir ...</option>
-                                    
-                                    <option value=""></option>
-                                    
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="Grade" class="col-form-label">Grade:</label>
-                                <input type="text" class="form-control" name="Grade" id="gr">
-                            </div>
-                            <div class="form-group">
-                                <label for="Type" class="col-form-label">Type:</label>
-                                <input type="text" class="form-control" name="Type" id="ty">
-                            </div>
-                            <div class="form-group">
-                                <label for="classe" class="col-form-label">Classe:</label>
-                                <select class="classe form-control" name="classes[]" multiple="multiple" style="width: 100%">
-                                    
-                                    <option value="">111</option>
-                                   
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Utilisateur</label>
-                                <select class="form-control" id="user_id" name="User_id">
-                                    <option value="0">Choisir ...</option>
-                                    
-                                    <option value=""></option>
-                                    
-
-                                </select>
-                            </div>
-                           
+                            <div class="card">
+                                <div class="card-body">
+                                  
+                                    <div class="card-body">
+                                      {{-- <div class="card-title">Enseignant Info</div> --}}
+              
+                                      <div class="form-row ">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext11" class="ul-form__label">Nom fr:</label>
+                                          <input type="text" class="form-control" id="inputtext11" name="nom_fr"/>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail12" class="ul-form__label">Prénom fr:</label>
+                                          <input type="text" class="form-control" id="inputEmail12" name="prenom_fr"/>
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext11" class="ul-form__label">Nom ar:</label>
+                                          <input type="text" class="form-control" id="inputtext11" name="nom_ar"/>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail12" class="ul-form__label">Prénom ar:</label>
+                                          <input type="text" class="form-control" id="inputEmail12" name="prenom_ar" />
+                                        </div>
+                                      </div>
+              
+                                      {{-- <div class="custom-separator"></div> --}}
+              
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext14" class="ul-form__label">Spécialité:</label>
+                                          <input type="text" class="form-control" id="inputtext14"name="specialite" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail15" class="ul-form__label">Adresse:</label>
+                                          <div class="input-right-icon">
+                                            <input type="text" class="form-control" id="inputEmail15" name="adresse"/>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {{-- <div class="custom-separator"></div> --}}
+              
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext14" class="ul-form__label">Télephone 1:</label>
+                                          <input type="text" class="form-control" id="inputtext14" name="tel" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail15" class="ul-form__label">Télephone 2:</label>
+                                          <div class="input-right-icon">
+                                            <input type="text" class="form-control" id="inputEmail15" name="tel2"/>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {{-- <div class="custom-separator"></div> --}}
+              
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext14" class="ul-form__label">Email:</label>
+                                          <input type="text" class="form-control" id="inputtext14" name="email" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail15" class="ul-form__label">Password:</label>
+                                          <div class="input-right-icon">
+                                            <input type="text" class="form-control" id="inputEmail15"name="password" />
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext14" class="ul-form__label">Photo:</label>
+                                          <input type="file" class="form-control-file" id="photo" name="photo">                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail15" class="ul-form__label">Status:</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="status" id="gridRadios1" value="1" checked>
+                                                    <label class="form-check-label ml-3" for="gridRadios1">
+                                                        Active
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="status" id="gridRadios2" value="0">
+                                                    <label class="form-check-label ml-3" for="gridRadios2">
+                                                        Inactive
+                                                    </label>
+                                                </div>
+                                                
+                                            </div>
+                                          </div>
+                                      </div>
+              
+                                      {{-- <div class="custom-separator"></div> --}}
+              
+                                      <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                          <label for="inputtext14" class="ul-form__label">Bio:</label>
+                                          <textarea class="form-control form-control-rounded" placeholder="Type your message" name="bio" id="message" cols="30" rows="3"></textarea>                                        </div>
+                                       
+              
+                                        
+                                      </div>
+                                    </div>
+                                 
+                                </div>
+                              </div>
 
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button type="submit" class="btn btn-primary ">Enregistrer</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         <!-- Edit Modal content -->
-        <div class="modal fade" id="editModalContent" tabindex="-1" role="dialog" aria-labelledby="editModalContent" aria-hidden="true">
+        <div class="modal fade modaledit" id="editModalContent" tabindex="-1" role="dialog" aria-labelledby="editModalContent"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editModalContent_title">Modifier Enseignant</h5>
+                        <h5 class="modal-title" id="editModalContent_title">Modifier Classe</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form enctype="multipart/form-data" id="myform">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
 
-                            <div class="form-group">
-                                <label for="recipient-name-1" class="col-form-label"> Code Enseignant:</label>
-                                <input type="text" class="form-control" id="CodeEnseignant" name="CodeEnseignant">
-                                <input type="hidden" class="form-control" id="IdEnseignant" name="IdEnseignant">
-                                <!-- <input type="hidden" class="form-control" id="userid" name="userid"> -->
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name-2" class="col-form-label">Nom Enseignant:</label>
-                                <input type="text" class="form-control" id="NomEnseignant" name="NomEnseignant">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Matiere</label>
-                                <select class="form-control mat" id="Matiere_id" name="Matiere_id">
-                                    <option value="0">Choisir ...</option>
-                                    
-                                    <option value=""></option>
-                                    
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="Grade" class="col-form-label">Grade:</label>
-                                <input type="text" class="form-control" id="Grade" name="Grade">
-                            </div>
-                            <div class="form-group">
-                                <label for="Type" class="col-form-label">Type:</label>
-                                <input type="text" class="form-control" id="Type" name="Type">
-                            </div>
-                            <div class="form-group">
-                                <label for="classe" class="col-form-label">Classe:</label>
-                                <select class="classe myclasse form-control" name="classes[]"  multiple="multiple" style="width: 100%">
-                                    
-                                    <option value=""></option>
-                                    
-
-                                </select>
-                                <small id="oldclasses" class="ul-form__text form-text text-success ">
-                                                                    
-                                </small>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Utilisateur</label>
-                                <select class="form-control user" id="user_id1" name="User_id">
-                                    <option value="0">Choisir ...</option>
-                                    
-                                    <option value=""></option>
-                                    
-
-                                </select>
-                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                  
+                                    <div class="card-body">
+                                      {{-- <div class="card-title">Enseignant Info</div> --}}
+              
+                                      <div class="form-row ">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext11" class="ul-form__label">Nom fr:</label>
+                                          <input type="text" class="form-control" id="nom_fr" name="nom_fr"/>
+                                          <input type="hidden" class="form-control" id="IdEnseignant" name="IdEnseignant">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail12" class="ul-form__label">Prénom fr:</label>
+                                          <input type="text" class="form-control" id="prenom_fr" name="prenom_fr"/>
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext11" class="ul-form__label">Nom ar:</label>
+                                          <input type="text" class="form-control" id="nom_ar" name="nom_ar"/>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail12" class="ul-form__label">Prénom ar:</label>
+                                          <input type="text" class="form-control" id="prenom_ar" name="prenom_ar" />
+                                        </div>
+                                      </div>
+              
+                                      {{-- <div class="custom-separator"></div> --}}
+              
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext14" class="ul-form__label">Spécialité:</label>
+                                          <input type="text" class="form-control" id="specialite"name="specialite" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail15" class="ul-form__label">Adresse:</label>
+                                          <div class="input-right-icon">
+                                            <input type="text" class="form-control" id="adresse" name="adresse"/>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {{-- <div class="custom-separator"></div> --}}
+              
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext14" class="ul-form__label">Télephone 1:</label>
+                                          <input type="text" class="form-control" id="tel" name="tel" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail15" class="ul-form__label">Télephone 2:</label>
+                                          <div class="input-right-icon">
+                                            <input type="text" class="form-control" id="tel2" name="tel2"/>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {{-- <div class="custom-separator"></div> --}}
+              
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext14" class="ul-form__label">Email:</label>
+                                          <input type="text" class="form-control" id="email" name="email" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail15" class="ul-form__label">Password:</label>
+                                          <div class="input-right-icon">
+                                            <input type="text" class="form-control" id="password"name="password" />
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputtext14" class="ul-form__label">Photo:</label>
+                                          <input type="file" class="form-control-file" id="photo" name="photo">                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail15" class="ul-form__label">Status:</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="status" id="status1" value="1" checked>
+                                                    <label class="form-check-label ml-3" for="gridRadios1">
+                                                        Active
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="status" id="status0" value="0">
+                                                    <label class="form-check-label ml-3" for="gridRadios2">
+                                                        Inactive
+                                                    </label>
+                                                </div>
+                                                
+                                            </div>
+                                          </div>
+                                      </div>
+              
+                                      {{-- <div class="custom-separator"></div> --}}
+              
+                                      <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                          <label for="inputtext14" class="ul-form__label">Bio:</label>
+                                          <textarea class="form-control form-control-rounded" placeholder="Type your message" name="bio" id="bio" cols="30" rows="3"></textarea>                                        </div>
+                                       
+              
+                                        
+                                      </div>
+                                    </div>
+                                 
+                                </div>
+                              </div>
+                             
 
                         </div>
-       
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="" class="btn btn-primary updatebtn">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
         <!-- Footer Start -->
@@ -265,11 +385,15 @@
 <script>
     @if (Session::has('success'))
     
-                toastr.success('Nouvelle matière ajoutée avec succes',"Success", {timeOut: 5000});
+                toastr.success('Nouvelle classe ajoutée avec succes',"Success", {timeOut: 5000});
     
-        
+     @elseif(Session::has('Error'))   
+     toastr.error('Vérifiez les champs',"Error", {timeOut: 5000});
+
     @endif
 </script>
+<script src="{{asset('assets/js/vendor/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('assets/js/sweetalert.script.js')}}"></script>
 
     <script>
         $(document).ready(function() {
@@ -293,7 +417,7 @@
                     form.submit();
                     swal(
                         'Supprimée!',
-                        'La matière a bien été supprimée.',
+                        'La classe a bien été supprimée.',
                         'success'
                     )
                 }, function(dismiss) {
@@ -314,16 +438,26 @@
                 let id = $(this).data('id');
 
 
-                // var action ="{{ URL::to('matieres') }}/"+id;
+                // var action ="{{ URL::to('classes') }}/"+id;
 
 
-                // var url = "{{ URL::to('matieres') }}";
+                // var url = "{{ URL::to('classes') }}";
 
-                $.get("matieres/" + id + "/edit", function(data) {
+                $.get("enseignants/" + id + "/edit", function(data) {
                     console.log(data.data);
-                    $('#CodeMatiere').val(data.data['CodeMatiere']);
-                    $('#NomMatiere').val(data.data['NomMatiere']);
-                    $('#IdMatiere').val(data.data['id']);
+                    $('#nom_fr').val(data.data['nom_fr']);
+                    $('#nom_ar').val(data.data['nom_ar']);
+                    $('#prenom_fr').val(data.data['prenom_fr']);
+                    $('#prenom_ar').val(data.data['prenom_ar']);
+                    $('#specialite').val(data.data['specialite']);
+                    $('#adresse').val(data.data['adresse']);
+                    $('#tel').val(data.data['tel']);
+                    $('#tel2').val(data.data['tel2']);
+                    $('#email').val(data.data['email']);
+                    $('#photo').val(data.data['photo']);
+                    $('#status').val(data.data['status']);
+                    $('#bio').val(data.data['bio']);
+                    $('#IdEnseignant').val(data.data['id']);
 
 
 
@@ -335,25 +469,49 @@
             });
             $('.updatebtn').on('click', function(e) {
                 e.preventDefault();
-                var CodeMatiere = $('#CodeMatiere').val();
-                var NomMatiere = $('#NomMatiere').val();
-                var id = $('#IdMatiere').val();
-
+                var nom_fr = $('#nom_fr').val();
+                var nom_ar = $('#nom_ar').val();
+                var prenom_fr = $('#prenom_fr').val();
+                var prenom_ar = $('#prenom_ar').val();
+                var specialite = $('#specialite').val();
+                var adresse = $('#adresse').val();
+                var adresse = $('#adresse').val();
+                var tel = $('#tel').val();
+                var tel2 = $('#tel2').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+                var photo = $('#photo').val();
+                var bio = $('#bio').val();
+                var id = $('#IdEnseignant').val();
+                var status =$("#myform input[type='radio']:checked").val();
+                var URL ="enseignants/"+ id;
+                console.log("url===",URL)
                 $.ajax({
                     method: "PUT",
-                    url: "matieres/" + id,
+                    url: URL,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    data: {
-                        id: id,
-                        CodeMatiere: CodeMatiere,
-                        NomMatiere: NomMatiere,
-
+                    data: { id: id,
+                        nom_fr: nom_fr,
+                        prenom_fr: prenom_fr,
+                        nom_ar: nom_ar,
+                        prenom_ar: prenom_ar,
+                        specialite: specialite,
+                        adresse: adresse,
+                        tel: tel,
+                        email : email,
+                        password : password ,
+                        photo : photo ,
+                        status : status ,
+                        bio : bio 
+                        
                     },
+
                     success: function(data) {
-                        $('.modal').modal('hide');
-                        // alert('update done')
+                        $('.modaledit').modal('hide');
+                        window.location.reload();
+                        //  alert('update done')
 
                     }
                 });

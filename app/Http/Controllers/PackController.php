@@ -2,29 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pack;
 use Illuminate\Http\Request;
-use Auth;
 
-class StudentController extends Controller
+class PackController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
-    //   return view('Admin.Student.index',compact('user'));
+        //
     }
-     public function home()
-    {
-        $user = Auth::user();
-      return view('Student.home',compact('user'));
-    }
-    public function calendrier()
-    {
-        
-      return view('Student.calendrier');
-    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -44,7 +34,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Pack $pack)
     {
         //
     }
@@ -52,7 +42,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Pack $pack)
     {
         //
     }
@@ -60,7 +50,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Pack $pack)
     {
         //
     }
@@ -68,7 +58,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pack $pack)
     {
         //
     }

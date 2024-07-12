@@ -26,7 +26,7 @@
                                                         <div class="modal-dialog modal-lg">
                                                           <div class="modal-content">
                                                                 <div class="modal-body">
-                                                                        <form method="POST" action="" enctype="multipart/form-data">
+                                                                        <form method="POST" action="{{route('offres.store')}}" enctype="multipart/form-data">
                                                                             @csrf
                                                                                 <div class="form-group row">
                                                                                     <label for="nom_off" class="col-sm-2 col-form-label">Nom</label>
@@ -40,12 +40,6 @@
                                                                                         <input type="text" class="form-control" id="inputName" placeholder="Description" name="descr_off">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="form-group row">
-                                                                                    <label for="montant_off" class="col-sm-2 col-form-label">Montant</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="number" class="form-control" id="" placeholder="Montant" name="montant_off">
-                                                                                    </div>
-                                                                                </div>
                                                                                 
                                                                                 <div class="form-group row">
                                                                                     <label for="date_deb" class="col-sm-2 col-form-label">Date Début:</label>
@@ -57,12 +51,6 @@
                                                                                     <label for="date_fin" class="col-sm-2 col-form-label">Date Fin:</label>
                                                                                     <div class="col-sm-10">
                                                                                         <input type="date" class="form-control" id="" placeholder="Date début" name="date_fin">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label for="photo" class="col-sm-2 col-form-label">Photo:</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="file" class="form-control" id="" placeholder="Photo" name="photo">
                                                                                     </div>
                                                                                 </div>
                                                                                 
@@ -81,64 +69,49 @@
                                         </div>
                                         <!-- end::modal addd-->
                                         <!-- begin::modal update-->
-                                        <div class="ul-card-list__modal">
-                                                <div class="modal fade " id="modal-update" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg">
-                                                          <div class="modal-content">
-                                                                <div class="modal-body">
-                                                                        <form method="POST" action="" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                                <div class="form-group row">
-                                                                                    <label for="nom_off" class="col-sm-2 col-form-label">Nom</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="text" class="form-control" id="inputName" placeholder="Nom" name="nom_off">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label for="descr_off" class="col-sm-2 col-form-label">Description</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="text" class="form-control" id="inputName" placeholder="Description" name="descr_off">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label for="montant_off" class="col-sm-2 col-form-label">Montant</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="number" class="form-control" id="" placeholder="Montant" name="montant_off">
-                                                                                    </div>
-                                                                                </div>
-                                                                                
-                                                                                <div class="form-group row">
-                                                                                    <label for="date_deb" class="col-sm-2 col-form-label">Date Début:</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="date" class="form-control" id="" placeholder="Date début" name="date_deb">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label for="date_fin" class="col-sm-2 col-form-label">Date Fin:</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="date" class="form-control" id="" placeholder="Date début" name="date_fin">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label for="photo" class="col-sm-2 col-form-label">Photo:</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="file" class="form-control" id="" placeholder="Photo" name="photo">
-                                                                                    </div>
-                                                                                </div>
-                                                                                
-                                                                               
-                                                                                <div class="form-group row">
-                                                                                    <div class="col-sm-10">
-                                                                                        
-                                                                                        <button type="submit" class="btn btn-success">Modifier</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                </div>
-                                                          </div>
+                                        <div class="modal fade modaledit" id="editModalContent" tabindex="-1" role="dialog" aria-labelledby="editModalContent"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalContent_title">Modifier Offre</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form>
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-body">
+                            
+                                                        <div class="form-group">
+                                                            <label for="recipient-name-1" class="col-form-label"> Nom Offre:</label>
+                                                            <input type="text" class="form-control" id="nom_off" name="nom_off">
+                                                            <input type="hidden" class="form-control" id="Idoffre" name="Idoffre">
                                                         </div>
-                                                      </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name-2" class="col-form-label">Description:</label>
+                                                            <input type="text" class="form-control" id="descr_off" name="descr_off">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name-2" class="col-form-label">Date début:</label>
+                                                            <input type="date" class="form-control" id="date_deb" name="date_deb">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name-2" class="col-form-label">Date fin:</label>
+                                                            <input type="date" class="form-control" id="date_fin" name="date_fin">
+                                                        </div>
+                            
+                            
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                        <button type="" class="btn btn-primary updatebtn">Enregistrer</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
+                                    </div>
                                         <!-- end::modal update-->
 
                                         <div class="card-body">
@@ -156,82 +129,39 @@
                                             <th scope="col">Nom offre</th>
                                             <th scope="col">Description</th>
 
-                                            <th scope="col">Montant</th>
+                                           
                                             <th scope="col">Date Debut</th>
                                             <th scope="col">Date Fin</th>
-                                            <th scope="col">Photo</th>
+                                            
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Watch</td>
-                                            <td>
-
-                                                12-10-2019
-
-                                            </td>
-                                            <td>1</td>
-                                            <td>1</td>
-
-                                            <td>$30</td>
-                                            <td><span class="badge badge-success">Delivered</span></td>
-
-                                            <td>
-                                                <a href="#" class="text-success mr-2" data-toggle="modal" data-target="#modal-update">
-                                                    <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                                                </a>
-                                                <a href="#" class="text-danger mr-2">
-                                                    <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Iphone</td>
-                                            <td>
-
-                                                23-10-2019
-
-                                            </td>
-                                            <td>2</td>
-                                            <td>2</td>
+                                        @foreach ($offres as $offre )
                                             
-                                            <td>$300</td>
-                                            <td><span class="badge badge-info">Pending</span></td>
-                                            <td>
-                                                <a href="#" class="text-success mr-2" data-toggle="modal"  data-target="#modal-update">
-                                                    <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                                                </a>
-                                                <a href="#" class="text-danger mr-2">
-                                                    <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        
                                         <tr>
-                                            <th scope="row">3</th>
-                                            <td>Watch</td>
-                                            <td>
+                                            <th scope="row">{{$loop->iteration}}</th>
+                                            <td><strong>{{$offre->nom_off}}</strong></td>
+                                            <td>    <strong>{{$offre->descr_off}}</strong></td>
+                                            <td><strong>{{$offre->date_deb}}</strong></td>
+                                            <td><strong>{{$offre->date_fin}}</strong></td>
 
-                                                12-10-2019
-
-                                            </td>
-                                            <td>3</td>
-                                            <td>3</td>
-
-                                            <td>$30</td>
-                                            <td><span class="badge badge-warning">Not Delivered</span></td>
-
-                                            <td>
-                                                <a href="#" class="text-success mr-2" data-toggle="modal"  data-target="#modal-update">
-                                                    <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                                                </a>
-                                                <a href="#" class="text-danger mr-2">
-                                                    <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                                </a>
+                                           
+                                            <td class="d-flex">
+                                                <button class="btn text-success bg-transparent btn-icon  mr-2 editbtn" data-id="{{$offre->id}}"  data-toggle="modal" data-target="#editModalContent" ><i class="nav-icon i-Pen-5 font-weight-bold"></i></button>
+    
+                                                <form action="{{ route('offres.destroy', $offre->id)}}" method="post" class="inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    
+                                                    <button class="btn text-danger  btn-icon  mr-2 alert-confirm"   ><i class="nav-icon i-Close-Window font-weight-bold"></i></i></button>
+    
+                                                </form>
+    
                                             </td>
                                         </tr>
+                                        @endforeach
 
                                     </tbody>
                                 </table>
@@ -279,4 +209,117 @@
             </div>
             <!-- fotter end -->
         </div>
+@endsection
+@section('scripts')
+<script>
+    @if (Session::has('success'))
+    
+                toastr.success('Nouvelle offre ajoutée avec succes',"Success", {timeOut: 5000});
+    
+     @elseif(Session::has('Error'))   
+     toastr.error('Vérifiez les champs',"Error", {timeOut: 5000});
+
+    @endif
+</script>
+<script src="{{asset('assets/js/vendor/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('assets/js/sweetalert.script.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+           
+            $('.alert-confirm').on('click', function(e) {
+                e.preventDefault();
+                var form = $(this).closest("form");
+                swal({
+                    title: 'Êtes vous sûr?',
+                    text: "Cet action est irréversible!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#0CC27E',
+                    cancelButtonColor: '#FF586B',
+                    confirmButtonText: 'Oui, Supprimer!',
+                    cancelButtonText: 'Non, Annuler!',
+                    confirmButtonClass: 'btn btn-success mr-5',
+                    cancelButtonClass: 'btn btn-danger',
+                    buttonsStyling: false
+                }).then(function() {
+                    form.submit();
+                    swal(
+                        'Supprimée!',
+                        'La matière a bien été supprimée.',
+                        'success'
+                    )
+                }, function(dismiss) {
+                    // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                    if (dismiss === 'cancel') {
+                        swal(
+                            'Annulée',
+                            'La supression est annulée !! :)',
+                            'error'
+                        )
+                    }
+                })
+            });
+
+            //edit button
+            $('.editbtn').on('click', function(e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+
+
+                // var action ="{{ URL::to('offres') }}/"+id;
+
+
+                // var url = "{{ URL::to('offres') }}";
+
+                $.get("offres/" + id + "/edit", function(data) {
+                    console.log(data.data);
+                    $('#nom_off').val(data.data['nom_off']);
+                    $('#descr_off').val(data.data['descr_off']);
+                    $('#date_deb').val(data.data['date_deb']);
+                    $('#date_fin').val(data.data['date_fin']);
+                    $('#Idoffre').val(data.data['id']);
+
+
+
+                });
+
+
+
+
+            });
+            
+            $('.updatebtn').on('click', function(e) {
+                e.preventDefault();
+                var nom_off = $('#nom_off').val();
+                var descr_off = $('#descr_off').val();
+                var date_deb = $('#date_deb').val();
+                var date_fin = $('#date_fin').val();
+                var id = $('#Idoffre').val();
+                var URL ="offres/"+ id;
+                console.log("url===",URL)
+                $.ajax({
+                    method: "PUT",
+                    url: URL,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: { id: id,
+                        nom_off: nom_off,
+                        descr_off: descr_off ,
+                        date_deb: date_deb ,
+                        date_fin: date_fin },
+
+                    success: function(data) {
+                        $('.modaledit').modal('hide');
+                        window.location.reload();
+                        //  alert('update done')
+
+                    }
+                });
+            });
+         
+        });
+    
+    </script>
 @endsection

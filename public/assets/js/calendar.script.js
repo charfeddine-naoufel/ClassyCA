@@ -53,7 +53,7 @@ $(document).ready(function() {
 
 
         events: [{
-            title: "Break time",
+            title: "Break time +++",
             start: new Date(year, month, 1),
             allDay: !0,
             color: "#ffc107"

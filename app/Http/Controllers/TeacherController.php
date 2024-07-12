@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Models\Teacher;
+use App\Models\User;
 use Auth;
 
 class TeacherController extends Controller
@@ -12,8 +16,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        
-      return view('Admin.Enseignant.index');
+       $enseignants=Teacher::all(); 
+      return view('Admin.Enseignant.index',compact('enseignants'));
     }
     public function home()
     {
@@ -34,7 +38,65 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            // dd($request);
+    $rules = array(
+        'nom_fr'       => 'required',
+        'prenom_fr'      => 'required',
+        'specialite'      => 'required',
+        'tel'      => 'required|numeric',
+        'email'      => 'required',
+        'password'      => 'required',
+        'status'      => 'required',
+         'photo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+
+    );
+   
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+        return redirect()->route('enseignants.index')
+        ->with('Error','Vérifiez vos champs.');
+    } else {
+        // store new user
+       
+       
+        $user=new User;
+        $user['name']=$request['nom_fr'];
+        $user['email']=$request['email'];
+        $user['password']=$request['password'];
+        // $user['password_confirmation']=$request['password'];
+        $user['role']='teacher';
+        $user->save();
+        $user=User::latest()->first();;
+        // store new teacher
+        $teacher = new Teacher;
+        if ($request->hasFile('photo')) {
+            // put image in the public storage
+           $filePath = Storage::disk('public')->put('images/teachers/photo', request()->file('photo'));
+           $teacher['photo'] = $filePath;
+       }
+        
+       
+        $teacher->nom_fr = $request-> nom_fr;
+        $teacher->prenom_fr = $request-> prenom_fr;
+        $teacher->nom_ar = $request-> nom_ar;
+        $teacher->prenom_ar = $request-> prenom_ar;
+        $teacher->specialite      =  $request-> specialite;
+        $teacher->tel      =  $request-> tel;
+        $teacher->tel2      =  $request-> tel2;
+        $teacher->email      =  $request-> email;
+        $teacher->adresse      =  $request-> adresse;
+        $teacher->bio      =  $request-> bio;
+        // $teacher->photo      =  $request-> photo;
+        $teacher->password      =  $request-> password;
+        $teacher->status      =  $request-> status;
+        $teacher->user_id      =  $user-> id;
+        
+        $teacher->save();
+
+        // redirect
+        return redirect()->route('enseignants.index')
+        ->with('success','Nouvelle teacher crée avec succés.');
+    }
     }
 
     /**
@@ -50,15 +112,77 @@ class TeacherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $enseignant = Teacher::find($id); 
+                return response()->json([
+                               'success' => true,
+                                'data' => $enseignant 
+                                  ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Teacher $teacher)
     {
-        //
+        $rules = array(
+            'nom_fr'       => 'required',
+            'prenom_fr'      => 'required',
+            'specialite'      => 'required',
+            'tel'      => 'required|numeric',
+            'email'      => 'required',
+            'password'      => 'required',
+            'status'      => 'required',
+             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+    
+        );
+       
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->route('enseignants.index')
+            ->with('Error','Vérifiez vos champs.');
+        } else {
+            // store new user
+           
+            
+            $user=User::where('user_id',$teacher->user_id)->first();
+            $user['name']=$request['nom_fr'];
+            $user['email']=$request['email'];
+            $user['password']=$request['password'];
+            // $user['password_confirmation']=$request['password'];
+            $user['role']='teacher';
+            $user->save();
+            $user=User::latest()->first();;
+            // store new teacher
+            
+            if ($request->hasFile('photo')) {
+                // put image in the public storage
+               $filePath = Storage::disk('public')->put('images/teachers/photo', request()->file('photo'));
+               $teacher['photo'] = $filePath;
+           }
+            
+           
+            $teacher->nom_fr = $request-> nom_fr;
+            $teacher->prenom_fr = $request-> prenom_fr;
+            $teacher->nom_ar = $request-> nom_ar;
+            $teacher->prenom_ar = $request-> prenom_ar;
+            $teacher->specialite      =  $request-> specialite;
+            $teacher->tel      =  $request-> tel;
+            $teacher->tel2      =  $request-> tel2;
+            $teacher->email      =  $request-> email;
+            $teacher->adresse      =  $request-> adresse;
+            $teacher->bio      =  $request-> bio;
+            // $teacher->photo      =  $request-> photo;
+            $teacher->password      =  $request-> password;
+            $teacher->status      =  $request-> status;
+            $teacher->user_id      =  $user-> id;
+            
+            $teacher->save();
+    
+            // redirect
+            return response()->json(['success' => true,    
+                       ]); 
+        }
+        
     }
 
     /**
@@ -66,6 +190,10 @@ class TeacherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $teacher=Teacher::find($id);
+        $teacher->delete();
+    
+        return redirect()->route('enseignants.index')
+                        ->with('success','Classe supprimée avec succés');
     }
 }

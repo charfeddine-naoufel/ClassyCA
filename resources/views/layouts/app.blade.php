@@ -8,8 +8,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/styles/vendor/calendar/fullcalendar.min.css')}}">
+
     <link id="gull-theme" rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/perfect-scrollbar.css')}}">
+
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/toastr.css')}}">
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/sweetalert2.min.css')}}">
@@ -27,7 +30,10 @@
         </div>
     </div> --}}
     <!-- Pre Loader end  -->
+
     <div class="app-admin-wrap layout-sidebar-large clearfix">
+        {{-- <div class="app-admin-wrap layout-sidebar-compact sidebar-dark-purple sidenav-open clearfix"> --}}
+
         <div class="main-header">
             <div class="logo">
                 <img src="{{asset('assets/images/logo.png')}}" alt="">

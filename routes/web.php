@@ -36,8 +36,9 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('/matieres', MatiereController::class);
     Route::resource('/enseignants', TeacherController::class);
     Route::resource('/classes', ClasseController::class);
-
-    Route::get('/offre', [OffreController::class, 'index'])->name('offre.index');
+    Route::resource('/offres', OffreController::class);
+    
+  
 
     
   
@@ -45,6 +46,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
   // Student routes
   Route::middleware('student')->prefix('student')->group(function () {
     Route::get('/', [StudentController::class, 'home'])->name('student-dash');
+    Route::get('/calendrier', [StudentController::class, 'calendrier'])->name('student.calendrier');
   
   });
   // Teacher routes
