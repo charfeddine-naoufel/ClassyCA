@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Matieres')
 @section('content')
+
     <div class="main-content-wrap sidenav-open d-flex flex-column">
         <div class="breadcrumb">
             <h1 class="mr-2">Dashboard</h1>
@@ -11,27 +12,21 @@
         </div>
 
         <div class="separator-breadcrumb border-top"></div>
-
-        <div class="row mb-4">
-
-            <div class="col-md-12 mb-3">
-                <div class="card text-left">
-
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-
-                            <h4 class="card-title mb-3"> Matières</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card o-hidden mb-4">
+                    <div class="card-header d-flex align-items-center border-0">
+                        <h3 class="w-50 float-left card-title m-0">Matières</h3>
+                        <div class="dropdown dropleft text-right w-50 float-right">
                             <button type="button" class="btn btn-primary btn-icon m-1" data-toggle="modal"
                                 data-target="#verifyModalContent" data-whatever="@mdo" id="toast">
                                 <span class="ul-btn__icon"><i class="i-Add"></i></span>
                                 <span class="ul-btn__text">Ajouter</span>
                             </button>
                         </div>
+                    </div>
 
-                        <p>
-                            Vous pouvez créer, mettre à jour ou supprimer une matière.
-
-                        </p>
+                    <div class="m-3">
                         <div class="table-responsive">
                             <table class="table ">
                                 <thead class="thead-dark">
@@ -78,13 +73,14 @@
                             </table>
 
                         </div>
-
-
                     </div>
-
                 </div>
+
+
             </div>
         </div>
+
+        
 
 
         <!-- Verify Modal content -->

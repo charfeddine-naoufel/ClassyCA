@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\ChapitreController;
 use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\GroupController;
 
 
 /*
@@ -24,7 +25,7 @@ use App\Http\Controllers\ClasseController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::post('/eleves', [StudentController::class,'store'])->name('eleves.registerEl');
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -35,7 +36,10 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin-dash');
     Route::resource('/matieres', MatiereController::class);
     Route::resource('/enseignants', TeacherController::class);
+    Route::resource('/eleves', StudentController::class);
+    Route::patch('/removegroupEl/{id}', [StudentController::class,'updateGrEl'])->name('student.removefromgrou');
     Route::resource('/classes', ClasseController::class);
+    Route::resource('/groups', GroupController::class);
     Route::resource('/offres', OffreController::class);
     
   

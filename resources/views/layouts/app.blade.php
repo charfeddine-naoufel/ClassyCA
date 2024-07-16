@@ -16,6 +16,8 @@
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/toastr.css')}}">
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/sweetalert2.min.css')}}">
+    
+    <link rel="stylesheet" href="{{asset('assets/styles/vendor/select2.css')}}">
 
 </head>
 
@@ -331,7 +333,7 @@
     <script src="{{asset('assets/js/vendor/echarts.min.js')}}"></script>
 
     <script src="{{asset('assets/js/es5/echart.options.min.js')}}"></script>
-    <script src="assets/js/es5/dashboard.v1.script.min.js"></script>
+    <script src="{{asset('assets/js/es5/dashboard.v1.script.min.js')}}"></script>
 
     <script src="{{asset('assets/js/es5/script.min.js')}}"></script>
     <script src="{{asset('assets/js/es5/sidebar.large.script.min.js')}}"></script>

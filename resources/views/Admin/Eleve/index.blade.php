@@ -5,7 +5,7 @@
         <div class="breadcrumb">
             <h1 class="mr-2">Dashboard</h1>
             <ul>
-                <li><a href="">Enseignants</a></li>
+                <li><a href="">Eleves</a></li>
                 <!-- <li>Version 1</li> -->
             </ul>
         </div>
@@ -14,91 +14,86 @@
 
         <div class="row mb-4">
 
-            <div class="col-md-12 mb-3">
-                <div class="card text-left">
+          <div class="col-md-12">
+            <div class="card o-hidden mb-4">
+                <div class="card-header d-flex align-items-center border-0">
+                    <h3 class="w-50 float-left card-title m-0">Elèves</h3>
+                    {{-- <div class="dropdown dropleft text-right w-50 float-right">
+                        <button type="button" class="btn btn-primary btn-icon m-1" data-toggle="modal"
+                            data-target="#verifyModalContent" data-whatever="@mdo" id="toast">
+                            <span class="ul-btn__icon"><i class="i-Add"></i></span>
+                            <span class="ul-btn__text">Ajouter</span>
+                        </button>
+                    </div> --}}
+                </div>
 
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-
-                            <h4 class="card-title mb-3"> Enseignants</h4>
-                            <button type="button" class="btn btn-primary btn-icon m-1" data-toggle="modal"
-                                data-target="#verifyModalContent" data-whatever="@mdo" id="toast">
-                                <span class="ul-btn__icon"><i class="i-Add"></i></span>
-                                <span class="ul-btn__text">Ajouter</span>
-                            </button>
-                        </div>
-
-                        <p>
-                            Vous pouvez créer, mettre à jour ou supprimer un Enseignant.
-
-                        </p>
-                        <div class="table-responsive">
-                            <table class="table ">
-                                <thead class="thead-dark">
-
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nom prenom</th>
-                                        <th scope="col">الاسم واللقب</th>
-                                        <th scope="col">Spécialité</th>
-                                        <th scope="col">Adresse</th>
-                                        <th scope="col">Tel1 / Tel2</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Bio</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">User</th>
-
-
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach($enseignants as $enseignant)
-                                    <tr>
-                                        <th scope="row">{{$loop->iteration }}</th>
+                <div class="m-3">
+                  <div class="table-responsive">
+                    <table class="table ">
+                        <thead class="thead-dark">
+                
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom prenom</th>
+                                <th scope="col">الاسم واللقب</th>
+                                <th scope="col">Tel1 / Tel2</th>
+                                <th scope="col">ville</th>
+                                <th scope="col">gouvernorat</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Classe</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">User</th>
+                
+                
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                
+                            @foreach($eleves as $eleve)
+                            <tr>
+                                <th scope="row">{{$loop->iteration }}</th>
+                                
+                                <td><strong>{{$eleve->nom_fr}} {{$eleve->prenom_fr}}</strong></td>
+                                <td><strong>{{$eleve->nom_ar}} {{$eleve->prenom_ar}}</strong></td>
+                                <td><strong>{{$eleve->tel}}<i class="text-10 text-warning i-Telephone"></i> {{$eleve->tel2}}</strong></td>
+                                <td><strong>{{$eleve->ville}} </strong></td>
+                                <td><strong>{{$eleve->gouvernorat}} </strong></td>
+                                <td><strong>{{$eleve->email}} </strong></td>
+                                <td><strong>{{$eleve->classe->slug}} </strong></td>
+                                <td>
+                                    @if($eleve->status=="1")
+                                    <span class="badge badge-pill badge-success m-2">Active</span>
+                                    @else
+                                    <span class="badge badge-pill badge-danger m-2">Inactive</span>
+                                    @endif
+                                     </td>
+                                <td><strong>{{$eleve->user_id}} </strong></td>
+                
+                
+                                <td class="d-flex">
+                                    <button class="btn text-success bg-transparent btn-icon  mr-2 editbtn" data-id="{{$eleve->id}}"  data-toggle="modal" data-target="#editModalContent" ><i class="nav-icon i-Pen-5 font-weight-bold"></i></button>
+                
+                                    <form action="{{ route('eleves.destroy', $eleve->id)}}" method="post" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
                                         
-                                        <td><strong>{{$enseignant->nom_fr}} {{$enseignant->prenom_fr}}</strong></td>
-                                        <td><strong>{{$enseignant->nom_ar}} {{$enseignant->prenom_ar}}</strong></td>
-                                        <td><strong>{{$enseignant->specialite}} </strong></td>
-                                        <td><strong>{{$enseignant->adresse}} </strong></td>
-                                        <td><strong>{{$enseignant->tel}}<i class="text-10 text-warning i-Telephone"></i> {{$enseignant->tel2}}</strong></td>
-                                        <td><strong>{{$enseignant->email}} </strong></td>
-                                        <td><strong>{{$enseignant->bio}} </strong></td>
-                                        <td>
-                                            @if($enseignant->status=="1")
-                                            <span class="badge badge-pill badge-success m-2">Active</span>
-                                            @else
-                                            <span class="badge badge-pill badge-danger m-2">Inactive</span>
-                                            @endif
-                                             </td>
-                                        <td><strong>{{$enseignant->user_id}} </strong></td>
-
-
-                                        <td class="d-flex">
-                                            <button class="btn text-success bg-transparent btn-icon  mr-2 editbtn" data-id="{{$enseignant->id}}"  data-toggle="modal" data-target="#editModalContent" ><i class="nav-icon i-Pen-5 font-weight-bold"></i></button>
-
-                                            <form action="{{ route('enseignants.destroy', $enseignant->id)}}" method="post" class="inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                
-                                                <button class="btn text-danger  btn-icon  mr-2 alert-confirm"   ><i class="nav-icon i-Close-Window font-weight-bold"></i></i></button>
-
-                                            </form>
-
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-                        </div>
-
-
-                    </div>
-
+                                        <button class="btn text-danger  btn-icon  mr-2 alert-confirm"   ><i class="nav-icon i-Close-Window font-weight-bold"></i></i></button>
+                
+                                    </form>
+                
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                
+                </div>
                 </div>
             </div>
+
+
+        </div>
         </div>
 
 
@@ -108,12 +103,12 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="verifyModalContent_title">Nouvelle Classe</h5>
+                        <h5 class="modal-title" id="verifyModalContent_title">Nouvel Elève</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="post" action="{{ route('enseignants.store') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('eleves.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
 
@@ -236,12 +231,12 @@
             </div>
         </div>
         <!-- Edit Modal content -->
-        <div class="modal fade modaledit" id="editModalContent" tabindex="-1" role="dialog" aria-labelledby="editModalContent"
+        <div class="modal fade modaledit bd-example-modal-lg" id="editModalContent" tabindex="-1" role="dialog" aria-labelledby="editModalContent"
             aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editModalContent_title">Modifier Classe</h5>
+                        <h5 class="modal-title" id="editModalContent_title">Modifier Elève</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -262,7 +257,7 @@
                                           <label for="inputtext11" class="ul-form__label">Nom fr:</label>
                                           <input type="text" class="form-control" id="nom_fr" name="nom_fr"/>
                                           <input type="hidden" class="form-control" id="IdEnseignant" name="IdEnseignant">
-                                          <input type="hidden" class="form-control" id="IdUser" name="IdUser">
+                                          <input type="text" class="form-control" id="IdUser" name="IdUser">
                                         </div>
                                         <div class="form-group col-md-6">
                                           <label for="inputEmail12" class="ul-form__label">Prénom fr:</label>
@@ -386,10 +381,12 @@
 <script>
     @if (Session::has('success'))
     
-                toastr.success('Nouvelle classe ajoutée avec succes',"Success", {timeOut: 5000});
+                toastr.success('Nouvel elève ajoutée avec succes',"Success", {timeOut: 5000});
     
      @elseif(Session::has('Error'))   
      toastr.error('Vérifiez les champs',"Error", {timeOut: 5000});
+     @elseif(Session::has('delete'))   
+     toastr.info('Elève supprimé avec succès',"Suppression", {timeOut: 5000});
 
     @endif
 </script>

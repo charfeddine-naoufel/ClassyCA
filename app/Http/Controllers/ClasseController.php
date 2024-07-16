@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classe;
+use App\Models\Student;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,9 +15,11 @@ class ClasseController extends Controller
      */
     public function index()
     {
+        $eleves=Student::where('group_id',Null)->get(); 
+        $groups=Group::all();
         $classes = Classe::all();
         // dd($classes);
-        return view('Admin.Classe.index',compact('classes'));
+        return view('Admin.Classe.index',compact('classes','eleves','groups'));
     }
 
     /**

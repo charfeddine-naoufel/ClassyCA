@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GroupController extends Controller
 {
@@ -12,7 +14,10 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+                
+        $groups = Group::all();
+        // dd($groups);
+        return view('Admin.Classe.index',compact('groups','eleves'));
     }
 
     /**
@@ -28,13 +33,45 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+    //    dd($request);
+    $rules = array(
+        'nomg'       => 'required',
+        'classe_id'      => 'required'
+       
+    );
+    $eleves=$request->eleves;
+    
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+        return redirect()->route('classes.index')
+        ->with('Error','Vérifiez vos champs.');
+    } else {
+        // store
+        $group = new Group;
+        $group->nomg = $request-> nomg;
+        $group->classe_id      =  $request-> classe_id;
+        
+        $group->save();
+        $group=Group::latest()->first();
+        foreach ($eleves as $item) {
+            $eleve=Student::find($item);
+            $eleve['group_id']=$group->id;
+            $eleve->save();
+            } 
+
+        // redirect
+        return redirect()->route('classes.index')
+        ->with('success','Nouveau group crée avec succés.');
+    }
+
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Group $group)
+    public function show(Classe $classe)
     {
         //
     }
@@ -42,24 +79,59 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Group $group)
-    {
-        //
+    public function edit($id)
+    { 
+        $group = Group::find($id); 
+        $group['slug']=$group->classe->slug;
+        // $eleves=Student::select('id','nom_fr','prenom_fr')->where('group_id',$id)->get();
+        // $group['eleves']=$eleves;    
+        
+                return response()->json([
+                               'success' => true,
+                                'data' => $group 
+                                  ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Group $group)
+    public function update(Request $request, $id)
     {
-        //
+        
+        
+               $rules = array(
+                'nomg'       => 'required',
+                'classe_id'      => 'required',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect()->route('classes.index')
+                ->with('Error','Vérifiez vos champs.');
+            } else {
+                // update
+                $group = Group::find($id);
+                $group->nomg = $request-> nomg;
+                $group->classe_id      =  $request-> classe_id;
+                $group->save();
+        
+                // redirect
+                // return redirect()->route('classes.index')
+                // ->with('success','Matière modifiée avec succés.');
+
+                return response()->json(['success' => true,    
+                       ]); 
+            }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Group $group)
+    public function destroy($id)
     {
-        //
+        $group=Group::find($id);
+        $group->delete();
+    
+        return redirect()->route('groups.index')
+                        ->with('success','Classe supprimée avec succés');
     }
 }

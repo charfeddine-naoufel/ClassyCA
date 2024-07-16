@@ -10,6 +10,7 @@
     <meta name="author" content="UI Lib">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}"></head>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
     <style>
       .loadscreen {
           text-align: center;
@@ -71,14 +72,14 @@
         <div class="container">
             <div class="main-content text-center">
                 <div class="logo">
-                    <img src="{{asset('assets/images/logo.png')}}" alt="">
+                    <img src="{{asset('assets/images/logo.png')}}" alt="" class="mb-5">
                 </div>
-                <h1 class="mb-24 font-weight-bold">Classy Academy<br>طريق النجاح و التميز</h1>
+                <h1 class="mb-24 font-weight-bold"><strong class="heading text-primary display-2 mb-4" style="text-shadow: 4px 6px 7px rgba(0,0,0,0.6); -webkit-text-stroke: 2px rgb(105, 102, 102);"> Classy Academy </strong><br><br><strong class=" text-info t-font-boldest display-4" style="font-family: 'Alexandria', sans-serif;text-shadow: 4px 6px 7px rgba(0,0,0,0.6);"> طريق النجاح و التميز </strong></h1>
                 <p class="p-readable text-muted mx-auto mb-32">خبرة  و كفاءة الاطار التربوي نقطة قوتنا</p>
                 <div class="cta d-flex justify-content-center mb-48">
-                    <a class="btn btn-raised btn-raised-primary btn-xl rounded" id="view_dem" href="{{route('login')}} ">تسجيل الدخول</a>
+                    <a class="btn btn-raised btn-raised-primary btn-xl rounded" id="view_dem" href="{{route('login')}} "> الدخول</a>
                     <span style="width: 20px"></span>
-                    <!-- <a class="btn btn-raised btn-raised-secondary btn-xl rounded" href="https://themeforest.net/item/gull-bootstrap-laravel-admin-dashboard-template/23101970">Buy Gull</a> -->
+                     <a class="btn btn-raised btn-raised-secondary btn-xl rounded" href="{{route('register')}}">التسجيل</a> 
                 </div>
                 <div class="mb-48">
                   <a href="http://demos.ui-lib.com/gull-doc/" target="_blank" class="mx-8 text-muted font-weight-bold">Angular Doc</a>

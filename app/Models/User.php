@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Teacher::class);
     }
+    public function eleve()
+    {
+        return $this->hasOne(Student::class);
+    }
 }

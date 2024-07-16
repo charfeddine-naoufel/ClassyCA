@@ -9,9 +9,9 @@ class Classe extends Model
 {
     use HasFactory;
 
-    public function groups()
+    public function eleves()
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Eleve::class);
     }
 
     public function courses()

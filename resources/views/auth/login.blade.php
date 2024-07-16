@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gull - Laravel + Bootstrap 4 admin template</title>
+    <title>Login</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/css/themes/lite-purple.min.css">
 </head>
 
 <body class="text-left">
-    <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/back.jpg')}});background-size:contain">
+    <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/back.jpg')}});background-size:cover">
         <div class="auth-content">
             <div class="card o-hidden " style="box-shadow: 4px 7px 24px -4px rgba(0,0,0,0.62);">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="background-size: cover;background-image: url(./assets/images/bgr.jpg)">
                         <div class="p-4">
                             <div class="auth-logo text-center mb-4">
                                 <img src="{{asset('assets/images/logo.png')}}" alt="">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 text-center " style="background-size: cover;background-image: url(./assets/images/photo-long-3.jpg)">
+                    <div class="col-md-6 text-center " style="background-size: cover;background-image: url(./assets/images/bgr.jpg)">
                         <div class="pr-3 auth-right">
                             <a class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text" href="signup.html">
                                 <i class="i-Mail-with-At-Sign"></i> Sign up with Email

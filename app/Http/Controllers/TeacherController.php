@@ -122,7 +122,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, $id)
     {
         $rules = array(
             'nom_fr'       => 'required',
@@ -132,19 +132,24 @@ class TeacherController extends Controller
             'email'      => 'required',
             'password'      => 'required',
             'status'      => 'required',
-             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
+             'user_id' =>'required'
     
         );
        
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return redirect()->route('enseignants.index')
-            ->with('Error','Vérifiez vos champs.');
-        } else {
+            return response()->json([
+                'error' => true,
+                 'data' => $enseignant 
+                   ]);
+            
             // store new user
            
+        } else {  
+            $teacher=Teacher::find($id);
+            $user=User::find($teacher->user_id);
             
-            $user=User::where('user_id',$teacher->user_id)->first();
             $user['name']=$request['nom_fr'];
             $user['email']=$request['email'];
             $user['password']=$request['password'];
@@ -191,9 +196,11 @@ class TeacherController extends Controller
     public function destroy(string $id)
     {
         $teacher=Teacher::find($id);
+        $user=Teacher::find($teacher->id);
         $teacher->delete();
+        $user->delete();
     
         return redirect()->route('enseignants.index')
-                        ->with('success','Classe supprimée avec succés');
+                        ->with('delete','Enseignant supprimé avec succés');
     }
 }

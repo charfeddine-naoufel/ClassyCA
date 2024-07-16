@@ -19,7 +19,7 @@
                     </li>
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('student.calendrier')}}">
-                            <i class="nav-icon i-Computer-Secure"></i>
+                            <i class="nav-icon  i-Calendar-4"></i>
                             <span class="nav-text">Mon calendrier</span>
                         </a>
                         <div class="triangle"></div>

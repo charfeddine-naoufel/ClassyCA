@@ -27,21 +27,22 @@ return new class extends Migration
             $table->string('role')->default('student');
             $table->date('date_naiss')->nullable();
             $table->enum('genre', ['M', 'F'])->nullable();
+            $table->integer('group_id')->nullable()->unsigned();
 
             
            
-            $table->boolean('status')->default(0)->comment('1 active, 0 inactive');
+            $table->boolean('status')->default(1)->comment('1 active, 0 inactive');
             $table->string('password');
           
             
             $table->timestamps();
             $table->softDeletes();
             $table->foreignId('user_id');
-            $table->foreignId('group_id');
+            $table->foreignId('classe_id');
 
             // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
         });
     }
 

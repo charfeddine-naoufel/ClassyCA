@@ -13,9 +13,13 @@ class Student extends Model
     {
         return $this->hasMany(Payment::class);
     }
-
-    public function group()
+    public function user()
     {
-        return $this->belongsTo(Group::class);
+        return $this->hasOne(User::class);
+    }
+
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class);
     }
 }
