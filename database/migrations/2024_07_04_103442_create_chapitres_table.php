@@ -17,10 +17,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('trimestre');
             $table->timestamps();
-            $table->foreignId('matiere_id');
+            $table->foreignId('course_id');
 
             // Foreign key constraint
-            $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 

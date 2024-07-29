@@ -4,7 +4,7 @@
                     <li class="nav-item" data-item="dashboard">
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Bar-Chart"></i>
-                            <span class="nav-text">Dashboard </span>
+                            <span class="nav-text">Admin <br> Dashboard </span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -30,7 +30,7 @@
                         <div class="triangle"></div>
                     </li>
                     <li class="nav-item" >
-                        <a class="nav-item-hold" href="{{route('chapitre.index')}}">
+                        <a class="nav-item-hold" href="{{route('chapitres.index')}}">
                             <i class="nav-icon i-Computer-Secure"></i>
                             <span class="nav-text">Packs</span>
                         </a>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('classe_id');
             $table->foreignId('teacher_id');
             $table->foreignId('matiere_id');
+            $table->foreignId('group_id');
             
 
             
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 

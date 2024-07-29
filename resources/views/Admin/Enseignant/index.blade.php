@@ -44,9 +44,8 @@
                                         <th scope="col">Adresse</th>
                                         <th scope="col">Tel1 / Tel2</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Bio</th>
+                                        <th scope="col">Cours</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">User</th>
 
 
                                         <th scope="col">Action</th>
@@ -72,7 +71,7 @@
                                             <span class="badge badge-pill badge-danger m-2">Inactive</span>
                                             @endif
                                              </td>
-                                        <td><strong>{{$enseignant->user_id}} </strong></td>
+                                        <td><strong>cours </strong></td>
 
 
                                         <td class="d-flex">
@@ -108,7 +107,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="verifyModalContent_title">Nouvelle Classe</h5>
+                        <h5 class="modal-title" id="verifyModalContent_title">Nouvel Enseignant</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

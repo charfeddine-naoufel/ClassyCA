@@ -20,7 +20,14 @@
                             <div class="auth-logo text-center mb-4">
                                 <img src="{{asset('assets/images/logo.png')}}" alt="">
                             </div>
-                            <h1 class="mb-3 text-18">S'identifier</h1>
+                            <h1 class="mb-3 text-18">S'identifier </h1>
+                            @if(Session::has('error'))
+                            
+                            <div class="alert alert-danger">
+                            {{ Session::get('error')}}
+                            </div>
+                            @endif
+                            
                             <form method="POST" action="{{ route('login') }}">
                         @csrf
                                 <div class="form-group">

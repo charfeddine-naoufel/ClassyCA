@@ -6,7 +6,7 @@
                         </a>
                     <span class="flex-grow-1"></span>
                     <div class="d-flex align-items-center">
-                        <img class="logo" src="./assets/images/logo.png" alt="">
+                        <img class="logo" src="{{asset('assets/images/logo.png')}}" alt="">
                         <div>
                             <p class="m-0">&copy; 2024 NHK Team</p>
                             <p class="m-0">Tous droits reservés</p>

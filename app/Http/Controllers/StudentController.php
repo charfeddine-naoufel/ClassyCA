@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Student;
+use App\Models\Course;
+use App\Models\Chapitre;
 use App\Models\User;
 use Auth;
 
@@ -27,6 +29,35 @@ class StudentController extends Controller
     {
         
       return view('Student.calendrier');
+    }
+    public function mescours()
+    {
+        $student=Auth::user()->student;
+        $courses=Course::where('group_id',$student->group_id)->get();
+        // $mycourses=[];
+        // foreach ($courses as $key => $course) {
+        //     $mycourses[$course->matiere->nom_matiere]=Chapitre::where('course_id',$course->id)->get();
+        // }
+        
+        // dd($mycourses);
+        if ($student->status==1) {
+            
+            return view('Student.mescours',compact('courses'));
+        }
+        else {
+            
+            return view('Student.mescoursNotPaid');
+        }
+    }
+    public function chapitrescours($id)
+    {
+        
+        $student=Auth::user()->student;
+        $course=Course::find($id);
+        $chapitres=Chapitre::where('course_id',$id)->get();
+        // dd($chapitres);
+        
+      return view('Student.chapitres',compact('chapitres','course'));
     }
     /**
      * Show the form for creating a new resource.
@@ -61,7 +92,7 @@ class StudentController extends Controller
        
        
         $user=new User;
-        $user['name']=$request['nom_fr'];
+        $user['name']=$request['nom_fr'].' '.$request['prenom_fr'];
         $user['email']=$request['email'];
         $user['password']=$request['password'];
         // $user['password_confirmation']=$request['password'];

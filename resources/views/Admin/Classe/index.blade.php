@@ -123,9 +123,37 @@
 
                                 </td>
                                 <td>
-                                    
-                                    <div class="accordion" id="accordionRightIcon">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span><i class="i-Business-Mens ul-accordion__font"> </i></span>Elèves du groupe
+                                        </button>
+                                        <div class="dropdown-menu bg-transparent shadow-none p-0 m-0" style="width: 320px">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <ul class="list-group">
+                                                    
+                                                    
+                                                        @foreach ($group ->students as $eleve )
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center py-0">
+                                                            {{$eleve->nom_fr}} {{$eleve->prenom_fr}}
+                                                            <form method="POST" action="{{route('student.removefromgrou',['id' => $eleve->id])}}">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <button type="submit" class="btn btn-danger btn-sm m-0">X</button>
+                                                            </form>
+                                                            
+                                                        </li>
+                                                        
+                                                        
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="accordion" id="accordionRightIcon">
                                     <div class="card">
+                                        
                                         <div class="card-header header-elements-inline">
                                             <h6 class="card-title ul-collapse__icon--size ul-collapse__right-icon mb-0">
                                                 <a data-toggle="collapse" class="text-default collapsed" href="#accordion-item-icons-{{$loop->iteration }}" aria-expanded="false"> 
@@ -162,7 +190,8 @@
                                     </div>
                         
                                     
-                                </div></td>
+                                </div> --}}
+                            </td>
 
 
 

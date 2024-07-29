@@ -18,4 +18,8 @@ class Group extends Model
     {
         return $this->hasMany(Student::class);
     }
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }

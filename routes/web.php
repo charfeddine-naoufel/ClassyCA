@@ -9,6 +9,8 @@ use App\Http\Controllers\OffreController;
 use App\Http\Controllers\ChapitreController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\SeanceController;
 
 
 /*
@@ -51,12 +53,21 @@ Route::middleware('admin')->prefix('admin')->group(function () {
   Route::middleware('student')->prefix('student')->group(function () {
     Route::get('/', [StudentController::class, 'home'])->name('student-dash');
     Route::get('/calendrier', [StudentController::class, 'calendrier'])->name('student.calendrier');
+    Route::get('/MesCours', [StudentController::class, 'mescours'])->name('student.mescours');
+    Route::get('/MesCours/{id}/chapitres', [StudentController::class, 'chapitrescours'])->name('student.chapitrescours');
   
   });
   // Teacher routes
   Route::middleware('teacher')->prefix('teacher')->group(function () {
     Route::get('/', [TeacherController::class, 'home'])->name('teacher-dash');
-    Route::get('/chapitre', [ChapitreController::class, 'index'])->name('chapitre.index');
+    // Route::get('/chapitre', [ChapitreController::class, 'index'])->name('chapitre.index');
+    Route::resource('/courses', CourseController::class);
+    Route::get('/mescourses', [TeacherController::class,'mescours'])->name('teacher.mescours');
+    Route::get('/mesgroups', [TeacherController::class,'mesgroups'])->name('teacher.mesgroups');
+    Route::get('/mesSeances', [SeanceController::class,'mesSeances'])->name('teacher.messeances');
+
+    Route::resource('/chapitres', ChapitreController::class);
+    Route::resource('/seances', SeanceController::class);
   
   });
 

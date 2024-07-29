@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
+use App\Models\Course;
+use App\Models\Matiere;
+use App\Models\Group;
+use App\Models\Classe;
 use App\Models\User;
 use Auth;
 
@@ -18,6 +22,26 @@ class TeacherController extends Controller
     {
        $enseignants=Teacher::all(); 
       return view('Admin.Enseignant.index',compact('enseignants'));
+    }
+    public function mescours()
+    {
+       $courses=Course::where('teacher_id',Auth::user()->teacher->id)->get(); 
+    //    dd($courses);
+       $matieres=Matiere::all();
+       $groups=Group::all();
+       $classes=Classe::all();
+      return view('Teacher.courses.index',compact('courses','matieres','groups','classes'));
+    }
+    public function mesgroups()
+    {
+       $courses=Course::where('teacher_id',Auth::user()->teacher->id)->get(); 
+       $groups=[];
+       foreach ($courses as $key => $course) {
+           $groups[$course->group_id]=Group::where('id',$course->group_id)->get();
+       }
+    //  dd($groups);
+       
+      return view('Teacher.group.mesgroups',compact('groups'));
     }
     public function home()
     {

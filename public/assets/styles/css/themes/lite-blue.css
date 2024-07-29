@@ -8,27 +8,27 @@
 :root {
   --blue: #003473;
   --indigo: #3F51B5;
-  --purple: #663399;
+  --purple: #059669;
   --pink: #CB3066;
   --red: #f44336;
   --orange: #e97d23;
   --yellow: #ffc107;
   --green: #4caf50;
   --teal: #20c997;
-  --cyan: #9c27b0;
+  --cyan: #059669;
   --white: #fff;
   --gray: #1b406c;
   --gray-dark: #0f233b;
   --blue: #003473;
   --indigo: #3F51B5;
-  --purple: #663399;
+  --purple: #059669;
   --pink: #CB3066;
   --red: #f44336;
   --orange: #e97d23;
   --yellow: #ffc107;
   --green: #4caf50;
   --teal: #20c997;
-  --cyan: #9c27b0;
+  --cyan: #059669;
   --white: #fff;
   --gray: #1b406c;
   --primary: #003473;
@@ -7287,55 +7287,55 @@ a.text-gray-900:hover, a.text-gray-900:focus {
 
 .sidebar-gradient-purple-indigo .sidebar-left {
   /* fallback/image non-cover color */
-  background-color: #663399;
+  background-color: #059669;
   /* Firefox 3.6+ */
-  background-image: -moz-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background-image: -moz-linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* Safari 4+, Chrome 1+ */
-  background-image: -webkit-gradient(linear, -154deg, right top, color-stop(0%, #663399), color-stop(100%, #33214b));
+  background-image: -webkit-gradient(linear, -154deg, right top, color-stop(0%, #059669), color-stop(100%, #33214b));
   /* Safari 5.1+, Chrome 10+ */
-  background-image: -webkit-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background-image: -webkit-linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* Opera 11.10+ */
-  background-image: -o-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background-image: -o-linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* IE10+ */
-  background: -ms-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background: -ms-linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* Standard */
-  background: linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background: linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* IE6-9 */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 ); }
 
 .gradient-purple-indigo {
   /* fallback/image non-cover color */
-  background-color: #663399;
+  background-color: #059669;
   /* Firefox 3.6+ */
-  background-image: -moz-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background-image: -moz-linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* Safari 4+, Chrome 1+ */
-  background-image: -webkit-gradient(linear, -154deg, right top, color-stop(0%, #663399), color-stop(100%, #33214b));
+  background-image: -webkit-gradient(linear, -154deg, right top, color-stop(0%, #059669), color-stop(100%, #33214b));
   /* Safari 5.1+, Chrome 10+ */
-  background-image: -webkit-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background-image: -webkit-linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* Opera 11.10+ */
-  background-image: -o-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background-image: -o-linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* IE10+ */
-  background: -ms-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background: -ms-linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* Standard */
-  background: linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background: linear-gradient(-154deg, #059669 0%, #33214b 100%);
   /* IE6-9 */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 ); }
 
 .btn.gradient-purple-indigo:active, .btn.gradient-purple-indigo.active {
   /* fallback/image non-cover color */
-  background-color: #663399;
+  background-color: #059669;
   /* Firefox 3.6+ */
-  background-image: -moz-linear-gradient(-90deg, #663399 0%, #33214b 100%);
+  background-image: -moz-linear-gradient(-90deg, #059669 0%, #33214b 100%);
   /* Safari 4+, Chrome 1+ */
-  background-image: -webkit-gradient(linear, -90deg, right top, color-stop(0%, #663399), color-stop(100%, #33214b));
+  background-image: -webkit-gradient(linear, -90deg, right top, color-stop(0%, #059669), color-stop(100%, #33214b));
   /* Safari 5.1+, Chrome 10+ */
-  background-image: -webkit-linear-gradient(-90deg, #663399 0%, #33214b 100%);
+  background-image: -webkit-linear-gradient(-90deg, #059669 0%, #33214b 100%);
   /* Opera 11.10+ */
-  background-image: -o-linear-gradient(-90deg, #663399 0%, #33214b 100%);
+  background-image: -o-linear-gradient(-90deg, #059669 0%, #33214b 100%);
   /* IE10+ */
-  background: -ms-linear-gradient(-90deg, #663399 0%, #33214b 100%);
+  background: -ms-linear-gradient(-90deg, #059669 0%, #33214b 100%);
   /* Standard */
-  background: linear-gradient(-90deg, #663399 0%, #33214b 100%);
+  background: linear-gradient(-90deg, #059669 0%, #33214b 100%);
   /* IE6-9 */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 ); }
 
@@ -7526,10 +7526,10 @@ a.text-gray-900:hover, a.text-gray-900:focus {
   background: #322740; }
 
 .sidebar-purple .sidebar-left {
-  background: #663399; }
+  background: #059669; }
 
 .purple {
-  background: #663399; }
+  background: #059669; }
 
 .sidebar-pink .sidebar-left {
   background: #CB3066; }
@@ -7568,10 +7568,10 @@ a.text-gray-900:hover, a.text-gray-900:focus {
   background: #20c997; }
 
 .sidebar-cyan .sidebar-left {
-  background: #9c27b0; }
+  background: #059669; }
 
 .cyan {
-  background: #9c27b0; }
+  background: #059669; }
 
 .sidebar-gray .sidebar-left {
   background: #2d2d33; }
@@ -7750,7 +7750,7 @@ $full-map: (
   color: black; }
 
 .purple-500 {
-  background-color: #663399; }
+  background-color: #059669; }
 
 .text-purple-500 {
   color: white; }
@@ -8170,7 +8170,7 @@ $full-map: (
   color: black; }
 
 .cyan-500 {
-  background-color: #9c27b0; }
+  background-color: #059669; }
 
 .text-cyan-500 {
   color: black; }
@@ -8530,7 +8530,7 @@ $full-map: (
   color: black; }
 
 .purple-500 {
-  background-color: #663399; }
+  background-color: #059669; }
 
 .text-purple-500 {
   color: white; }
@@ -8950,7 +8950,7 @@ $full-map: (
   color: black; }
 
 .cyan-500 {
-  background-color: #9c27b0; }
+  background-color: #059669; }
 
 .text-cyan-500 {
   color: black; }
@@ -15725,7 +15725,8 @@ a.typo_link.text-gray-900:after {
   width: 100%; }
 
 .layout-sidebar-compact.sidenav-open .main-content-wrap {
-  width: calc( 100% - 76px - 220px); }
+  width: calc(
+ 100% - 76px - 220px); }
 
 .layout-sidebar-compact.sidenav-open .sidebar-left {
   left: 0; }
@@ -16903,7 +16904,7 @@ ul.metismenu {
   height: 40px;
   padding: 0 12px 0 24px;
   border-radius: 0 35px 35px 0;
-  margin-right: 16px;
+  margin-right: 16px#059669
   background-color: #663399;
   color: #fff !important; }
 
@@ -21503,7 +21504,7 @@ ngb-rating .half {
           font-size: 18px;
           line-height: 24px;
           width: 32px;
-          color: #ffffff;
+          color: #ffff#059669
           background: #663399;
           border-radius: 0 0 0 6px; }
         .customizer .customizer-body .layouts .layout-box.active {
@@ -21522,7 +21523,7 @@ ngb-rating .half {
         text-align: center;
         box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.03);
         cursor: pointer; }
-        .customizer .customizer-body .colors .color.purple {
+        .customizer .c#059669er-body .colors .color.purple {
           background: #663399; }
         .customizer .customizer-body .colors .color.blue {
           background: #2f47c2; }
@@ -23684,7 +23685,7 @@ div.tab-border {
     margin-top: 5px; }
   #task-manager li.nav-item.dropdown {
     padding: 0px; }
-  #task-manager button.task-manager-button.navbar-toggler.text-white {
+  #task-manager #059669task-manager-button.navbar-toggler.text-white {
     background: #663399; } }
 
 #task-manager-list .ul-task-manager__dropdown-menu.show {
@@ -24956,7 +24957,7 @@ span.ul-contact-detail__followers {
   opacity: 1;
   visibility: visible; }
 
-.ul-widget-app__icons a i:hover {
+.ul-widge#059669icons a i:hover {
   color: #663399; }
 
 .ul-widget-app__comment {
@@ -25014,7 +25015,7 @@ span.ul-widget-app__find-font {
   position: absolute;
   /* left: 0; */
   top: 4px;
-  right: 10px;
+  right: #059669
   color: #663399;
   bottom: 0;
   font-size: 20px; }

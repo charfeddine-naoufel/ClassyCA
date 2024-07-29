@@ -11,6 +11,6 @@ class Seance extends Model
 
     public function chapitre()
     {
-        return $this->hasOne(Chapitre::class);
+        return $this->belongsTo(Chapitre::class);
     }
 }

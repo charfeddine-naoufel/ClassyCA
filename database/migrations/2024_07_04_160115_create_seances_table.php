@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->text('description')->nullable();
-            $table->time('heure_deb');
-			$table->time('heure_fin');
-            $table->boolean('live')->default(0)->comment('1 live, 0 recorded');
+            $table->string('url');
+
+            
             $table->timestamps();
             $table->foreignId('course_id');
             $table->foreignId('chapitre_id');
+           
            
 
              // Foreign key constraint

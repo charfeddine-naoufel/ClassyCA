@@ -13,4 +13,12 @@ class Chapitre extends Model
     {
         return $this->hasMany(Support::class);
     }
+    public function seances()
+    {
+        return $this->hasMany(Seance::class);
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }
