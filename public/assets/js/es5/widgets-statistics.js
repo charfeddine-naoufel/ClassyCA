@@ -23,7 +23,7 @@ $(document).ready(function () {
     //     yaxis: {
     //         min: 0
     //     },
-    //     colors: ['#059669'],
+    //     colors: ['#639'],
 
     // }
     // var spark1 = new ApexCharts(document.querySelector("#spark1"), spark1);
@@ -245,7 +245,7 @@ $(document).ready(function () {
                 data: [31, 40, 28, 51, 42, 109, 100],
             },
         ],
-        colors: ["#059669", "#e97d23"],
+        colors: ["#639", "#e97d23"],
     };
 
     var chart = new ApexCharts(

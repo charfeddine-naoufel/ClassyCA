@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\Chapitre;
+use App\Models\Live;
 use App\Models\User;
 use Auth;
+use Jubaer\Zoom\Facades\Zoom;
 
 class StudentController extends Controller
 {
@@ -26,9 +28,63 @@ class StudentController extends Controller
       return view('Student.home',compact('user'));
     }
     public function calendrier()
+    { 
+        $student=Auth::user()->student;
+        $meetings = Live::where('start_time','>=',now())->where('group_id',$student->group_id)->get();
+        // dd($meetings->first()->course->groupe);
+        $events = [];
+        
+        foreach ($meetings as $meeting) {
+            $title=$meeting->course->matiere->label_matiere.' : '.$meeting['topic'];
+            $title = nl2br($title);
+            $color='';
+            if ($meeting->course->matiere->label_matiere=='Eco')
+            $color='#4caf50';
+            elseif ($meeting->course->matiere->label_matiere=='Gest') {
+                $color='#d22346';
+            }
+            elseif ($meeting->course->matiere->label_matiere=='Info') {
+                $color='#ffc107';
+            }
+            // dd($title);
+            $url='#';
+            $student=Auth::user()->student;
+            if ($student->status==1) {
+                $url=$meeting['join_url'];
+            }
+            $events[]=[
+                'title' => $title,
+                'start' => $meeting['start_time'], // Assurez-vous que vos noms de colonnes correspondent à votre base de données
+                'end' => $meeting['start_time'],
+                'color' => $color,
+                'url' => $url,
+                // Ajoutez d'autres champs d'événement si nécessaire
+            ];
+          
+        }
+        
+    //    dd($events);
+      return view('Student.calendrier',compact('events'));
+    }
+    public function calendarlives()
     {
         
-      return view('Student.calendrier');
+        $meetings = Zoom::getUpcomingMeeting();
+        
+        $events = [];
+        foreach ($meetings['data']['meetings']as $meeting) {
+            $events[]= [
+                'title' => $meeting['topic'],
+                'start' => $meeting['start_time'], // Assurez-vous que vos noms de colonnes correspondent à votre base de données
+                'end' => $meeting['start_time'],
+                
+                'url' => $meeting->join_url,
+                // Ajoutez d'autres champs d'événement si nécessaire
+            ];
+        }
+
+        return response()->json(['events'=>$events]);
+
     }
     public function mescours()
     {

@@ -282,7 +282,7 @@ $(document).ready(function () {
             {
                 label: "My First dataset",
                 backgroundColor: "rgba(102, 51, 153, 0.5)",
-                borderColor: "#059669",
+                borderColor: "#639",
 
                 pointBorderColor: "#825da7",
                 pointBackgroundColor: "#825da7",
@@ -293,8 +293,8 @@ $(document).ready(function () {
             {
                 label: "My Second dataset",
                 backgroundColor: "rgba(177, 125, 230, 0.7)",
-                borderColor: "#059669",
-                pointColor: "#059669",
+                borderColor: "#639",
+                pointColor: "#639",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(151,187,205,1)",

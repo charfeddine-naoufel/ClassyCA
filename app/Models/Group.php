@@ -22,4 +22,8 @@ class Group extends Model
     {
         return $this->hasMany(Course::class);
     }
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'courses', 'group_id', 'teacher_id');
+    }
 }

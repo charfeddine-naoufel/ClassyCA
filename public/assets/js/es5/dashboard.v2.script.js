@@ -83,7 +83,7 @@ $(document).ready(function () {
                                     name: "Completed",
                                     value: 80,
                                     itemStyle: {
-                                        color: "#059669",
+                                        color: "#639",
                                     },
                                 },
                                 {

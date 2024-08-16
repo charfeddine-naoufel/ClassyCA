@@ -11,6 +11,9 @@ use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SeanceController;
+use App\Http\Controllers\LiveController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SupportController;
 
 
 /*
@@ -43,6 +46,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('/classes', ClasseController::class);
     Route::resource('/groups', GroupController::class);
     Route::resource('/offres', OffreController::class);
+    Route::resource('/payments', PaymentController::class);
     
   
 
@@ -55,6 +59,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/calendrier', [StudentController::class, 'calendrier'])->name('student.calendrier');
     Route::get('/MesCours', [StudentController::class, 'mescours'])->name('student.mescours');
     Route::get('/MesCours/{id}/chapitres', [StudentController::class, 'chapitrescours'])->name('student.chapitrescours');
+    Route::get('/calendar-events', [StudentController::class, 'calendarlives'])->name('student.lives');
   
   });
   // Teacher routes
@@ -68,6 +73,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 
     Route::resource('/chapitres', ChapitreController::class);
     Route::resource('/seances', SeanceController::class);
+    Route::resource('/lives', LiveController::class);
+    Route::resource('/documents', SupportController::class);
   
   });
 

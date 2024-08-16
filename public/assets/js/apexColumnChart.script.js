@@ -151,7 +151,7 @@ $(document).ready(function () {
                 shade: "light",
                 type: "horizontal",
                 shadeIntensity: 0.25,
-                gradientToColors: "#059669",
+                gradientToColors: "#639",
                 inverseColors: true,
                 opacityFrom: 1,
                 opacityTo: 1,

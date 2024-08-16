@@ -67,88 +67,115 @@
                     <div class="card text-left">
 
                         <div class="card-body">
-                            <h4 class="card-title mb-3 text-center"><span class="heading text-primary">Chapitres du cours : </span> {{  $course->matiere->nom_matiere }} <i class="text-20 text-warning i-Reverbnation"></i> <span class="heading text-secondary"> Classe : </span> {{  $course->classe->slug  }}<i class="text-20 text-warning i-Reverbnation"></i><span class="heading text-info">  Prof : </span> {{ $course->teacher->nom_fr }} </h4>
-                            
-                                
-                            
+                            <h4 class="card-title mb-3 text-center"><span class="heading text-primary">Chapitres du cours :
+                                </span> {{ $course->matiere->nom_matiere }} <i
+                                    class="text-20 text-warning i-Reverbnation"></i> <span class="heading text-secondary">
+                                    Classe : </span> {{ $course->classe->slug }}<i
+                                    class="text-20 text-warning i-Reverbnation"></i><span class="heading text-info"> Prof :
+                                </span> {{ $course->teacher->nom_fr }} </h4>
+
+
+
                             <ul class="nav nav-tabs" id="myIconTab" role="tablist">
                                 @foreach ($chapitres as $chapitre)
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ $loop->iteration == 1 ? 'active' : '' }} "
+                                            id="home-icon-tab{{ $loop->iteration }} " data-toggle="tab"
+                                            href="#homeIcon{{ $loop->iteration }}" role="tab"
+                                            aria-controls="homeIcon{{ $loop->iteration }}" aria-selected="true"><i
+                                                class="nav-icon i-Folder-Zip mr-1"></i>{{ $chapitre->titre }}</a>
+                                    </li>
+                                @endforeach
                                 <li class="nav-item">
-                                    <a class="nav-link {{$loop->iteration ==  1 ? 'active' : ''  }} " id="home-icon-tab{{$loop->iteration}} " data-toggle="tab" href="#homeIcon{{$loop->iteration}}" role="tab" aria-controls="homeIcon{{$loop->iteration}}" aria-selected="true"><i class="nav-icon i-Folder-Zip mr-1"></i>{{$chapitre->titre}}</a>
+                                    <a class="nav-link t-font-boldest" id="contact-icon-tab" data-toggle="tab" href="#contactIcon" role="tab" aria-controls="contactIcon" aria-selected="false"><i class="nav-icon i-Home1 mr-1"></i> Documents</a>
                                 </li>
-                                @endforeach 
                             </ul>
 
-                            <div class="tab-content" id="myIconTabContent" style="border-left: 1px solid #993366;border-right: 1px solid #993366;border-bottom: 1px solid #993366;">
+                            <div class="tab-content" id="myIconTabContent"
+                                style="border-left: 1px solid #993366;border-right: 1px solid #993366;border-bottom: 1px solid #993366;border-top: 1px solid #993366;">
                                 @foreach ($chapitres as $chapitre)
-                                <div class="tab-pane fade {{$loop->iteration ==  1 ? 'active show' : ''  }}" id="homeIcon{{$loop->iteration}}" role="tabpanel" aria-labelledby="home-icon-tab{{$loop->iteration}}">
-                                    <div class="row">
-                                        <!-- begin::main column -->
-                                        <div class="col-lg-12">
-                                            <div class="row">
-                                                <!-- begin::basic example -->
-                                                <div class="col-lg-9 mb-3">
-                                                    <div class="card">
-                                                        <div class="card-header bg-transparent">
-                                                            <h3 class="card-title"> Séances</h3>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-9">
-                                                                    <div id="trailer" style="height:50vh;"class="section d-flex justify-content-center embed-responsive embed-responsive-21by9 w-100">
-                                                                        <iframe src="https://player.vimeo.com/video/137857207" style="" name="player" title="Vimeo video" allowfullscreen="" data-gtm-yt-inspected-2340190_699="true" data-gtm-yt-inspected-24="true"></iframe>
-                                                                        {{-- <video class="embed-responsive-item"name="player" controls autoplay loop muted>
-                                                                              <source src="https://player.vimeo.com/external/325698769.sd.mp4?s=4e70164190f4b472059c9f4ca74ca0ca58056ce4&profile_id=165" type="video/mp4">
+                                    <div class="tab-pane fade {{ $loop->iteration == 1 ? 'active show' : '' }}"
+                                        id="homeIcon{{ $loop->iteration }}" role="tabpanel"
+                                        aria-labelledby="home-icon-tab{{ $loop->iteration }}">
+                                        <div class="row">
+                                            <!-- begin::main column -->
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <!-- begin::basic example -->
+                                                    <div class="col-lg-12 mb-3">
+                                                        <div class="card">
+                                                            <div class="card-header bg-transparent">
+                                                                <h3 class="card-title"> Séances</h3>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-10">
+                                                                        <div
+                                                                            style="height:70vh;"class="section   embed-responsive embed-responsive-21by9 ">
+                                                                            {{-- <video  autoplay>
+                                                                            <source src="https://www.youtube.com/watch?v=jpnCos8Ff_o" >
+                                                                          Your browser does not support the video tag.
+                                                                          </video> --}}
+                                                                            {{-- <iframe src="https://player.vimeo.com/video/137857207" class="" name="player" title="Vimeo video" allowfullscreen="" ></iframe> --}}
+                                                                            {{-- <video class="embed-responsive-item"name="player" id="player" controls controlslist="nodownload">
+                                                                              <source id="playersrc" src="https://player.vimeo.com/external/325698769.sd.mp4?s=4e70164190f4b472059c9f4ca74ca0ca58056ce4&profile_id=165" type="video/mp4">
                                                                               Your browser does not support the video tag.
                                                                             </video> --}}
-                                                                            
-                                                                      </div> 
-                                                                      
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <div class="ul-product-detail__brand-name mb-4">
-                                                                        <h5 class="heading">Séances :</h5>
-                                                                        
+
+                                                                            <iframe id="player{{ $chapitre->id }}"
+                                                                                data-id="player{{ $chapitre->id }}"
+                                                                                width="560" height="315"
+                                                                                class="youtube-player"
+                                                                                src="https://player.vimeo.com/external/325698769.sd.mp4?s=4e70164190f4b472059c9f4ca74ca0ca58056ce4&profile_id=165"
+                                                                                frameborder="0"
+                                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                                allowfullscreen></iframe>
+
+
+                                                                        </div>
+
                                                                     </div>
-                        
-                                                                    
-                        
-                                                                     
-                                                                    <div class="ul-product-detail__features mt-3">
-                                                                        <ul class="m-0 p-0">
-                                                                            <li>
-                                                                                <i class="i-Right1 text-primary text-15 align-middle font-weight-700"> </i>
-                                                                                <a href="https://player.vimeo.com/video/81676731" target="player" ><span class="align-middle">Séance 1</span></a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <i class="i-Right1 text-primary text-15 align-middle font-weight-700"> </i>
-                                                                                <a href="https://player.vimeo.com/video/81676731" target="player" ><span class="align-middle">Séance 2</span></a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <i class="i-Right1 text-primary text-15 align-middle font-weight-700"> </i>
-                                                                                <a href="" target="player" ><span class="align-middle">Séance 3</span></a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <i class="i-Right1 text-primary text-15 align-middle font-weight-700"> </i>
-                                                                                <a href="" target="player" ><span class="align-middle">Séance 4</span></a>
-                                                                            </li>
-                                                                        </ul>
+                                                                    <div class="col-lg-2">
+                                                                        <div class="ul-product-detail__brand-name mb-4">
+                                                                            <h5 class="heading">Séances :</h5>
+
+                                                                        </div>
+
+
+
+
+                                                                        <div class="ul-product-detail__features mt-3">
+                                                                            <ul class="m-0 p-0">
+                                                                                @foreach ($chapitre->seances as $seance)
+                                                                                    <li>
+                                                                                        <i
+                                                                                            class="i-Right1 text-primary text-15 align-middle font-weight-700">
+                                                                                        </i>
+                                                                                        <a href="#"
+                                                                                            data-target="player{{ $chapitre->id }}"
+                                                                                            data-url="{{ $seance->url }}"
+                                                                                            class="accessvideo"><span
+                                                                                                class="align-middle">{{ $seance->titre }}</span></a>
+                                                                                    </li>
+                                                                                @endforeach
+
+                                                                            </ul>
+                                                                        </div>
+
+
                                                                     </div>
-                        
-                                                                    
                                                                 </div>
                                                             </div>
+
+
                                                         </div>
-                                                        
-                                                        
                                                     </div>
-                                                </div>
-                                                <!-- end::basic example -->
-                
-                                                <!-- begin::checkoxes & radio addons -->
-                                                <div class="col-lg-3 mb-3">
+                                                    <!-- end::basic example -->
+
+                                                    <!-- begin::documents -->
+                                                    {{-- <div class="col-lg-3 mb-3">
                                                         <!-- navigation -->
-                                                <div class="card  mb-3">
+                                                    <div class="card  mb-3">
                                                     <div class="card-header font-weight-bold dropdown-toggle" onClick="customToggle3()">Documents</div>
                                                     <div class="card-body" id="custom-toggle3">
 
@@ -167,24 +194,85 @@
                                                     </div>
                                                 </div>
                                                 <!-- end of navigation -->
+                                                </div> --}}
+                                                    <!-- end::documents -->
                                                 </div>
-                                                <!-- end::checkoxes & radio addons -->
+                                                <!-- end of row -->
+
+
                                             </div>
-                                            <!-- end of row -->
-                                            
-                                            
+                                            <!-- end::main-column -->
                                         </div>
-                                        <!-- end::main-column -->
                                     </div>
+                                @endforeach
+                                <div class="tab-pane fade" id="contactIcon" role="tabpanel" aria-labelledby="contact-icon-tab" >
+                                  <div class="row">
+                                    <div class="col-md-3">
+
+                                        <div class="card mb-4">
+                                            <div class="card-header teal-600 text-purple-600">
+                                                Chapitre1:
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Téléchargement</h5>
+                                                
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                </ul>
+                                            </div>
+                                        </div>     
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <div class="card mb-4">
+                                            <div class="card-header teal-600 text-purple-600">
+                                                Chapitre1:
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Téléchargement</h5>
+                                                
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                </ul>
+                                            </div>
+                                        </div>     
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <div class="card mb-4">
+                                            <div class="card-header teal-600 text-purple-600">
+                                                Chapitre1:
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Téléchargement</h5>
+                                                
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                    <li class="list-group-item">Document 1</li>
+                                                </ul>
+                                            </div>
+                                        </div>     
+                                    </div>
+                                  </div>
                                 </div>
-                                @endforeach  
                             </div>
+                        </div>
                     </div>
+
+
+
                 </div>
-
-
-
-            </div>
         </section>
 
         <!-- Footer Start -->
@@ -194,6 +282,35 @@
 
 @endsection
 @section('scripts')
+
+    <script>
+        $(document).ready(function() {
+            $('.accessvideo').on('click', function(e) {
+                e.preventDefault();
+                $('iframe').each(function(index){
+                    $(this).attr('src',$(this).attr('src'));
+                    return false;
+                })
+                var targetId = $(this).attr('data-target');
+                var videoUrl = $(this).attr("data-url");
+                var videoId = getYouTubeVideoId(videoUrl); // Fonction pour extraire l'ID de la vidéo
+
+                if (videoId) {
+                    $("#" + targetId).attr("src", "https://www.youtube.com/embed/" + videoId +
+                        "?autoplay=0");
+                }
+
+            });
+        });
+
+        // Fonction pour extraire l'ID de la vidéo YouTube depuis l'URL
+        function getYouTubeVideoId(url) {
+            var match = url.match(
+                /(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:v\/|embed\/|watch\?v=|watch\?.*?v=|.+\/.+\/|.+\/)\/?([^\?&""">]+)/
+            );
+            return match ? match[1] : null;
+        }
+    </script>
     <script src="{{ asset('assets/js/vendor/calendar/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/calendar/moment.min.js') }}"></script>
 

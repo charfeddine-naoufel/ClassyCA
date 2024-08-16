@@ -94,7 +94,7 @@ $(document).ready(function () {
                         45000, 82000, 35000, 93000, 71000, 89000, 49000, 91000,
                         80200, 86000, 35000, 40050,
                     ],
-                    label: { show: false, color: "#059669" },
+                    label: { show: false, color: "#639" },
                     type: "bar",
                     color: "#7569b3",
                     smooth: true,
@@ -254,7 +254,7 @@ $(document).ready(function () {
                     type: "line",
                     showSymbol: true,
                     smooth: true,
-                    color: "#059669",
+                    color: "#639",
                     lineStyle: {
                         opacity: 1,
                         width: 2,
@@ -1649,7 +1649,7 @@ $(document).ready(function () {
                 ],
                 axisLabel: {
                     show: true,
-                    color: "#059669",
+                    color: "#639",
                     interval: 5,
                     inside: false,
                     align: "center",
@@ -1695,17 +1695,17 @@ $(document).ready(function () {
                     smooth: true,
                     showSymbol: false,
                     itemStyle: {
-                        borderColor: "#059669",
-                        color: ["#059669"],
+                        borderColor: "#639",
+                        color: ["#639"],
                     },
                     lineStyle: {
                         opacity: 1,
                         width: 1,
-                        color: ["#059669"],
+                        color: ["#639"],
                     },
                     areaStyle: {
                         opacity: 1,
-                        color: ["#059669"],
+                        color: ["#639"],
                     },
                 },
             ],
@@ -1818,7 +1818,7 @@ $(document).ready(function () {
                 containLabel: true,
             },
             color: [
-                "#059669",
+                "#639",
                 "#63845",
                 "#ebcb37",
                 "#a1b968",

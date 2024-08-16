@@ -25,25 +25,21 @@ class SeanceController extends Controller
         $teacher=Auth::user()->teacher;
         $mesclasses=Course::where('teacher_id',$teacher->id)->get();
         //  dd($mesclasses);
+         $meschapitres=collect();
+        $i=0;
         foreach ($mesclasses as $key => $classe) {
             $chapitresbyclasses[$classe->classe->slug]=$classe->chapitres;
+            $meschapitres=$meschapitres->merge($classe->chapitres);
         }
-        // dd($coursesbyclasses);
-        // foreach ($coursesbyclasses as $key => $courses) {
-        //     foreach ($courses as $key => $course) {
-        //         $chapitres[$course->classe->slug]=$course->chapitres;
-            
-
-        //     }
-
-        // }
+        
+        //  dd($meschapitres);
         
         $courses=Course::where('teacher_id',$teacher->id)->get();
-        $meschapitres=[];
+        
       
-        $seancesByChapitres=[];
+        
        
-        return view('Teacher.seances.index',compact('seancesByChapitres','courses','meschapitres','chapitresbyclasses'));
+        return view('Teacher.seances.index',compact('courses','meschapitres','chapitresbyclasses'));
     }
 
     /**

@@ -102,7 +102,7 @@ $(document).ready(function () {
         yaxis: {
             min: 0,
         },
-        colors: ["#059669"],
+        colors: ["#639"],
         // title: {
         //     text: '$235,312',
         //     offsetX: 0,

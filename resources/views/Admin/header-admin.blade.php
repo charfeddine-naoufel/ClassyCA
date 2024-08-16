@@ -4,35 +4,42 @@
                     <li class="nav-item" data-item="dashboard">
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Bar-Chart"></i>
-                            <span class="nav-text">Admin <br> Dashboard </span>
+                            <span class="nav-text"><strong>Admin <br> Dashboard</strong> </span>
                         </a>
                         <div class="triangle"></div>
                     </li>
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('matieres.index')}}">
                             <i class="nav-icon i-Library"></i>
-                            <span class="nav-text">Matiere</span>
+                            <span class="nav-text"><strong>Matiere</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
                     <li class="nav-item active" data-item="users">
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon  i-Address-Book"></i>
-                            <span class="nav-text">Utilisateurs</span>
+                            <span class="nav-text"><strong>Utilisateurs</strong> </span>
+                        </a>
+                        <div class="triangle"></div>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-item-hold" href="{{route('payments.index')}}">
+                            <i class="nav-icon  i-Billing"></i>
+                            <span class="nav-text"><strong>Payements</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('offres.index')}}">
                             <i class="nav-icon  i-Dropbox"></i>
-                            <span class="nav-text">Offres</span>
+                            <span class="nav-text"><strong>Offres</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('chapitres.index')}}">
                             <i class="nav-icon i-Computer-Secure"></i>
-                            <span class="nav-text">Packs</span>
+                            <span class="nav-text"><strong>Packs</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -42,7 +49,7 @@
                     <li class="nav-item " >
                         <a class="nav-item-hold" href="{{route('classes.index')}}">
                             <i class="nav-icon i-File-Clipboard-File--Text"></i>
-                            <span class="nav-text">Classes <br> et Groupes</span>
+                            <span class="nav-text"><strong>Classes <br> et Groupes</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>

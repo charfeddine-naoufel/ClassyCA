@@ -33,12 +33,13 @@ $(document).ready(function() {
         year = newDate.getFullYear();
 
     $('#calendar').fullCalendar({
-
+        locale: 'fr',
         header: {
             left: 'prev,next today',
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
+        
         themeSystem: "bootstrap4",
         droppable: true,
         editable: true,

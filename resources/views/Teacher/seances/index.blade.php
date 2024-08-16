@@ -72,7 +72,7 @@
                                                         <div class="col-sm-10">
                                                             <select class="form-control form-control-rounded " name="chapitre_id">
                                                                 @foreach ($meschapitres as $chapitre)
-                                                                <option value="{{$chapitre->id}}">{{$chapitre->titre}}</option>
+                                                                <option value="{{$chapitre->id}}">{{$chapitre->titre}}--{{$chapitre->course->classe->slug}}</option>
                                                                     
                                                                 @endforeach
                                                                 
@@ -150,7 +150,7 @@
                                                         <div class="col-sm-10">
                                                             <select class="form-control form-control-rounded " name="chapitre_id" id="chapitre_id">
                                                                 @foreach ($meschapitres as $chapitre)
-                                                                <option value="{{$chapitre->id}}">{{$chapitre->titre}}</option>
+                                                                <option value="{{$chapitre->id}}">{{$chapitre->titre}}--{{$chapitre->course->classe->slug}} </option>
                                                                     
                                                                 @endforeach
                                                                 
@@ -187,7 +187,7 @@
                                     <div class="card text-left">
 
                                         <div class="card-body">
-                                            <h4 class="card-title mb-3">Séances pour la classe : {{$key}}</h4>
+                                            <h4 class="card-title mb-3">Séances pour la classe : <span class="text-primary">{{$key}}</span> </h4>
 
                                             <ul class="nav nav-tabs" id="myIconTab" role="tablist">
                                                 @foreach ($chapitres as  $chapitre)
@@ -195,7 +195,7 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link {{$loop->iteration ==  1 ? 'active' : ''  }}" id="home-icon-tab{{$chapitre->id}} " data-toggle="tab"
                                                     href="#homeIcon{{$chapitre->id}}" role="tab" aria-controls="homeIcon{{$chapitre->id}}"
-                                                    aria-selected="true"><i class="nav-icon i-Business-Mens mr-1"></i><strong>{{$chapitre->titre}} </strong></a>
+                                                    aria-selected="true"><i class="nav-icon i-Business-Mens mr-1"></i><strong >{{$chapitre->titre}} </strong></a>
                                                 </li>
                                                 
                                                 @endforeach
@@ -210,7 +210,7 @@
 
                                                         <div class="table-responsive">
                                                             <div class="card-body">
-                                                                <h4 class="card-title mb-3"> Séances du chapitres : <strong>{{$chapitre->titre}}</strong></h4>
+                                                                <h4 class="card-title mb-3"> Séances du chapitres : <strong class="text-primary">{{$chapitre->titre}}</strong></h4>
                         
                                                                 <div class="table-responsive">
                                                                     <table class="table ">

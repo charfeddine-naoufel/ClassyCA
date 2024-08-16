@@ -34,6 +34,14 @@ class Teacher extends Model
     {
         return $this->hasMany(Course::class);
     }
+    public function chapitres()
+    {
+        return $this->hasManyThrough(Chapitre::class, Course::class);
+    }
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'courses', 'teacher_id', 'group_id');
+    }
 
     
 }

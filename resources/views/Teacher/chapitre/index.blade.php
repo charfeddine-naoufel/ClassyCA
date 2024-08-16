@@ -175,7 +175,7 @@
                                                 
                                                 @endforeach
                                             </ul>
-                                            <div class="tab-content" id="myIconTabContent"style="border-left: 1px solid #993366;border-right: 1px solid #993366;border-bottom: 1px solid #993366;">
+                                            <div class="tab-content" id="myIconTabContent"style="border-left: 1px solid #993366;border-right: 1px solid #993366;border-bottom: 1px solid #993366;border-top: 1px solid #993366;">
                                                 @foreach ($chapitresByClasses as $key => $chapitresByClasse)
                                                     
                                                

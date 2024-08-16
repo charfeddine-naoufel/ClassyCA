@@ -17,10 +17,10 @@ class Course extends Model
     {
         return $this->hasMany(Chapitre::class);
     }
-    // public function groups()
-    // {
-    //     return $this->hasMany(Group::class);
-    // }
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
+    }
     public function teacher()
     {
         return $this->belongsTo(Teacher::class);
@@ -33,5 +33,6 @@ class Course extends Model
     {
         return $this->belongsTo(Matiere::class);
     }
+
 
 }

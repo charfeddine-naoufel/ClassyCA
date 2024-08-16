@@ -86,7 +86,7 @@ $(document).ready(function () {
                             color: "rgba(102, 51, 153, 0.68)",
                         },
                         itemStyle: {
-                            color: "#059669",
+                            color: "#639",
                         },
                     },
                     {

@@ -4,7 +4,7 @@
                     <li class="nav-item" data-item="dashboard">
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Bar-Chart"></i>
-                            <span class="nav-text">Dashboard <br> Prof </span>
+                            <span class="nav-text"><strong>Dashboard <br> Prof</strong>  </span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -15,7 +15,7 @@
                     <li class="nav-item" data-item="courses">
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Folders"></i>
-                            <span class="nav-text">Mes Cours</span>
+                            <span class="nav-text"><strong>Mes Cours</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -23,7 +23,7 @@
                     <li class="nav-item " >
                         <a class="nav-item-hold" href="{{route('teacher.mesgroups')}} ">
                             <i class="nav-icon i-Conference"></i>
-                            <span class="nav-text">Mes Groupes</span>
+                            <span class="nav-text"><strong>Mes Groupes</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -32,7 +32,7 @@
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Dec"></i>
-                            <span class="nav-text">Mon Calendrier</span>
+                            <span class="nav-text"><strong>Mon Calendrier</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -76,25 +76,31 @@
                     <li class="nav-item">
                         <a href="{{route('teacher.mescours')}}">
                             <i class="nav-icon i-Management"></i>
-                            <span class="item-name">Cours</span>
+                            <span class="item-name"><strong>Cours</strong> </span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('chapitres.index')}}">
                             <i class="nav-icon i-Newspaper"></i>
-                            <span class="item-name">Chapitres</span>
+                            <span class="item-name"><strong>Chapitres</strong> </span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('teacher.messeances')}}">
                             <i class="nav-icon i-Data-Stream"></i>
-                            <span class="item-name">Séances</span>
+                            <span class="item-name"><strong>Séances</strong> </span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="{{route('lives.index')}}">
                             <i class="nav-icon i-Consulting"></i>
-                            <span class="item-name">Live</span>
+                            <span class="item-name"><strong>Live</strong> </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('documents.index')}}">
+                            <i class="nav-icon i-Files"></i>
+                            <span class="item-name"><strong>Documents</strong> </span>
                         </a>
                     </li>
                 </ul>
