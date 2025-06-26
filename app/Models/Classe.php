@@ -11,7 +11,7 @@ class Classe extends Model
 
     public function eleves()
     {
-        return $this->hasMany(Eleve::class);
+        return $this->hasMany(Student::class);
     }
 
     public function courses()

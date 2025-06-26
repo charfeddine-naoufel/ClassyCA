@@ -80,6 +80,11 @@
 
 
                                         <td class="d-flex">
+                                            <form action="{{ route('invoice', $payment->id)}}" method="get" class="inline-block">
+                                                @csrf
+                                                
+                                            <button class="btn text-info bg-transparent btn-icon  mr-2 facturebtn" title="Facture"  ><i class="nav-icon i-Billing font-weight-bold"></i></button>
+                                        </form>
                                             <button class="btn text-success bg-transparent btn-icon  mr-2 editbtn" data-id="{{$payment->id}}"  data-toggle="modal" data-target="#editModalContent" ><i class="nav-icon i-Pen-5 font-weight-bold"></i></button>
 
                                             <form action="{{ route('payments.destroy', $payment->id)}}" method="post" class="inline-block">
@@ -292,12 +297,6 @@
             $('.editbtn').on('click', function(e) {
                 e.preventDefault();
                 let id = $(this).data('id');
-
-
-                // var action ="{{ URL::to('payments') }}/"+id;
-
-
-                // var url = "{{ URL::to('payments') }}";
 
                 $.get("payments/" + id + "/edit", function(data) {
                     console.log(data.data);

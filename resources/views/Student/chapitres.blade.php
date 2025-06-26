@@ -207,63 +207,27 @@
                                 @endforeach
                                 <div class="tab-pane fade" id="contactIcon" role="tabpanel" aria-labelledby="contact-icon-tab" >
                                   <div class="row">
+                                      @foreach ( $chapitres as $chapitre )
+                                          
+                                     
                                     <div class="col-md-3">
 
                                         <div class="card mb-4">
                                             <div class="card-header teal-600 text-purple-600">
-                                                Chapitre1:
+                                                 {{ $chapitre->titre }}
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">Téléchargement</h5>
                                                 
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
+                                                    @foreach ( $chapitre->supports as $document )
+                                                    <li class="list-group-item"><a href="{{$document->chemin}}" target="_blank"><i class="text-20 i-Download"></i> {{$document->nom}}</a> </li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>     
                                     </div>
-                                    <div class="col-md-3">
-
-                                        <div class="card mb-4">
-                                            <div class="card-header teal-600 text-purple-600">
-                                                Chapitre1:
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">Téléchargement</h5>
-                                                
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                </ul>
-                                            </div>
-                                        </div>     
-                                    </div>
-                                    <div class="col-md-3">
-
-                                        <div class="card mb-4">
-                                            <div class="card-header teal-600 text-purple-600">
-                                                Chapitre1:
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">Téléchargement</h5>
-                                                
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                    <li class="list-group-item">Document 1</li>
-                                                </ul>
-                                            </div>
-                                        </div>     
-                                    </div>
+                                     @endforeach
                                   </div>
                                 </div>
                             </div>

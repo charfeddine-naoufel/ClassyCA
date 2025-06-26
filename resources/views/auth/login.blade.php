@@ -11,9 +11,10 @@
 </head>
 
 <body class="text-left">
-    <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/back.jpg')}});background-size:cover">
+    <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/bgback.jpg')}});background-size:cover">
+    {{-- <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/back.jpg')}});background-size:cover"> --}}
         <div class="auth-content">
-            <div class="card o-hidden " style="box-shadow: 4px 7px 24px -4px rgba(0,0,0,0.62);">
+            <div class="card o-hidden " style="box-shadow: 4px 7px 24px -4px rgba(252, 250, 250, 0.62);">
                 <div class="row">
                     <div class="col-md-6" style="background-size: cover;background-image: url(./assets/images/bgr.jpg)">
                         <div class="p-4">

@@ -28,19 +28,23 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <form method="POST" action="{{route('chapitres.store')}} " enctype="multipart/form-data">
+                                                <form method="POST" action="{{route('chapitres.store')}} " enctype="multipart/form-data" class="needs-validation" novalidate>
                                                     @csrf
                                                     <div class="form-group row">
                                                         <label for="nom_off" class="col-sm-2 col-form-label">Titre: </label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="Titre" placeholder="Titre" name="titre">
+                                                            <input type="text" class="form-control"  placeholder="Titre" name="titre" required>
+                                                            <div class="invalid-tooltip">
+                                                            Le titre est obligatoire
                                                         </div>
+                                                        </div>
+                                                        
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="Description"
                                                             class="col-sm-2 col-form-label">Description :</label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="Description"
+                                                            <input type="text" class="form-control" id="Description" required
                                                                 placeholder="Description" name="description">
                                                         </div>
                                                     </div>
@@ -94,13 +98,16 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <form method="POST" action="" enctype="multipart/form-data">
+                                                <form method="POST" action="" enctype="multipart/form-data" novalidate>
                                                     @csrf
                                                     <div class="form-group row">
                                                         <label for="nom_off" class="col-sm-2 col-form-label">Titre: </label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="Titre"
+                                                            <input type="text" class="form-control" id="Titre" required
                                                                 placeholder="Titre" name="titre">
+                                                        </div>
+                                                        <div class="invalid-tooltip">
+                                                            Le titre est obligatoire
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -284,4 +291,7 @@
         
         <!-- fotter end -->
     </div>
+@endsection
+@section('scripts')
+
 @endsection

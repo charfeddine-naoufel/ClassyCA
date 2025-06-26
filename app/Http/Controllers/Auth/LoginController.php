@@ -47,9 +47,7 @@ class LoginController extends Controller
         'email' =>'required|email',
         'password' =>'required'
       ]);
-//    $credentials['email']="admin@gmail.com";
-//    $credentials['password']="password";
-    //   dd($credentials);
+
       if (Auth::attempt($credentials))
       {
           $user = Auth::user()->role;

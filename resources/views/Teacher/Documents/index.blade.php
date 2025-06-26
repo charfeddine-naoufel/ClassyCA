@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Pyements')
+@section('title', 'Documents')
 @section('content')
 
     <div class="main-content-wrap sidenav-open d-flex flex-column">
@@ -58,15 +58,15 @@
                                         </td>
                                         <td>
                                             <strong>
-
-                                                {{$support->chemin}}
+                                                    <a href="{{$support->chemin}}" target="_blank"> Télécharger</a>
+                                                
                                             </strong>
 
                                         </td>
                                         <td>
                                             <strong>
 
-                                                {{$support->chapitre->course->teacher->nom-fr}} {{$support->chapitre->course->teacher->prenom-fr}}
+                                                {{$support->chapitre->course->teacher->nom_fr}} {{$support->chapitre->course->teacher->prenom_fr}}
                                             </strong>
 
                                         </td>
@@ -118,13 +118,17 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="post" action="{{ route('documents.store') }}">
+                    <form method="post" action="{{ route('documents.store') }}" class="needs-validation" novalidate>
                         @csrf
                         <div class="modal-body">
 
                             <div class="form-group">
                                 <label for="label-support" class="col-form-label">Nom Document:</label>
-                                <input type="text" class="form-control" name="nom">
+                                <input type="text" class="form-control" name="nom" required>
+                                <div class="invalid-tooltip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle text-20"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12" y2="17"></line></svg>
+                                    Le nom du document est obligatoire
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="nom-support" class="col-form-label"> Type:</label>
@@ -142,13 +146,17 @@
                             </div>
                                                        
                             <div class="form-group">
-                                <label for="label-support" class="col-form-label">Fichier:</label>
-                                <input type="file" class="form-control" name="chemein">
+                                <label for="label-support" class="col-form-label">Lien Fichier:</label>
+                                <input type="text" class="form-control" name="chemin" required>
+                                <div class="invalid-tooltip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle text-20"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12" y2="17"></line></svg>
+                                    Le lien au document est obligatoire
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="nom-support" class="col-form-label"> Chapitret:</label>
-                                <select class="form-control form-control-rounded w-100" name="chapitre_id">
+                                <select class="form-control form-control-rounded w-100" name="chapitre_id" required>
                                     <option value="">Choisir un chapitre</option>
                                     @foreach ($chapitres as $chapitre)
                                     <option value="{{$chapitre->id}}">{{$chapitre->titre}} {{$chapitre->course->classe->slug}}</option>
@@ -156,6 +164,10 @@
                                     @endforeach
                                     
                                 </select>
+                                <div class="invalid-tooltip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle text-20"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12" y2="17"></line></svg>
+                                    Le choix d'un chapitre est obligatoire
+                                </div>
                             </div>
 
                         </div>
@@ -186,8 +198,11 @@
                             
                             <div class="form-group">
                                 <label for="label-support" class="col-form-label">Nom Document:</label>
-                                <input type="text" class="form-control" id="nom">
+                                <input type="text" class="form-control" id="nom" required>
                                 <input type="hidden" class="form-control" id="IdSupport" >
+                                <div class="invalid-tooltip">
+                                    Le nom du document est obligatoire
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="nom-support" class="col-form-label"> Type:</label>
@@ -205,13 +220,16 @@
                             </div>
                                                        
                             <div class="form-group">
-                                <label for="label-support" class="col-form-label">Fichier:</label>
-                                <input type="file" class="form-control" id="chemein">
+                                <label for="label-support" class="col-form-label">Lien Fichier:</label>
+                                <input type="text" class="form-control" id="chemin" required>
+                                <div class="invalid-tooltip">
+                                    Le lien au document est obligatoire
+                                </div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="nom-support" class="col-form-label"> Chapitret:</label>
-                                <select class="form-control form-control-rounded w-100" id="chapitre_id">
+                                <label for="nom-support" class="col-form-label"> Chapitre :</label>
+                                <select class="form-control form-control-rounded w-100" id="chapitre_id" required>
                                     <option value="">Choisir un chapitre</option>
                                     @foreach ($chapitres as $chapitre)
                                     <option value="{{$chapitre->id}}">{{$chapitre->titre}} {{$chapitre->course->classe->slug}}</option>
@@ -219,6 +237,9 @@
                                     @endforeach
                                     
                                 </select>
+                                <div class="invalid-tooltip">
+                                    Le choix d'un chapitre est obligatoire
+                                </div>
                             </div>
 
 
@@ -303,13 +324,13 @@
 
                 // var url = "{{ URL::to('supports') }}";
 
-                $.get("supports/" + id + "/edit", function(data) {
+                $.get("documents/" + id + "/edit", function(data) {
                     console.log(data.data);
-                    $('#student_id').val(data.data['student_id']);
-                    $('#method').val(data.data['method']);
-                    $('#montant').val(data.data['montant']);
-                    $('#date_pay').val(data.data['date_pay']);
-                    $('#IdPayment').val(data.data['id']);
+                    $('#IdSupport').val(data.data['id']);
+                    $('#chapitre_id').val(data.data['chapitre_id']);
+                    $('#nom').val(data.data['nom']);
+                    $('#type').val(data.data['type']);
+                    $('#chemin').val(data.data['chemin']);
 
 
 
@@ -321,12 +342,12 @@
             });
             $('.updatebtn').on('click', function(e) {
                 e.preventDefault();
-                var student_id = $('#student_id').val();
-                var method = $('#method').val();
-                var montant = $('#montant').val();
-                var date_pay = $('#date_pay').val();
-                var id = $('#IdPayment').val();
-                var URL ="supports/"+ id;
+                var chapitre_id = $('#chapitre_id').val();
+                var nom = $('#nom').val();
+                var type = $('#type').val();
+                var chemin = $('#chemin').val();
+                var id = $('#IdSupport').val();
+                var URL ="documents/"+ id;
                 console.log("url===",URL)
                 $.ajax({
                     method: "PUT",
@@ -335,10 +356,10 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     data: { id: id,
-                        student_id: student_id,
-                        method: method ,
-                        montant: montant ,
-                        date_pay: date_pay ,
+                        chapitre_id: chapitre_id,
+                        nom: nom ,
+                        type: type ,
+                        chemin: chemin ,
                     },
 
                     success: function(data) {

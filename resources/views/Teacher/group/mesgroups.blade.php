@@ -37,14 +37,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                @php
+                                    $i=1;
+                                @endphp
                                     @foreach($groups as $groupe)
                                     @foreach($groupe as $item)
                                     <tr>
-                                        <th scope="row">{{$loop->iteration }}</th>
+                                        <th scope="row">{{$i++ }}</th>
                                         <td><strong>{{$item->nomg}} </strong></td>
                                         <td><strong>{{$item->classe->slug}} </strong></td>
-                                        <td><strong>{{$item->eleves}} </strong></td>
+                                        <td>
+                                            <div class="ul-widget-s7__items mb-4">
+                                                <span class="ul-widget-s7__item-time ul-middle">{{$item->nomg}}</span>
+                                                <div class="ul-widget-s7__item-circle">
+                                                  <p class="ul-vertical-line bg-primary "></p>
+                                                </div>
+                                                <div class="ul-widget-s7__item-text">
+                                                    @foreach ($item->students as $student)
+                                                    <p class="m-0 p-0"><i class="text-20 i-Checked-User"></i>  {{$student->nom_fr}} {{$student->prenom_fr}}</p>
+                                                    @endforeach
+                                                </div>
+                                              </div>
+                                          </td>
                                        
                                         
 

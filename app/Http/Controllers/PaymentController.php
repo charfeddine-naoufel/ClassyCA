@@ -65,6 +65,12 @@ class PaymentController extends Controller
         
     }
 
+    public function invoice($id){
+        $payment = Payment::find($id);
+        return view('Admin.Payment.invoice',compact('payment'));
+
+    }
+
     /**
      * Display the specified resource.
      */

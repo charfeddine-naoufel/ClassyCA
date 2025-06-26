@@ -196,6 +196,9 @@ body {
   padding: 0;
   padding: 35px 15px 10px 15px;
   color: #ffffff;
+  font-family: "Almarai", sans-serif;
+  font-weight: 700;
+  font-style: normal;
   text-align: center;
   text-transform: uppercase;
   -webkit-transition: all .2s;
@@ -329,17 +332,19 @@ a:focus {
 .slider_section .detail-box {
   width: 100%;
   margin: 0 auto;
+  
 }
 
 .slider_section .detail-box h1 {
   text-transform: uppercase;
-  font-size: 3rem;
+  font-size: 4rem;
   color: #ffffff;
   font-weight: 600;
 }
 
 .slider_section .detail-box h1 span {
   color: #f1db25;
+  
 }
 
 .slider_section .detail-box p {
@@ -445,6 +450,7 @@ a:focus {
           box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
   position: relative;
   margin-left: -45px;
+  
 }
 
 .about_section .detail-box p {
@@ -762,6 +768,18 @@ a:focus {
   bottom: 0;
   background-color: rgba(28, 28, 28, 0.75);
 }
+/* custom */
+.detail-box{
+  font-family: "Almarai", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  
+}
+.imgus{
+  border:3px solid #f1db25;
+  border-radius: 15px;
+  /* width: 80%; */
+}
 
 .team_section .btn-box {
   display: -webkit-box;
@@ -917,3 +935,88 @@ a:focus {
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
+
+.pricing-content{position:relative;}
+.pricing_design{
+    position: relative;
+    margin: 0px 0px;
+}
+.pricing_design .single-pricing{
+    background:#554c86;
+    padding: 60px 40px;
+    border-radius:30px;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+    position: relative;
+    z-index: 1;
+}
+.pricing_design .single-pricing:before{
+    content: "";
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px 18px 190px 18px;
+    border: 1px solid #eee;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+.price-head{}
+.price-head h2 {
+	margin-bottom: 20px;
+	font-size: 26px;
+	font-weight: 600;
+}
+.price-head h1 {
+	font-weight: 600;
+	margin-top: 30px;
+	margin-bottom: 5px;
+}
+.price-head span{}
+
+.single-pricing ul{list-style:none;margin-top: 30px;}
+.single-pricing ul li {
+	line-height: 36px;
+}
+.single-pricing ul li i {
+	background: #554c86;
+	color: #fff;
+	width: 20px;
+	height: 20px;
+	border-radius: 30px;
+	font-size: 11px;
+	text-align: center;
+	line-height: 20px;
+	margin-right: 6px;
+}
+.pricing-price{}
+
+.price_btn {
+	background: #554c86;
+	padding: 10px 30px;
+	color: #fff;
+	display: inline-block;
+	margin-top: 20px;
+	border-radius: 2px;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+}
+.price_btn:hover{background:#0aa1d6;}
+a{
+text-decoration:none;    
+}
+
+.section-title {
+    margin-bottom: 60px;
+}
+.text-center {
+    text-align: center!important;
+}
+
+.section-title h2 {
+    font-size: 45px;
+    font-weight: 600;
+    margin-top: 0;
+    position: relative;
+    text-transform: capitalize;
+}

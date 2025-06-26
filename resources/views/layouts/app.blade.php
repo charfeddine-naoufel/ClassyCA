@@ -336,6 +336,9 @@
 
     <script src="{{asset('assets/js/es5/script.min.js')}}"></script>
     <script src="{{asset('assets/js/es5/sidebar.large.script.min.js')}}"></script>
+
+    <script src="{{asset('assets/js/form.validation.script.js')}}"></script>
+
     {{-- <script src="assets/js/vendor/toastr.min.js"></script> --}}
     {{-- <script src="assets/js/toastr.script.js"></script> --}}
     

@@ -13,7 +13,7 @@
 <body class="text-left">
     <form method="POST" action="{{ route('eleves.registerEl') }}" >
         @csrf
-    <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/back.jpg')}});background-size:cover;box-shadow: 10px 10px 23px 4px rgba(0,0,0,0.75);">
+    <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/bgback.jpg')}});background-size:cover;box-shadow: 10px 10px 23px 4px rgba(0,0,0,0.75);">
         <div class="col-md-8">
             <div class="card o-hidden " style="box-shadow: 4px 7px 24px -4px rgba(0,0,0,0.62);">
                 <div class="row">

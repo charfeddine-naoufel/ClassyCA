@@ -138,7 +138,7 @@ $(document).ready(function () {
 
             series: [
                 {
-                    name: "Sales by Country",
+                    name: "nombre d'eleves",
                     type: "pie",
                     radius: "60%",
                     center: ["50%", "50%"],

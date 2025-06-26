@@ -38,28 +38,27 @@ class SupportController extends Controller
         
     //    dd($request);
     $rules = array(
-        'student_id'       => 'required',
-        'method'      => 'required',
-        'montant'      => 'required',
-        'date_pay'      => 'required'
+        'nom'       => 'required',
+        'type'      => 'required',
+        'chemin'      => 'required',
+        'chapitre_id'      => 'required'
     );
     $validator = Validator::make($request->all(), $rules);
     if ($validator->fails()) {
-        return redirect()->route('supports.index')
+        return redirect()->route('documents.index')
         ->with('Error','Vérifiez vos champs.');
     } else {
         // store
         $support = new Support;
-        $support->student_id = $request-> student_id;
-        $support->method      =  $request-> method;
-        $support->montant      =  $request-> montant;
-        $support->date_pay      =  $request-> date_pay;
+        $support->chapitre_id = $request-> chapitre_id;
+        $support->nom      =  $request-> nom;
+        $support->type      =  $request-> type;
+        $support->chemin      =  $request-> chemin;
         
         $support->save();
-        Student::whereId($support->student_id)->update(['status'=>1]);
 
         // redirect
-        return redirect()->route('supports.index')
+        return redirect()->route('documents.index')
         ->with('success','Nouveau support crée avec succés.');
     }
 
@@ -89,27 +88,27 @@ class SupportController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Support $support)
+    public function update(Request $request, $id)
     {
         
         
                $rules = array(
-                'student_id'       => 'required',
-                'method'      => 'required',
-                'montant'      => 'required',
-                'date_pay'      => 'required'
+                'chapitre_id'       => 'required',
+                'nom'      => 'required',
+                'type'      => 'required',
+                'chemin'      => 'required'
             );
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                return redirect()->route('supports.index')
+                return redirect()->route('documents.index')
                 ->with('Error','Vérifiez vos champs.');
             } else {
                 // update
-                // $support = Support::find($id);
-                $support->student_id = $request-> student_id;
-                $support->method      =  $request-> method;
-                $support->montant      =  $request-> montant;
-                $support->date_pay      =  $request-> date_pay;
+             $support = Support::find($id);
+                $support->chapitre_id = $request-> chapitre_id;
+                $support->nom      =  $request-> nom;
+                $support->type      =  $request-> type;
+                $support->chemin      =  $request-> chemin;
                 
                 $support->save();
         
@@ -125,12 +124,12 @@ class SupportController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Support $support)
+    public function destroy($id)
     {
+        $support = Support::find($id);
         $support->delete();
-        Student::whereId($support->student_id)->update(['status'=>0]);
     
-        return redirect()->route('supports.index')
+        return redirect()->route('documents.index')
                         ->with('success','Support supprimé avec succés');
     }
 }

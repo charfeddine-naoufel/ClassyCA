@@ -47,6 +47,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('/groups', GroupController::class);
     Route::resource('/offres', OffreController::class);
     Route::resource('/payments', PaymentController::class);
+    Route::get('/payment/facture/{id}', [PaymentController::class, 'invoice'])->name('invoice');
     
   
 

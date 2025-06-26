@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Student;
+use App\Models\Classe;
 
 class AdminController extends Controller
 {
@@ -13,7 +15,41 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user();
-      return view('Admin.home',compact('user'));
+        $eleves=Student::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        // Créer un tableau avec 12 cases (1 pour chaque mois) initialisé à 0
+        $Inscrit = array_fill(1, 12, 0);
+        
+        // Remplir le tableau avec les valeurs récupérées de la base de données
+        foreach ($eleves as $registration) {
+            $Inscrit[$registration->month] = $registration->count;
+        }
+        $elevesA=Student::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->where('status',1)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        // Créer un tableau avec 12 cases (1 pour chaque mois) initialisé à 0
+        $Active = array_fill(1, 12, 0);
+        
+        // Remplir le tableau avec les valeurs récupérées de la base de données
+        foreach ($elevesA as $registration) {
+            $Active[$registration->month] = $registration->count;
+        }
+        $ElActive = array_values($Active);
+        $ElInscrit = array_values($Inscrit);
+        //tableau d'eleves par classes
+        $classes=Classe::all();
+        $Elclasse=[];
+        foreach ($classes as $classe) {
+            $Elclasse[]=[$classe->eleves->count(),$classe->slug];
+        }
+        // dd(json_encode($Elclasse));
+      return view('Admin.home',compact('user','ElInscrit','ElActive','Elclasse'));
     }
 
     /**
