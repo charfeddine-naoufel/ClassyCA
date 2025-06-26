@@ -170,11 +170,11 @@
 
         <!-- header top menu end -->
         @if (Auth::user()->role == 'admin')
-             @include('admin.header-admin')
+             @include('Admin.header-admin')
         @elseif (Auth::user()->role == 'teacher')
-            @include('teacher.header-teacher')
+            @include('Teacher.header-teacher')
         @elseif (Auth::user()->role == 'student')
-            @include('student.header-student')
+            @include('Student.header-student')
         @endif
 
         
