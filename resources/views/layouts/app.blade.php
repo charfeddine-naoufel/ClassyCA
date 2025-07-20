@@ -8,16 +8,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/styles/vendor/calendar/fullcalendar.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/styles/vendor/calendar/fullcalendar.min.css') }}">
 
-    <link id="gull-theme" rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/styles/vendor/perfect-scrollbar.css')}}">
+    <link id="gull-theme" rel="stylesheet" href="{{ asset('assets/styles/css/themes/lite-purple.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/styles/vendor/perfect-scrollbar.css') }}">
 
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"> --}}
-    <link rel="stylesheet" href="{{asset('assets/styles/vendor/toastr.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/styles/vendor/sweetalert2.min.css')}}">
-    
-    <link rel="stylesheet" href="{{asset('assets/styles/vendor/select2.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/styles/vendor/toastr.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/styles/vendor/sweetalert2.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/styles/vendor/select2.css') }}">
 
 </head>
 
@@ -38,7 +38,7 @@
 
         <div class="main-header">
             <div class="logo">
-                <img src="{{asset('assets/images/logo.png')}}" alt="">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="">
             </div>
 
             <div class="menu-toggle">
@@ -64,7 +64,8 @@
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
                 <!-- Grid menu Dropdown -->
                 <div class="dropdown">
-                    <i class="i-Safe-Box text-muted header-icon" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false"></i>
+                    <i class="i-Safe-Box text-muted header-icon" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" role="button" aria-expanded="false"></i>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="menu-icon-grid">
                             <a href="#"><i class="i-Shop-4"></i> Home</a>
@@ -78,12 +79,14 @@
                 </div>
                 <!-- Notificaiton -->
                 <div class="dropdown">
-                    <div class="badge-top-container" id="dropdownNotification" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="badge-top-container" id="dropdownNotification" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <span class="badge badge-primary">3</span>
                         <i class="i-Bell text-muted header-icon"></i>
                     </div>
                     <!-- Notification dropdown -->
-                    <div class="dropdown-menu rtl-ps-none dropdown-menu-right notification-dropdown" aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
+                    <div class="dropdown-menu rtl-ps-none dropdown-menu-right notification-dropdown"
+                        aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
                         <div class="dropdown-item d-flex">
                             <div class="notification-icon">
                                 <i class="i-Speach-Bubble-6 text-primary mr-1"></i>
@@ -147,20 +150,21 @@
                 <!-- User avatar dropdown -->
                 <div class="dropdown">
                     <div class="user col align-self-end">
-                        <img src="{{asset('assets/images/faces/1.jpg')}}" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset('assets/images/faces/1.jpg') }}" id="userDropdown" alt=""
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <div class="dropdown-header">
-                                <i class="i-Lock-User mr-1"></i> {{Auth::user()->name}}
+                                <i class="i-Lock-User mr-1"></i> {{ Auth::user()->name }}
                             </div>
                             <a class="dropdown-item">Account settings</a>
                             <a class="dropdown-item">Billing history</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Quitter</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -170,14 +174,14 @@
 
         <!-- header top menu end -->
         @if (Auth::user()->role == 'admin')
-             @include('Admin.header-admin')
+            @include('Admin.header-admin')
         @elseif (Auth::user()->role == 'teacher')
             @include('Teacher.header-teacher')
         @elseif (Auth::user()->role == 'student')
             @include('Student.header-student')
         @endif
 
-        
+
         <!--=============== Left side End ================-->
 
         <!-- ============ Body content start ============= -->
@@ -189,7 +193,7 @@
     <!-- ============ Search UI Start ============= -->
     <div class="search-ui">
         <div class="search-header o-hidden">
-            <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo float-left">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="" class="logo float-left">
             <button class="search-close btn btn-icon bg-transparent float-right mt-2">
                 <i class="i-Close-Window text-22 text-muted"></i>
             </button>
@@ -206,10 +210,11 @@
                 <div class="card o-hidden flex-row mb-4 d-flex">
                     <div class="list-thumb d-flex">
                         <!-- TUMBNAIL -->
-                        <img src="{{asset('assets/images/products/headphone-1.jpg')}}" alt="">
+                        <img src="{{ asset('assets/images/products/headphone-1.jpg') }}" alt="">
                     </div>
                     <div class="flex-grow-1 pl-2 d-flex">
-                        <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <div
+                            class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
                             <!-- OTHER DATA -->
                             <a href="" class="w-40 w-sm-100">
                                 <div class="item-title">Headphone 1</div>
@@ -302,57 +307,56 @@
                 </div>
             </div>
         </div> --}}
-        <!-- PAGINATION CONTROL -->
-        <div class="col-md-12 mt-5 text-center">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination d-inline-flex">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <!-- PAGINATION CONTROL -->
+            <div class="col-md-12 mt-5 text-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination d-inline-flex">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
-    <!-- ============ Search UI End ============= -->
-    <script src="{{asset('assets/js/vendor/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/echarts.min.js')}}"></script>
+        <!-- ============ Search UI End ============= -->
+        <script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor/echarts.min.js') }}"></script>
 
-    <script src="{{asset('assets/js/es5/echart.options.min.js')}}"></script>
-    <script src="{{asset('assets/js/es5/dashboard.v1.script.min.js')}}"></script>
+        <script src="{{ asset('assets/js/es5/echart.options.min.js') }}"></script>
+        <script src="{{ asset('assets/js/es5/dashboard.v1.script.min.js') }}"></script>
 
-    <script src="{{asset('assets/js/es5/script.min.js')}}"></script>
-    <script src="{{asset('assets/js/es5/sidebar.large.script.min.js')}}"></script>
+        <script src="{{ asset('assets/js/es5/script.min.js') }}"></script>
+        <script src="{{ asset('assets/js/es5/sidebar.large.script.min.js') }}"></script>
 
-    <script src="{{asset('assets/js/form.validation.script.js')}}"></script>
+        <script src="{{ asset('assets/js/form.validation.script.js') }}"></script>
 
-    {{-- <script src="assets/js/vendor/toastr.min.js"></script> --}}
-    {{-- <script src="assets/js/toastr.script.js"></script> --}}
-    
- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
- <script>
+        {{-- <script src="assets/js/vendor/toastr.min.js"></script> --}}
+        {{-- <script src="assets/js/toastr.script.js"></script> --}}
 
-    $(document).ready(function(){
-      $('.nav-item').click(function(){
-        $(this).addClass('active').siblings().removeClass('active');
-    });
-    });
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.nav-item').click(function() {
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+            });
         </script>
-    @yield('scripts')
-    
+        @yield('scripts')
+
 </body>
 
 </html>

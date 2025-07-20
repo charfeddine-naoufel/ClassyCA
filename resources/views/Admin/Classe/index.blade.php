@@ -203,7 +203,7 @@
                                                 <span class="_dot _r_block-dot bg-success"></span>
                                             </button>
                                         <div class="dropdown-menu" x-placement="bottom-start">
-                                            <a class="dropdown-item text-info" href="#">Ajouter eleve</a>
+                                            <a class="dropdown-item text-info addstudent" href="#" data-toggle="modal" data-id="{{$group->id}}" data-target=".bd-example-modal-sm">Ajouter eleve</a>
                                             <a class="dropdown-item text-success editbtngroup" href="#" data-id="{{$group->id}}"  data-toggle="modal" data-target="#editModalContentgroup">Modifier Groupe </a>
                                             
                                             <div class="dropdown-divider"></div>
@@ -234,7 +234,34 @@
 </div>
  {{-- end classes et groupes --}}
         
-
+        <!-- Small Modal -->
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-1" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle-1">Ajouter eleve au groupe</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="label-classe" class="col-form-label">Elève:</label>
+                            <input type="hidden" class="form-control" name="group" id="groupe_id">
+                            <select class="form-control " id="student" name="eleve_id">
+                                <option value="">Choisir eleve</option>
+                                
+                                
+                              </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary ml-2" id="saveBtn">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Verify Modal content  classe-->
         <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent"
@@ -491,6 +518,54 @@
                         )
                     }
                 })
+            });
+            //addstudent
+            $('.addstudent').on('click', function(e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+                let alleleves = {!! json_encode($elevesNiveaux) !!};
+                let eleves = alleleves[id];
+                console.log(eleves);
+                var select = $('#student');
+  
+                select.find('option:not(:first)').remove();
+                
+                $.each(eleves, function(index, eleve) {
+                    select.append($('<option>', {
+                    value: eleve.id,
+                    text: eleve.nom_fr +' '+eleve.prenom_fr
+                    }));
+                });
+
+                $('#groupe_id').val(id);
+               
+
+            });
+            //update eleve groupe
+                $('#saveBtn').click(function() {
+                var studentId = $('#student').val();
+                var groupId = $('#groupe_id').val();
+                   console.log(groupId);
+                $.ajax({
+                url: 'eleves/' + studentId + '/update-group',
+                method: 'POST',
+                headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                data: {
+                    group_id: groupId
+                    
+                },
+                success: function(data) {
+                        $('.modaledit').modal('hide');
+                        window.location.reload();
+                        //  alert('update done')
+
+                    },
+                error: function(xhr) {
+                    alert('Erreur lors de la mise à jour.');
+                }
+                });
             });
 
             //edit button

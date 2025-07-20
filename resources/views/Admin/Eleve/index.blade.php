@@ -241,129 +241,146 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form enctype="multipart/form-data" id="myform">
-                        @csrf
-                        @method('PUT')
-                        <div class="modal-body">
-
-                            <div class="card">
-                                <div class="card-body">
-                                  
-                                    <div class="card-body">
-                                      {{-- <div class="card-title">Enseignant Info</div> --}}
-              
-                                      <div class="form-row ">
-                                        <div class="form-group col-md-6">
-                                          <label for="inputtext11" class="ul-form__label">Nom fr:</label>
-                                          <input type="text" class="form-control" id="nom_fr" name="nom_fr"/>
-                                          <input type="hidden" class="form-control" id="IdEnseignant" name="IdEnseignant">
-                                          <input type="text" class="form-control" id="IdUser" name="IdUser">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                          <label for="inputEmail12" class="ul-form__label">Prénom fr:</label>
-                                          <input type="text" class="form-control" id="prenom_fr" name="prenom_fr"/>
-                                        </div>
-                                      </div>
+                    <form enctype="multipart/form-data" id="studentForm">
+                      @csrf
+                      @method('PUT')
+                      <div class="modal-body">
+                          <div class="card">
+                              <div class="card-body">
+                                  <div class="card-body">
+                  
                                       <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                          <label for="inputtext11" class="ul-form__label">Nom ar:</label>
-                                          <input type="text" class="form-control" id="nom_ar" name="nom_ar"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                          <label for="inputEmail12" class="ul-form__label">Prénom ar:</label>
-                                          <input type="text" class="form-control" id="prenom_ar" name="prenom_ar" />
-                                        </div>
-                                      </div>
-              
-                                      {{-- <div class="custom-separator"></div> --}}
-              
-                                      <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                          <label for="inputtext14" class="ul-form__label">Spécialité:</label>
-                                          <input type="text" class="form-control" id="specialite"name="specialite" />
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                          <label for="inputEmail15" class="ul-form__label">Adresse:</label>
-                                          <div class="input-right-icon">
-                                            <input type="text" class="form-control" id="adresse" name="adresse"/>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Nom fr:</label>
+                                              <input type="text" class="form-control" id="nom_fr" name="nom_fr"/>
+                                              <input type="hidden" id="IdStudent" name="IdStudent">
+                                              <input type="hidden" id="IdUser" name="IdUser">
                                           </div>
-                                        </div>
-                                      </div>
-                                      {{-- <div class="custom-separator"></div> --}}
-              
-                                      <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                          <label for="inputtext14" class="ul-form__label">Télephone 1:</label>
-                                          <input type="text" class="form-control" id="tel" name="tel" />
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                          <label for="inputEmail15" class="ul-form__label">Télephone 2:</label>
-                                          <div class="input-right-icon">
-                                            <input type="text" class="form-control" id="tel2" name="tel2"/>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      {{-- <div class="custom-separator"></div> --}}
-              
-                                      <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                          <label for="inputtext14" class="ul-form__label">Email:</label>
-                                          <input type="text" class="form-control" id="email" name="email" />
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                          <label for="inputEmail15" class="ul-form__label">Password:</label>
-                                          <div class="input-right-icon">
-                                            <input type="text" class="form-control" id="password"name="password" />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                          <label for="inputtext14" class="ul-form__label">Photo:</label>
-                                          <input type="file" class="form-control-file" id="photo" name="photo">                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="inputEmail15" class="ul-form__label">Status:</label>
-                                            <div class="col-sm-10">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="status" id="status1" value="1" checked>
-                                                    <label class="form-check-label ml-3" for="gridRadios1">
-                                                        Active
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="status" id="status0" value="0">
-                                                    <label class="form-check-label ml-3" for="gridRadios2">
-                                                        Inactive
-                                                    </label>
-                                                </div>
-                                                
-                                            </div>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Prénom fr:</label>
+                                              <input type="text" class="form-control" id="prenom_fr" name="prenom_fr"/>
                                           </div>
                                       </div>
-              
-                                      {{-- <div class="custom-separator"></div> --}}
-              
+                  
                                       <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                          <label for="inputtext14" class="ul-form__label">Bio:</label>
-                                          <textarea class="form-control form-control-rounded" placeholder="Type your message" name="bio" id="bio" cols="30" rows="3"></textarea>                                        </div>
-                                       
-              
-                                        
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Nom ar:</label>
+                                              <input type="text" class="form-control" id="nom_ar" name="nom_ar"/>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Prénom ar:</label>
+                                              <input type="text" class="form-control" id="prenom_ar" name="prenom_ar"/>
+                                          </div>
                                       </div>
-                                    </div>
-                                 
-                                </div>
+                  
+                                      <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Adresse:</label>
+                                              <input type="text" class="form-control" id="adresse" name="adresse"/>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Ville:</label>
+                                              <input type="text" class="form-control" id="ville" name="ville"/>
+                                          </div>
+                                      </div>
+                  
+                                      <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Gouvernorat:</label>
+                                              <input type="text" class="form-control" id="gouvernorat" name="gouvernorat"/>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Date de naissance:</label>
+                                              <input type="date" class="form-control" id="date_naiss" name="date_naiss"/>
+                                          </div>
+                                      </div>
+                  
+                                      <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Genre:</label>
+                                              <select class="form-control" id="genre" name="genre">
+                                                  <option value="">-- Choisir --</option>
+                                                  <option value="M">Garçon</option>
+                                                  <option value="F">Fille</option>
+                                              </select>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Classe:</label>
+                                              <select class="form-control" id="classe_id" name="classe_id">
+                                                @foreach ($classes as $classe)
+                                                <option value="{{$classe->id}}">{{$classe->slug}}</option>
+                                                    
+                                                @endforeach
+                                              </select>
+                                          </div>
+                                      </div>
+                  
+                                      <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Groupe:</label>
+                                              <select class="form-control" id="group_id" name="group_id">
+                                                @foreach ($groups as $group)
+                                                <option value="{{$group->id}}">{{$group->nomg}}</option>
+                                                    
+                                                @endforeach
+                                              </select>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Téléphone 1:</label>
+                                              <input type="text" class="form-control" id="tel" name="tel"/>
+                                          </div>
+                                      </div>
+                  
+                                      <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Téléphone 2:</label>
+                                              <input type="text" class="form-control" id="tel2" name="tel2"/>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Email:</label>
+                                              <input type="email" class="form-control" id="email" name="email"/>
+                                          </div>
+                                      </div>
+                  
+                                      <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Mot de passe:</label>
+                                              <input type="password" class="form-control" id="password" name="password"/>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Statut:</label>
+                                              <div class="col-sm-10">
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="status" id="status1" value="1" checked>
+                                                      <label class="form-check-label ml-3" for="status1">Actif</label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="status" id="status0" value="0">
+                                                      <label class="form-check-label ml-3" for="status0">Inactif</label>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                  
+                                      <!-- Si tu as un champ pour uploader une photo -->
+                                      <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                              <label class="ul-form__label">Photo:</label>
+                                              <input type="file" class="form-control-file" id="photo" name="photo"/>
+                                          </div>
+                                      </div>
+                  
+                                  </div>
                               </div>
-                             
-
-                        </div>
-                        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="" class="btn btn-primary updatebtn">Enregistrer</button>
-                        </div>
-                    </form>
+                          </div>
+                      </div>
+                  
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                          <button type="submit" class="btn btn-primary updatebtn">Enregistrer</button>
+                      </div>
+                  </form>
+                  
                 </div>
             </div>
         </div>
@@ -432,97 +449,103 @@
 
             //edit button
             $('.editbtn').on('click', function(e) {
-                e.preventDefault();
-                let id = $(this).data('id');
+    e.preventDefault();
+    let id = $(this).data('id');
+
+    $.get("eleves/" + id + "/edit", function(data) {
+        console.log(data.data);
+
+        $('#nom_fr').val(data.data['nom_fr']);
+        $('#prenom_fr').val(data.data['prenom_fr']);
+        $('#nom_ar').val(data.data['nom_ar']);
+        $('#prenom_ar').val(data.data['prenom_ar']);
+        $('#adresse').val(data.data['adresse']);
+        $('#ville').val(data.data['ville']);
+        $('#gouvernorat').val(data.data['gouvernorat']);
+        $('#tel').val(data.data['tel']);
+        $('#tel2').val(data.data['tel2']);
+        $('#email').val(data.data['email']);
+        $('#password').val(''); // jamais préremplir le password pour sécurité
+
+        $('#date_naiss').val(data.data['date_naiss']);
+        $('#genre').val(data.data['genre']);
+        $('#classe_id').val(data.data['classe_id']);
+        $('#group_id').val(data.data['group_id']);
+
+        // Status
+        $("input[name='status'][value='" + data.data['status'] + "']").prop('checked', true);
+
+        $('#IdStudent').val(data.data['id']);
+        $('#IdUser').val(data.data['user_id']);
+    });
+});
+
+$('.updatebtn').on('click', function(e) {
+    e.preventDefault();
+
+    var id = $('#IdStudent').val();
+    var user_id = $('#IdUser').val();
+
+    var nom_fr = $('#nom_fr').val();
+    var prenom_fr = $('#prenom_fr').val();
+    var nom_ar = $('#nom_ar').val();
+    var prenom_ar = $('#prenom_ar').val();
+    var adresse = $('#adresse').val();
+    var ville = $('#ville').val();
+    var gouvernorat = $('#gouvernorat').val();
+    var tel = $('#tel').val();
+    var tel2 = $('#tel2').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var date_naiss = $('#date_naiss').val();
+    var genre = $('#genre').val();
+    var classe_id = $('#classe_id').val();
+    var group_id = $('#group_id').val();
+    var status = $("input[name='status']:checked").val();
+
+    var URL = "eleves/" + id;
+
+    console.log("URL:", URL);
+
+    $.ajax({
+        method: "PUT",
+        url: URL,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+            nom_fr: nom_fr,
+            prenom_fr: prenom_fr,
+            nom_ar: nom_ar,
+            prenom_ar: prenom_ar,
+            adresse: adresse,
+            ville: ville,
+            gouvernorat: gouvernorat,
+            tel: tel,
+            tel2: tel2,
+            email: email,
+            password: password,
+            date_naiss: date_naiss,
+            genre: genre,
+            classe_id: classe_id,
+            group_id: group_id,
+            status: status,
+            user_id: user_id
+        },
+        success: function(data) {
+            console.log(data);
+            $('.modaledit').modal('hide');
+            window.location.reload();
+            toastr.success("Mise à jour de l'élève effectuée avec succès", "Succès", {timeOut: 5000});
+        },
+        error: function(data) {
+            console.log(data);
+            toastr.error("Erreur lors de la mise à jour de l'élève", "Erreur", {timeOut: 5000});
+        }
+    });
+});
 
 
-                // var action ="{{ URL::to('classes') }}/"+id;
-
-
-                // var url = "{{ URL::to('classes') }}";
-
-                $.get("enseignants/" + id + "/edit", function(data) {
-                    console.warn(data.data);
-                    $('#nom_fr').val(data.data['nom_fr']);
-                    $('#nom_ar').val(data.data['nom_ar']);
-                    $('#prenom_fr').val(data.data['prenom_fr']);
-                    $('#prenom_ar').val(data.data['prenom_ar']);
-                    $('#specialite').val(data.data['specialite']);
-                    $('#adresse').val(data.data['adresse']);
-                    $('#tel').val(data.data['tel']);
-                    $('#tel2').val(data.data['tel2']);
-                    $('#email').val(data.data['email']);
-                    $('#password').val(data.data['password']);
-                    $('#status').val(data.data['status']);
-                    $('#bio').val(data.data['bio']);
-                    $('#IdEnseignant').val(data.data['id']);
-                    $('#IdUser').val(data.data['user_id']);
-
-
-
-                });
-
-
-
-
-            });
-            $('.updatebtn').on('click', function(e) {
-                e.preventDefault();
-                var nom_fr = $('#nom_fr').val();
-                var nom_ar = $('#nom_ar').val();
-                var prenom_fr = $('#prenom_fr').val();
-                var prenom_ar = $('#prenom_ar').val();
-                var specialite = $('#specialite').val();
-                var adresse = $('#adresse').val();
-                var tel = $('#tel').val();
-                var tel2 = $('#tel2').val();
-                var email = $('#email').val();
-                var password = $('#password').val();
-                // var photo = $('#photo').val();
-                var bio = $('#bio').val();
-                var id = $('#IdEnseignant').val();
-                var user_id = $('#IdUser').val();
-                
-                var status =$("#myform input[type='radio']:checked").val();
-                var URL ="enseignants/"+ id;
-                console.log("url===",URL)
-                $.ajax({
-                    method: "PUT",
-                    url: URL,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: { id: id,
-                        nom_fr: nom_fr,
-                        prenom_fr: prenom_fr,
-                        nom_ar: nom_ar,
-                        prenom_ar: prenom_ar,
-                        specialite: specialite,
-                        adresse: adresse,
-                        tel: tel,
-                        email : email,
-                        password : password ,
-                        // photo : photo ,
-                        status : status ,
-                        bio : bio ,
-                        user_id :user_id
-                        
-                    },
-
-                    success: function(data) {
-                      console.log(data)
-                        $('.modaledit').modal('hide');
-                        window.location.reload();
-                        toastr.success("Mise à jour de l'enseignant effectuée avec succes","Success", {timeOut: 5000});
-
-                        //  alert('update done')
-
-                    },
-                    error:function(data){
-                      console.log(data)
-                    }
-                });
-            });
          
         });
     </script>

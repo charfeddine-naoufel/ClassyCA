@@ -15,13 +15,38 @@ class ClasseController extends Controller
      */
     public function index()
     {
+        $groupes = Student::select('group_id')->distinct()->whereNotNull('group_id') ->get();
+        $elevesNiveaux = [];
+
+    foreach ($groupes as $groupe) {
+    $classeRef = Student::where('group_id', $groupe->group_id)
+        ->with('classe')
+        ->first()
+        ->classe;
+
+    if (!$classeRef) {
+        continue; 
+    }
+
+    $niveau = $classeRef->niveau;
+    $section = $classeRef->section;
+    $eleves = Student::whereHas('classe', function ($query) use ($niveau, $section) {
+        $query->where('niveau', $niveau)
+              ->where('section', $section);
+    })->with('classe')->get();
+
+    $elevesNiveaux[$groupe->group_id] = $eleves;
+    }
+    // dd($elevesNiveaux);
+
+
         $eleves=Student::where('group_id',Null)->get(); 
         $groups=Group::all();
         $classes = Classe::all();
         // dd($classes);
-        return view('Admin.Classe.index',compact('classes','eleves','groups'));
+        return view('Admin.Classe.index',compact('classes','eleves','groups','elevesNiveaux'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

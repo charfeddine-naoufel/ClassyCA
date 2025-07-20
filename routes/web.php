@@ -42,7 +42,9 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('/matieres', MatiereController::class);
     Route::resource('/enseignants', TeacherController::class);
     Route::resource('/eleves', StudentController::class);
+    Route::post('/eleves/{id}/update-group', [StudentController::class, 'updateGroup']);
     Route::patch('/removegroupEl/{id}', [StudentController::class,'updateGrEl'])->name('student.removefromgrou');
+    
     Route::resource('/classes', ClasseController::class);
     Route::resource('/groups', GroupController::class);
     Route::resource('/offres', OffreController::class);
