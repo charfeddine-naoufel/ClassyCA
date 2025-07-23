@@ -14,6 +14,7 @@ use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\LiveController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -52,7 +53,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/payment/facture/{id}', [PaymentController::class, 'invoice'])->name('invoice');
     
   
-
+    Route::resource('/users', UserController::class);
     
   
   });

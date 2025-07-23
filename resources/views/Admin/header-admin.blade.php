@@ -66,29 +66,12 @@
                 <!-- Submenu Dashboards -->
                 <ul class="childNav" data-parent="dashboard">
                     <li class="nav-item">
-                        <a href="dashboard.v1.html">
+                        <a href="#">
                             <i class="nav-icon i-Clock-3"></i>
-                            <span class="item-name">Version 1</span>
+                            <span class="item-name">Tableau de Board</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="dashboard.v2.html">
-                            <i class="nav-icon i-Clock-4"></i>
-                            <span class="item-name">Version 2</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="dashboard.v3.html">
-                            <i class="nav-icon i-Over-Time"></i>
-                            <span class="item-name">Version 3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="dashboard.v4.html">
-                            <i class="nav-icon i-Clock"></i>
-                            <span class="item-name">Version 4</span>
-                        </a>
-                    </li>
+                    
                 </ul>
                 <ul class="childNav" data-parent="users">
                     <li class="nav-item">
@@ -104,7 +87,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="form.input.group.html">
+                        <a href="{{route('users.index')}}">
                             <i class="nav-icon  i-Administrator"></i>
                             <span class="item-name">Admins</span>
                         </a>

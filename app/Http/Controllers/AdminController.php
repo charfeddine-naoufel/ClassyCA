@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Student;
+use App\Models\User;
 use App\Models\Classe;
 
 class AdminController extends Controller
@@ -51,8 +52,12 @@ class AdminController extends Controller
         // dd(json_encode($Elclasse));
       return view('Admin.home',compact('user','ElInscrit','ElActive','Elclasse'));
     }
-
-    /**
+        public function allusers()
+        {
+            $users=User::all();
+            return view('Admin.User.index',compact('users'));
+        }
+            /**
      * Show the form for creating a new resource.
      */
     public function create()

@@ -25,7 +25,13 @@ class TeacherController extends Controller
     }
     public function mescours()
     {
-       $courses=Course::where('teacher_id',Auth::user()->teacher->id)->get(); 
+        $user = Auth::user();
+
+        if ($user && $user->teacher) {
+            $courses = Course::where('teacher_id', $user->teacher->id)->get();
+        } else {
+            $courses = collect(); 
+        }
     //    dd($courses);
        $matieres=Matiere::all();
        $groups=Group::all();
@@ -34,7 +40,14 @@ class TeacherController extends Controller
     }
     public function mesgroups()
     {
-       $courses=Course::where('teacher_id',Auth::user()->teacher->id)->get(); 
+        $user = Auth::user();
+
+        if ($user && $user->teacher) {
+            $courses = Course::where('teacher_id', $user->teacher->id)->get();
+        } else {
+            $courses = collect(); 
+        }
+        
        $groups=[];
        foreach ($courses as $key => $course) {
            $groups[$course->group_id]=Group::where('id',$course->group_id)->get();
@@ -46,6 +59,7 @@ class TeacherController extends Controller
     public function home()
     {
         $user = Auth::user();
+        
       return view('Teacher.home',compact('user'));
     }
 
