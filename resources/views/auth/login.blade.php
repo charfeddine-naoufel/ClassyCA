@@ -65,14 +65,14 @@
                     </div>
                     <div class="col-md-6 text-center " style="background-size: cover;background-image: url(./assets/images/bgr.jpg)">
                         <div class="pr-3 auth-right">
-                            <a class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text" href="signup.html">
-                                <i class="i-Mail-with-At-Sign"></i> Sign up with Email
+                            <a class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text" href="#">
+                                <i class="i-Mail-with-At-Sign"></i> Sign up avec Email
                             </a>
                             <a class="btn btn-rounded btn-outline-google btn-block btn-icon-text">
-                                <i class="i-Google-Plus"></i> Sign up with Google
+                                <i class="i-Google-Plus"></i> Sign up avec Google
                             </a>
                             <a class="btn btn-rounded btn-block btn-icon-text btn-outline-facebook">
-                                <i class="i-Facebook-2"></i> Sign up with Facebook
+                                <i class="i-Facebook-2"></i> Sign up avec Facebook
                             </a>
                         </div>
                     </div>

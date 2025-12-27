@@ -68,11 +68,11 @@
                         aria-haspopup="true" role="button" aria-expanded="false"></i>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="menu-icon-grid">
-                            <a href="#"><i class="i-Shop-4"></i> Home</a>
-                            <a href="#"><i class="i-Library"></i> UI Kits</a>
-                            <a href="#"><i class="i-Drop"></i> Apps</a>
-                            <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
-                            <a href="#"><i class="i-Checked-User"></i> Sessions</a>
+                            <a href="#"><i class="i-Shop-4"></i> Accueil</a>
+                            <a href="#"><i class="i-Library"></i> Paiements</a>
+                            <a href="#"><i class="i-Drop"></i> Parametres</a>
+                            <a href="#"><i class="i-File-Clipboard-File--Text"></i> Cours</a>
+                           
                             <a href="#"><i class="i-Ambulance"></i> Support</a>
                         </div>
                     </div>
@@ -93,56 +93,17 @@
                             </div>
                             <div class="notification-details flex-grow-1">
                                 <p class="m-0 d-flex align-items-center">
-                                    <span>New message</span>
-                                    <span class="badge badge-pill badge-primary ml-1 mr-1">new</span>
+                                    <span>Nouveau message</span>
+                                    <span class="badge badge-pill badge-primary ml-1 mr-1">Rappel</span>
                                     <span class="flex-grow-1"></span>
                                     <span class="text-small text-muted ml-auto">10 sec ago</span>
                                 </p>
-                                <p class="text-small text-muted m-0">James: Hey! are you busy?</p>
+                                <p class="text-small text-muted m-0">Votre prochain Live</p>
                             </div>
                         </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Receipt-3 text-success mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>New order received</span>
-                                    <span class="badge badge-pill badge-success ml-1 mr-1">new</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">2 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">1 Headphone, 3 iPhone x</p>
-                            </div>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Empty-Box text-danger mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>Product out of stock</span>
-                                    <span class="badge badge-pill badge-danger ml-1 mr-1">3</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">10 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">Headphone E67, R98, XL90, Q77</p>
-                            </div>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Data-Power text-success mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>Server Up!</span>
-                                    <span class="badge badge-pill badge-success ml-1 mr-1">3</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">14 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">Server rebooted successfully</p>
-                            </div>
-                        </div>
+                        
+                        
+                        
                     </div>
                 </div>
                 <!-- Notificaiton End -->
@@ -157,8 +118,8 @@
                             <div class="dropdown-header">
                                 <i class="i-Lock-User mr-1"></i> {{ Auth::user()->name }}
                             </div>
-                            <a class="dropdown-item">Account settings</a>
-                            <a class="dropdown-item">Billing history</a>
+                            <a class="dropdown-item">Paramètres du compte</a>
+                            <a class="dropdown-item">Historique de Paiement</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Quitter</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Student;
 use App\Models\Group;
 use App\Models\Classe;
@@ -143,57 +144,86 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    
     public function store(Request $request)
     {
-            //dd($request);
-    $rules = array(
-        'nom_fr'       => 'required',
-        'prenom_fr'      => 'required',
-        'tel'      => 'required|numeric',
-        'email'      => 'required',
-        'password'      => 'required',
-        'ville'      => 'required',
+        // Définir les règles de validation
+        $rules = [
+            'nom_fr' => 'required|string|max:255',
+            'prenom_fr' => 'required|string|max:255',
+            'nom_ar' => 'nullable|string|max:255',
+            'prenom_ar' => 'nullable|string|max:255',
+            'tel' => 'required|numeric|digits_between:8,15',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed', // Nécessite password_confirmation
+            'ville' => 'required|string|max:255',
+            'classe_id' => 'nullable|exists:classes,id',
+        ];
 
-    );
-   
-    $validator = Validator::make($request->all(), $rules);
-    if ($validator->fails()) {
-        return redirect()->route('register')
-        ->with('Error','Vérifiez vos champs.');
-    } else {
-        // store new user
-       
-       
-        $user=new User;
-        $user['name']=$request['nom_fr'].' '.$request['prenom_fr'];
-        $user['email']=$request['email'];
-        $user['password']=$request['password'];
-        // $user['password_confirmation']=$request['password'];
-        $user['role']='student';
-        $user->save();
-        $user=User::latest()->first();
-        // store new teacher
-        $eleve = new Student;
-               
-       
-        $eleve->nom_fr = $request-> nom_fr;
-        $eleve->prenom_fr = $request-> prenom_fr;
-        $eleve->nom_ar = $request-> nom_ar;
-        $eleve->prenom_ar = $request-> prenom_ar;
-        $eleve->tel      =  $request-> tel;
-        $eleve->ville      =  $request-> ville;
-        $eleve->email      =  $request-> email;
-        $eleve->classe_id      =  $request-> classe_id;
-        $eleve->password      =  $request-> password;
-        $eleve->user_id      =  $user-> id;
-        
-        $eleve->save();
+        // Messages personnalisés en français
+        $messages = [
+            'nom_fr.required' => 'Le nom en français est obligatoire.',
+            'prenom_fr.required' => 'Le prénom en français est obligatoire.',
+            'tel.required' => 'Le numéro de téléphone est obligatoire.',
+            'tel.numeric' => 'Le numéro de téléphone doit contenir uniquement des chiffres.',
+            'email.required' => 'L\'adresse email est obligatoire.',
+            'email.email' => 'L\'adresse email doit être valide.',
+            'email.unique' => 'Cette adresse email est déjà utilisée.',
+            'password.required' => 'Le mot de passe est obligatoire.',
+            'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
+            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+            'ville.required' => 'La ville est obligatoire.',
+        ];
 
-        // redirect
-        return redirect()->route('student-dash')
-        ->with('success','Nouvel Elève crée avec succés.');
+        // Effectuer la validation
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // Si la validation échoue, rediriger avec les erreurs
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)  // ← IMPORTANT : Envoyer les erreurs à la vue
+                ->withInput();            // ← Conserver les valeurs saisies
+        }
+
+        try {
+            // Créer l'utilisateur
+            $user = User::create([
+                'name' => $request->nom_fr . ' ' . $request->prenom_fr,
+                'email' => $request->email,
+                'password' => Hash::make($request->password), // ← SÉCURITÉ : Hasher le mot de passe
+                'role' => 'student',
+            ]);
+
+            // Créer l'étudiant
+            $eleve = Student::create([
+                'nom_fr' => $request->nom_fr,
+                'prenom_fr' => $request->prenom_fr,
+                'nom_ar' => $request->nom_ar,
+                'prenom_ar' => $request->prenom_ar,
+                'tel' => $request->tel,
+                'ville' => $request->ville,
+                'email' => $request->email,
+                'classe_id' => $request->classe_id,
+                'password' => Hash::make($request->password), // ← SÉCURITÉ : Hasher aussi ici
+                'user_id' => $user->id,
+            ]);
+
+            // Rediriger avec succès
+            return redirect()->route('student-dash')
+                ->with('success', 'Inscription réussie ! Bienvenue.');
+                
+        } catch (\Exception $e) {
+            // En cas d'erreur, supprimer l'utilisateur créé (si existant)
+            if (isset($user)) {
+                $user->delete();
+            }
+            
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
+        }
     }
-    }
+    
     public function updateGrEl($id)
     {
         $eleve=Student::find($id);

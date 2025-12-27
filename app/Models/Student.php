@@ -11,7 +11,7 @@ class Student extends Model
     protected $fillable = [
         'nom_fr', 'prenom_fr', 'nom_ar', 'prenom_ar',
         'adresse', 'ville', 'gouvernorat', 'tel', 'tel2', 'email',
-        'password', 'date_naiss', 'genre', 'classe_id', 'group_id', 'status', 'photo'
+        'password', 'date_naiss', 'genre', 'classe_id', 'group_id', 'status', 'photo','user_id'
     ];
     
 

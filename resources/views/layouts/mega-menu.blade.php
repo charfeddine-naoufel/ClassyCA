@@ -1,6 +1,6 @@
 <div class="dropdown mega-menu d-none d-md-block">
-                    <a href="#" class="btn text-muted dropdown-toggle mr-3" id="dropdownMegaMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mega Menu</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="#" class="btn text-muted dropdown-toggle mr-3" id="dropdownMegaMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Raccourcis</a>
+                    {{-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="row m-0">
                             <div class="col-md-4 p-4 text-left bg-img">
                                 <h2 class="title">Mega Menu <br> Sidebar</h2>
@@ -38,5 +38,5 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
