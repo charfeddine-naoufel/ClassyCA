@@ -385,7 +385,7 @@
 <script>
     @if (Session::has('success'))
     
-                toastr.success('Nouvelle classe ajoutée avec succes',"Success", {timeOut: 5000});
+                toastr.success('Nouveau Enseignant ajouté avec succes',"Success", {timeOut: 5000});
     
      @elseif(Session::has('Error'))   
      toastr.error('Vérifiez les champs',"Error", {timeOut: 5000});
@@ -417,7 +417,7 @@
                     form.submit();
                     swal(
                         'Supprimée!',
-                        'La classe a bien été supprimée.',
+                        'L enseignant a bien été supprimé.',
                         'success'
                     )
                 }, function(dismiss) {

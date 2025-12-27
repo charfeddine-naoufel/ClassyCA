@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div class="card o-hidden mb-4">
                     <div class="card-header d-flex align-items-center border-0">
-                        <h3 class="w-50 float-left card-title m-0">Cours</h3>
+                        <h3 class="w-50 float-left card-title m-0">Groupes</h3>
                         
                     </div>
 

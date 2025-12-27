@@ -133,7 +133,7 @@ class TeacherController extends Controller
 
         // redirect
         return redirect()->route('enseignants.index')
-        ->with('success','Nouvelle teacher crée avec succés.');
+        ->with('success','Nouveau enseignant crée avec succés.');
     }
     }
 

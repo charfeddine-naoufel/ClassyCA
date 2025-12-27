@@ -27,7 +27,7 @@ class ChapitreController extends Controller
         // $chapitresByClasses[$course->classe_id]->push($course->classe->slug);
         } 
         //    dd($chapitresByClasses);
-        return view('Teacher.Chapitre.index',compact('chapitres','courses','chapitresByClasses'));
+        return view('Teacher.chapitre.index',compact('chapitres','courses','chapitresByClasses'));
     }
 /**
      * Show the form for creating a new resource.
