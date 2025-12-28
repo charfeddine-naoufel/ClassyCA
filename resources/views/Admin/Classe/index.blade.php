@@ -464,25 +464,32 @@
             $('.liste-eleves').select2();
             // selection des eleves
             $('#classe').on('change', function() {
-                $('#elevesSelectedClasse').empty();
-                var selectedClasse = $('#classe').find(":selected").val();
-                var eleves={!! json_encode($eleves->toArray()) !!}
-                const eleves_classe = eleves.filter((eleve) => { return eleve.classe_id== selectedClasse });
-                var eleves_group=[]
-                $.each(eleves_classe, function (i, item) {
-                $('#elevesSelectedClasse').append($('<option>', { 
-                     value: item.id,
-                     text : item.nom_fr + " "+ item.prenom_fr
-                
-                 }));
-                
+    $('#elevesSelectedClasse').empty();
+    
+    var selectedClasse = $('#classe').find(":selected").val();
+    var eleves = {!! json_encode($eleves->toArray()) !!};
+    
+    // Convertir selectedClasse en nombre pour la comparaison stricte
+    const selectedClasseInt = parseInt(selectedClasse);
+    
+    // Filtrer les élèves par classe
+    const eleves_classe = eleves.filter((eleve) => {
+        return parseInt(eleve.classe_id) === selectedClasseInt;
+    });
+    
+    // Ajouter les élèves filtrés au select
+    $.each(eleves_classe, function (i, item) {
+        $('#elevesSelectedClasse').append($('<option>', { 
+            value: item.id,
+            text: item.nom_fr + " " + item.prenom_fr
+        }));
+    });
+    
+    console.log('Total élèves:', eleves.length);
+    console.log('Élèves dans la classe sélectionnée:', eleves_classe.length);
+    console.log('Classe sélectionnée:', selectedClasseInt);
+});
 
-                });
-
-                console.log('eleves=',eleves)
-               
-                console.log('classe selectionné=',selectedClasse)
-            });
             
             // selection des eleves
            
