@@ -255,52 +255,74 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
+    
+        $data = $request->only([
+            'nom_fr',
+            'prenom_fr',
+            'nom_ar',
+            'prenom_ar',
+            'adresse',
+            'ville',
+            'gouvernorat',
+            'tel',
+            'tel2',
+            'email',
+            'date_naiss',
+            'genre',
+            'classe_id',
+            'group_id',
+            'status'
+        ]);
+    
+        // 🔑 CORRECTION : Filtrer différemment pour garder la valeur 0
+        $data = array_filter($data, function ($value) {
+            // Garder les valeurs 0, '0', false
+            if ($value === 0 || $value === '0' || $value === false) {
+                return true;
+            }
+            // Pour les autres, enlever null et chaîne vide
+            return $value !== null && $value !== '';
+        });
+    
+        // 🔑 Password : si non vide => hashé & mis à jour
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
+        }
+    
+        // 🔑 Si photo : upload
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+            $data['photo'] = $photoPath;
+        }
+    
+        $student->update($data);
+    
+        return response()->json([
+            'success' => true,
+            'message' => "Mise à jour réussie",
+            'data' => $student['id']
+        ]);
+    }
+// update status
+public function toggleStatus($id)
 {
-    $student = Student::findOrFail($id);
-
-    $data = $request->only([
-        'nom_fr',
-        'prenom_fr',
-        'nom_ar',
-        'prenom_ar',
-        'adresse',
-        'ville',
-        'gouvernorat',
-        'tel',
-        'tel2',
-        'email',
-        'date_naiss',
-        'genre',
-        'classe_id',
-        'group_id',
-        'status'
-    ]);
-
-    // 🔑 On filtre pour enlever les champs vides => pas de mise à jour inutile
-    $data = array_filter($data, function ($value) {
-        return !is_null($value) && $value !== '';
-    });
-
-    // 🔑 Password : si non vide => hashé & mis à jour
-    if ($request->filled('password')) {
-        $data['password'] = bcrypt($request->password);
+    $student = Student::find($id);
+    
+    if ($student) {
+        // Basculer entre 0 et 1
+        $student->status = $student->status == 1 ? 0 : 1;
+        $student->save();
+        
+        return response()->json([
+            'success' => true,
+            'new_status' => $student->status
+        ]);
     }
-
-    // 🔑 Si photo : upload
-    if ($request->hasFile('photo')) {
-        $photoPath = $request->file('photo')->store('photos', 'public');
-        $data['photo'] = $photoPath;
-    }
-
-    $student->update($data);
-
-    return response()->json([
-        'success' => true,
-        'message' => "Mise à jour réussie",
-        'data' => $student['id']
-    ]);
+    
+    return response()->json(['success' => false], 404);
 }
-
     // public function update(Request $request, $id)
     // {
     //     $rules = array(

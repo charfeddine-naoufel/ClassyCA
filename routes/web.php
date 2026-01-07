@@ -44,6 +44,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('/enseignants', TeacherController::class);
     Route::resource('/eleves', StudentController::class);
     Route::post('/eleves/{id}/update-group', [StudentController::class, 'updateGroup']);
+    Route::post('/eleves/{id}/toggle-status', [StudentController::class, 'toggleStatus'])->name('eleves.toggle-status');
     Route::patch('/removegroupEl/{id}', [StudentController::class,'updateGrEl'])->name('student.removefromgrou');
     
     Route::resource('/classes', ClasseController::class);

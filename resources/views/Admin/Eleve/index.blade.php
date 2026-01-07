@@ -63,11 +63,19 @@
                                 <td><strong>{{$eleve->classe->slug}} </strong></td>
                                 <td>
                                     @if($eleve->status=="1")
-                                    <span class="badge badge-pill badge-success m-2">Active</span>
+                                    <a href="javascript:void(0)" 
+                                       class="badge badge-pill badge-success m-2 toggle-status" 
+                                       data-id="{{$eleve->id}}">
+                                        Active
+                                    </a>
                                     @else
-                                    <span class="badge badge-pill badge-danger m-2">Inactive</span>
+                                    <a href="javascript:void(0)" 
+                                       class="badge badge-pill badge-danger m-2 toggle-status" 
+                                       data-id="{{$eleve->id}}">
+                                        Inactive
+                                    </a>
                                     @endif
-                                     </td>
+                                </td>
                                 <td><strong>{{$eleve->user_id}} </strong></td>
                 
                 
@@ -449,103 +457,120 @@
 
             //edit button
             $('.editbtn').on('click', function(e) {
-    e.preventDefault();
-    let id = $(this).data('id');
+            e.preventDefault();
+            let id = $(this).data('id');
 
-    $.get("eleves/" + id + "/edit", function(data) {
-        console.log(data.data);
+            $.get("eleves/" + id + "/edit", function(data) {
+                console.log(data.data);
 
-        $('#nom_fr').val(data.data['nom_fr']);
-        $('#prenom_fr').val(data.data['prenom_fr']);
-        $('#nom_ar').val(data.data['nom_ar']);
-        $('#prenom_ar').val(data.data['prenom_ar']);
-        $('#adresse').val(data.data['adresse']);
-        $('#ville').val(data.data['ville']);
-        $('#gouvernorat').val(data.data['gouvernorat']);
-        $('#tel').val(data.data['tel']);
-        $('#tel2').val(data.data['tel2']);
-        $('#email').val(data.data['email']);
-        $('#password').val(''); // jamais préremplir le password pour sécurité
+                $('#nom_fr').val(data.data['nom_fr']);
+                $('#prenom_fr').val(data.data['prenom_fr']);
+                $('#nom_ar').val(data.data['nom_ar']);
+                $('#prenom_ar').val(data.data['prenom_ar']);
+                $('#adresse').val(data.data['adresse']);
+                $('#ville').val(data.data['ville']);
+                $('#gouvernorat').val(data.data['gouvernorat']);
+                $('#tel').val(data.data['tel']);
+                $('#tel2').val(data.data['tel2']);
+                $('#email').val(data.data['email']);
+                $('#password').val(''); // jamais préremplir le password pour sécurité
 
-        $('#date_naiss').val(data.data['date_naiss']);
-        $('#genre').val(data.data['genre']);
-        $('#classe_id').val(data.data['classe_id']);
-        $('#group_id').val(data.data['group_id']);
+                $('#date_naiss').val(data.data['date_naiss']);
+                $('#genre').val(data.data['genre']);
+                $('#classe_id').val(data.data['classe_id']);
+                $('#group_id').val(data.data['group_id']);
 
-        // Status
-        $("input[name='status'][value='" + data.data['status'] + "']").prop('checked', true);
+                // Status
+                $("input[name='status'][value='" + data.data['status'] + "']").prop('checked', true);
 
-        $('#IdStudent').val(data.data['id']);
-        $('#IdUser').val(data.data['user_id']);
-    });
-});
+                $('#IdStudent').val(data.data['id']);
+                $('#IdUser').val(data.data['user_id']);
+            });
+        });
 
-$('.updatebtn').on('click', function(e) {
-    e.preventDefault();
+        $('.updatebtn').on('click', function(e) {
+            e.preventDefault();
 
-    var id = $('#IdStudent').val();
-    var user_id = $('#IdUser').val();
+            var id = $('#IdStudent').val();
+            
+            // Récupérer tous les champs
+            var formData = {
+                nom_fr: $('#nom_fr').val(),
+                prenom_fr: $('#prenom_fr').val(),
+                nom_ar: $('#nom_ar').val(),
+                prenom_ar: $('#prenom_ar').val(),
+                adresse: $('#adresse').val(),
+                ville: $('#ville').val(),
+                gouvernorat: $('#gouvernorat').val(),
+                tel: $('#tel').val(),
+                tel2: $('#tel2').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
+                date_naiss: $('#date_naiss').val(),
+                genre: $('#genre').val(),
+                classe_id: $('#classe_id').val(),
+                group_id: $('#group_id').val(),
+                user_id: $('#IdUser').val(),
+                // 🔑 CORRECTION ICI : bien récupérer le status
+                status: $("input[name='status']:checked").val()
+            };
 
-    var nom_fr = $('#nom_fr').val();
-    var prenom_fr = $('#prenom_fr').val();
-    var nom_ar = $('#nom_ar').val();
-    var prenom_ar = $('#prenom_ar').val();
-    var adresse = $('#adresse').val();
-    var ville = $('#ville').val();
-    var gouvernorat = $('#gouvernorat').val();
-    var tel = $('#tel').val();
-    var tel2 = $('#tel2').val();
-    var email = $('#email').val();
-    var password = $('#password').val();
-    var date_naiss = $('#date_naiss').val();
-    var genre = $('#genre').val();
-    var classe_id = $('#classe_id').val();
-    var group_id = $('#group_id').val();
-    var status = $("input[name='status']:checked").val();
+            console.log("Form Data:", formData);
+            console.log("Status value:", formData.status, "Type:", typeof formData.status);
 
-    var URL = "eleves/" + id;
+            var URL = "eleves/" + id;
 
-    console.log("URL:", URL);
+            $.ajax({
+                method: "PUT",
+                url: URL,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: formData,
+                success: function(data) {
+                    console.log("Success Response:", data);
+                    $('.modaledit').modal('hide');
+                    // Option 1: Recharger la page
+                    window.location.reload();
+                    // Option 2: Mettre à jour juste la ligne
+                    // updateTableRow(data.data);
+                    toastr.success("Mise à jour de l'élève effectuée avec succès", "Succès", {timeOut: 5000});
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error:", xhr.responseJSON);
+                    toastr.error("Erreur lors de la mise à jour de l'élève", "Erreur", {timeOut: 5000});
+                }
+            });
+        });
 
-    $.ajax({
-        method: "PUT",
-        url: URL,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: {
-            nom_fr: nom_fr,
-            prenom_fr: prenom_fr,
-            nom_ar: nom_ar,
-            prenom_ar: prenom_ar,
-            adresse: adresse,
-            ville: ville,
-            gouvernorat: gouvernorat,
-            tel: tel,
-            tel2: tel2,
-            email: email,
-            password: password,
-            date_naiss: date_naiss,
-            genre: genre,
-            classe_id: classe_id,
-            group_id: group_id,
-            status: status,
-            user_id: user_id
-        },
-        success: function(data) {
-            console.log(data);
-            $('.modaledit').modal('hide');
-            window.location.reload();
-            toastr.success("Mise à jour de l'élève effectuée avec succès", "Succès", {timeOut: 5000});
-        },
-        error: function(data) {
-            console.log(data);
-            toastr.error("Erreur lors de la mise à jour de l'élève", "Erreur", {timeOut: 5000});
-        }
-    });
-});
+        // update status
 
+                $('.toggle-status').on('click', function() {
 
+            var studentId = $(this).data('id');
+            var badge = $(this);
+            console.log("studentId:",studentId);
+            
+            $.ajax({
+                url: 'eleves/' + studentId + '/toggle-status',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (badge.hasClass('badge-success')) {
+                        badge.removeClass('badge-success').addClass('badge-danger');
+                        badge.text('Inactive');
+                    } else {
+                        badge.removeClass('badge-danger').addClass('badge-success');
+                        badge.text('Active');
+                    }
+                    
+                    // Notification toastr
+                    toastr.success('Statut mis à jour', 'Succès');
+                }
+            });
+        });
          
         });
     </script>

@@ -17,7 +17,7 @@ class GroupController extends Controller
                 
         $groups = Group::all();
         // dd($groups);
-        return view('Admin.Classe.index',compact('groups','eleves'));
+        return view('Admin.Classe.index',compact('groups'));
     }
 
     /**
@@ -36,7 +36,7 @@ class GroupController extends Controller
         
     //    dd($request);
     $rules = array(
-        'nomg'       => 'required',
+        'nomg'       => 'required|unique:groups',
         'classe_id'      => 'required'
        
     );
@@ -45,7 +45,7 @@ class GroupController extends Controller
     $validator = Validator::make($request->all(), $rules);
     if ($validator->fails()) {
         return redirect()->route('classes.index')
-        ->with('Error','Vérifiez vos champs.');
+        ->with('Error','Vérifiez vos champs. Nom de groupe existe déjà!!! ');
     } else {
         // store
         $group = new Group;
@@ -53,12 +53,21 @@ class GroupController extends Controller
         $group->classe_id      =  $request-> classe_id;
         
         $group->save();
-        $group=Group::latest()->first();
-        foreach ($eleves as $item) {
-            $eleve=Student::find($item);
-            $eleve['group_id']=$group->id;
-            $eleve->save();
-            } 
+        $group = Group::latest()->first();
+
+            if (!empty($eleves) && is_array($eleves)) {
+                foreach ($eleves as $item) {
+                    $eleve = Student::find($item);
+                    
+                    if ($eleve) {
+                        $eleve->group_id = $group->id;
+                        $eleve->save();
+                    }
+                }
+            } else {
+                return redirect()->route('classes.index')
+                ->with('error', 'Veuillez sélectionner au moins un élève.');
+            }
 
         // redirect
         return redirect()->route('classes.index')
