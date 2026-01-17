@@ -74,6 +74,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('/courses', CourseController::class);
     Route::get('/mescourses', [TeacherController::class,'mescours'])->name('teacher.mescours');
     Route::get('/mesgroups', [TeacherController::class,'mesgroups'])->name('teacher.mesgroups');
+    Route::get('/calendrier', [TeacherController::class, 'calendrier'])->name('teacher.calendrier');
+
     Route::get('/mesSeances', [SeanceController::class,'mesSeances'])->name('teacher.messeances');
 
     Route::resource('/chapitres', ChapitreController::class);

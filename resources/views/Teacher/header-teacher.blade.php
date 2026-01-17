@@ -30,12 +30,13 @@
 
 
                     <li class="nav-item" >
-                        <a class="nav-item-hold" href="#">
-                            <i class="nav-icon i-Dec"></i>
-                            <span class="nav-text"><strong>Mon Calendrier</strong></span>
+                        <a class="nav-item-hold" href="{{route('teacher.calendrier')}}">
+                            <i class="nav-icon  i-Calendar-4"></i>
+                            <span class="nav-text"> <strong>Mon calendrier</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
+
                     
                     
                    

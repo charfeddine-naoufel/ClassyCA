@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StudentWelcomeMail; 
 use App\Models\Student;
 use App\Models\Group;
 use App\Models\Classe;
@@ -186,15 +188,16 @@ class StudentController extends Controller
         }
 
         try {
-            // Créer l'utilisateur
+            $plainPassword = $request->password;
+    
+            // Créer l'utilisateur et l'étudiant
             $user = User::create([
                 'name' => $request->nom_fr . ' ' . $request->prenom_fr,
                 'email' => $request->email,
-                'password' => Hash::make($request->password), // ← SÉCURITÉ : Hasher le mot de passe
+                'password' => Hash::make($plainPassword),
                 'role' => 'student',
             ]);
-
-            // Créer l'étudiant
+    
             $eleve = Student::create([
                 'nom_fr' => $request->nom_fr,
                 'prenom_fr' => $request->prenom_fr,
@@ -204,23 +207,34 @@ class StudentController extends Controller
                 'ville' => $request->ville,
                 'email' => $request->email,
                 'classe_id' => $request->classe_id,
-                'password' => Hash::make($request->password), // ← SÉCURITÉ : Hasher aussi ici
+                'password' => Hash::make($plainPassword),
                 'user_id' => $user->id,
             ]);
-
-            // Rediriger avec succès
+    
+            // 🔑 ENVOYER L'EMAIL DE BIENVENUE
+            try {
+                Mail::to($eleve->email)
+                    ->send(new StudentWelcomeMail($eleve, $plainPassword));
+                    
+                // Optionnel : Envoyer une copie à l'admin
+                // Mail::to('admin@example.com')
+                //     ->send(new NewStudentAdminMail($eleve));
+                    
+            } catch (\Exception $mailException) {
+                \Log::error('Erreur envoi email: ' . $mailException->getMessage());
+            }
+    
             return redirect()->route('student-dash')
-                ->with('success', 'Inscription réussie ! Bienvenue.');
-                
+                ->with('success', 'Inscription réussie ! Vérifiez votre email pour vos identifiants.');
+    
         } catch (\Exception $e) {
-            // En cas d'erreur, supprimer l'utilisateur créé (si existant)
             if (isset($user)) {
                 $user->delete();
             }
             
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
+                ->with('error', 'Erreur: ' . $e->getMessage());
         }
     }
     
@@ -323,69 +337,7 @@ public function toggleStatus($id)
     
     return response()->json(['success' => false], 404);
 }
-    // public function update(Request $request, $id)
-    // {
-    //     $rules = array(
-    //         'nom_fr'       => 'required',
-    //         'prenom_fr'      => 'required',
-    //         'specialite'      => 'required',
-    //         'tel'      => 'required|numeric',
-    //         'email'      => 'required',
-    //         'password'      => 'required',
-    //         'status'      => 'required',
-    //          'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
-    //          'user_id' =>'required'
     
-    //     );
-       
-    //     $validator = Validator::make($request->all(), $rules);
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'error' => true,
-    //              'data' => $eleve 
-    //                ]);
-            
-    //         // store new user
-           
-    //     } else {  
-    //         $eleve=Student::find($id);
-    //         $user=User::find($eleve->user_id);
-            
-    //         $user['name']=$request['nom_fr'];
-    //         $user['email']=$request['email'];
-    //         $user['password']=$request['password'];
-    //         // $user['password_confirmation']=$request['password'];
-    //         $user['role']='student';
-    //         $user->save();
-    //         $user=User::latest()->first();;
-    //         // store new student
-            
-           
-            
-           
-    //         $eleve->nom_fr = $request-> nom_fr;
-    //         $eleve->prenom_fr = $request-> prenom_fr;
-    //         $eleve->nom_ar = $request-> nom_ar;
-    //         $eleve->prenom_ar = $request-> prenom_ar;
-    //         $eleve->specialite      =  $request-> specialite;
-    //         $eleve->tel      =  $request-> tel;
-    //         $eleve->tel2      =  $request-> tel2;
-    //         $eleve->email      =  $request-> email;
-    //         $eleve->adresse      =  $request-> adresse;
-    //         $eleve->bio      =  $request-> bio;
-    //         // $eleve->photo      =  $request-> photo;
-    //         $eleve->password      =  $request-> password;
-    //         $eleve->status      =  $request-> status;
-    //         $eleve->user_id      =  $user-> id;
-            
-    //         $eleve->save();
-    
-    //         // redirect
-    //         return response()->json(['success' => true,    
-    //                    ]); 
-    //     }
-        
-    // }
 
     /**
      * Remove the specified resource from storage.
@@ -401,3 +353,4 @@ public function toggleStatus($id)
                         ->with('delete','Eleve supprimée avec succés');
     }
 }
+

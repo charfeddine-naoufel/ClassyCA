@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\Matiere;
 use App\Models\Group;
 use App\Models\Classe;
+use App\Models\Live;
 use App\Models\User;
 use Auth;
 
@@ -38,24 +39,98 @@ class TeacherController extends Controller
        $classes=Classe::all();
       return view('Teacher.courses.index',compact('courses','matieres','groups','classes'));
     }
-    public function mesgroups()
-    {
-        $user = Auth::user();
+    // public function mesgroups()
+    // {
+    //     $user = Auth::user();
 
-        if ($user && $user->teacher) {
-            $courses = Course::where('teacher_id', $user->teacher->id)->get();
-        } else {
-            $courses = collect(); 
+    //     if ($user && $user->teacher) {
+    //         $courses = Course::where('teacher_id', $user->teacher->id)->get();
+    //     } else {
+    //         $courses = collect(); 
+    //     }
+        
+    //    $groups=[];
+    //    foreach ($courses as $key => $course) {
+    //        $groups[$course->group_id]=Group::where('id',$course->group_id)->get();
+    //    }
+    //   dd($groups);
+       
+    //   return view('Teacher.group.mesgroups',compact('groups'));
+    // }
+
+    public function mesgroups()
+{
+    $user = Auth::user();
+    
+    // Vérification plus complète de l'utilisateur et de sa relation teacher
+    if (!$user || !$user->teacher) {
+        return view('Teacher.group.mesgroups', ['groups' => collect()]);
+    }
+    
+    // Récupérer les groupes distincts via une relation
+    $groups = Group::whereHas('courses', function($query) use ($user) {
+            $query->where('teacher_id', $user->teacher->id);
+        })
+        ->with(['courses' => function($query) use ($user) {
+            $query->where('teacher_id', $user->teacher->id);
+        }])
+        ->get();
+    // dd($groups);
+    return view('Teacher.group.mesgroups', compact('groups'));
+}
+
+// fonction calendrier
+public function calendrier()
+{
+    $user = Auth::user();
+    
+    if (!$user || !$user->teacher) {
+        return view('Teacher.calendrier', ['events' => []]);
+    }
+    
+    // Récupérer les lives via les cours de l'enseignant
+    $meetings = Live::where('start_time', '>=', now())
+        ->whereHas('course', function($query) use ($user) {
+            $query->where('teacher_id', $user->teacher->id);
+        })
+        ->with(['course.matiere', 'group'])
+        ->orderBy('start_time', 'asc')
+        ->get();
+    
+    $events = [];
+    $colorMap = [
+        'Eco' => '#4caf50',
+        'Gest' => '#d22346',
+        'Info' => '#ffc107',
+    ];
+    
+    foreach ($meetings as $meeting) {
+        if (!$meeting->course || !$meeting->course->matiere) {
+            continue;
         }
         
-       $groups=[];
-       foreach ($courses as $key => $course) {
-           $groups[$course->group_id]=Group::where('id',$course->group_id)->get();
-       }
-    //  dd($groups);
-       
-      return view('Teacher.group.mesgroups',compact('groups'));
+        $matiereLabel = $meeting->course->matiere->label_matiere;
+        $groupName = $meeting->group ? $meeting->group->nomg : 'Groupe inconnu';
+        
+        $title = $matiereLabel . ' - ' . $meeting->topic . ' (' . $groupName . ')';
+        
+        $events[] = [
+            'title' => $title,
+            'start' => $meeting['start_time'],
+            'end' => Carbon::parse($meeting['start_time'])->addMinutes(60),
+            'color' => $colorMap[$matiereLabel] ?? '#757575',
+            'url' => $meeting['start_url'] ?? '#',
+            'extendedProps' => [
+                'group' => $groupName,
+                'matiere' => $matiereLabel,
+                'topic' => $meeting->topic,
+                'meeting_id' => $meeting->id,
+            ],
+        ];
     }
+    
+    return view('Teacher.calendrier', compact('events'));
+}
     public function home()
     {
         $user = Auth::user();
