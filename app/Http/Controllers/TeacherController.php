@@ -12,6 +12,7 @@ use App\Models\Group;
 use App\Models\Classe;
 use App\Models\Live;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Auth;
 
 class TeacherController extends Controller
@@ -21,8 +22,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-       $enseignants=Teacher::all(); 
-      return view('Admin.Enseignant.index',compact('enseignants'));
+        $teachers = Teacher::with('user')->orderBy('created_at', 'desc')->paginate(15);;
+        return view('Admin.Enseignant.index', compact('teachers'));
+        
     }
     public function mescours()
     {
@@ -219,88 +221,153 @@ public function calendrier()
     {
         //
     }
-
+/**
+ * Toggle the status of a teacher.
+ */
+public function toggleStatus($id)
+{
+    try {
+        $teacher = Teacher::findOrFail($id);
+        
+        // Inverser le statut (1 → 0, 0 → 1)
+        $teacher->status = $teacher->status == "1" ? "0" : "1";
+        $teacher->save();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Statut mis à jour avec succès',
+            'status' => $teacher->status
+        ]);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Erreur lors du changement de statut: ' . $e->getMessage()
+        ], 500);
+    }
+}
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        $enseignant = Teacher::find($id); 
-                return response()->json([
-                               'success' => true,
-                                'data' => $enseignant 
-                                  ]);
+{
+    $teacher = Teacher::find($id); 
+    
+    if (!$teacher) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Enseignant non trouvé'
+        ], 404);
     }
+    
+    return response()->json([
+        'success' => true,
+        'data' => $teacher 
+    ]);
+}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'nom_fr'       => 'required',
-            'prenom_fr'      => 'required',
-            'specialite'      => 'required',
-            'tel'      => 'required|numeric',
-            'email'      => 'required',
-            'password'      => 'required',
-            'status'      => 'required',
-             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
-             'user_id' =>'required'
-    
-        );
-       
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'error' => true,
-                 'data' => $enseignant 
-                   ]);
-            
-            // store new user
-           
-        } else {  
-            $teacher=Teacher::find($id);
-            $user=User::find($teacher->user_id);
-            
-            $user['name']=$request['nom_fr'];
-            $user['email']=$request['email'];
-            $user['password']=$request['password'];
-            // $user['password_confirmation']=$request['password'];
-            $user['role']='teacher';
-            $user->save();
-            $user=User::latest()->first();;
-            // store new teacher
-            
+        try {
+            $teacher = Teacher::findOrFail($id);
+            $user = User::findOrFail($teacher->user_id);
+
+            $rules = [
+                'nom_fr'       => 'required|string|max:255',
+                'prenom_fr'    => 'required|string|max:255',
+                'specialite'   => 'required|string|max:255',
+                'tel'          => 'required|numeric|digits_between:8,15',
+                'email'        => [
+                    'required',
+                    'email',
+                    Rule::unique('users')->ignore($user->id),
+                    Rule::unique('teachers')->ignore($teacher->id),
+                ],
+                'password'     => 'nullable|min:8',
+                'status'       => 'required|in:0,1',
+                'photo'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'nom_ar'       => 'nullable|string|max:255',
+                'prenom_ar'    => 'nullable|string|max:255',
+                'tel2'         => 'nullable|numeric|digits_between:8,15',
+                'adresse'      => 'nullable|string|max:500',
+                'bio'          => 'nullable|string',
+            ];
+
+            $messages = [
+                'email.unique' => 'Cet email est déjà utilisé.',
+                'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
+                'tel.digits_between' => 'Le numéro de téléphone doit contenir entre 8 et 15 chiffres.',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Erreur de validation',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            // Mise à jour utilisateur
+            $userData = [
+                'name' => $request->nom_fr,
+                'email' => $request->email,
+            ];
+
+            if ($request->filled('password')) {
+                $userData['password'] = Hash::make($request->password);
+            }
+
+            $user->update($userData);
+
+            // Mise à jour photo
             if ($request->hasFile('photo')) {
-                // put image in the public storage
-               $filePath = Storage::disk('public')->put('images/teachers/photo', request()->file('photo'));
-               $teacher['photo'] = $filePath;
-           }
-            
-           
-            $teacher->nom_fr = $request-> nom_fr;
-            $teacher->prenom_fr = $request-> prenom_fr;
-            $teacher->nom_ar = $request-> nom_ar;
-            $teacher->prenom_ar = $request-> prenom_ar;
-            $teacher->specialite      =  $request-> specialite;
-            $teacher->tel      =  $request-> tel;
-            $teacher->tel2      =  $request-> tel2;
-            $teacher->email      =  $request-> email;
-            $teacher->adresse      =  $request-> adresse;
-            $teacher->bio      =  $request-> bio;
-            // $teacher->photo      =  $request-> photo;
-            $teacher->password      =  $request-> password;
-            $teacher->status      =  $request-> status;
-            $teacher->user_id      =  $user-> id;
-            
-            $teacher->save();
-    
-            // redirect
-            return response()->json(['success' => true,    
-                       ]); 
+                if ($teacher->photo && Storage::disk('public')->exists($teacher->photo)) {
+                    Storage::disk('public')->delete($teacher->photo);
+                }
+                
+                $fileName = time() . '_' . $request->file('photo')->getClientOriginalName();
+                $photoPath = $request->file('photo')->storeAs('images/teachers/photo', $fileName, 'public');
+                $teacher->photo = $photoPath;
+            }
+
+            // Mise à jour enseignant
+            $teacherData = [
+                'nom_fr'       => $request->nom_fr,
+                'prenom_fr'    => $request->prenom_fr,
+                'nom_ar'       => $request->nom_ar,
+                'prenom_ar'    => $request->prenom_ar,
+                'specialite'   => $request->specialite,
+                'tel'          => $request->tel,
+                'tel2'         => $request->tel2,
+                'email'        => $request->email,
+                'adresse'      => $request->adresse,
+                'bio'          => $request->bio,
+                'status'       => $request->status,
+            ];
+
+            if ($request->filled('password')) {
+                $teacherData['password'] = Hash::make($request->password);
+            }
+
+            $teacher->update($teacherData);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Enseignant mis à jour avec succès',
+                'teacher' => $teacher->fresh(['user'])
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de la mise à jour: ' . $e->getMessage()
+            ], 500);
         }
-        
     }
 
     /**

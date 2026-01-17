@@ -306,6 +306,7 @@
         <script src="{{ asset('assets/js/form.validation.script.js') }}"></script>
 
         {{-- <script src="assets/js/vendor/toastr.min.js"></script> --}}
+        
         {{-- <script src="assets/js/toastr.script.js"></script> --}}
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
