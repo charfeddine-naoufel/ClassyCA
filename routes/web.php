@@ -33,7 +33,11 @@ Route::get('/', function () {
 });
 Route::post('/eleves', [StudentController::class,'store'])->name('eleves.registerEl');
 Auth::routes();
-
+Route::post('/session/renew', function () {
+  // Juste toucher la session pour la renouveler
+  session()->reflash();
+  return response()->json(['status' => 'ok']);
+})->name('session.renew')->middleware('auth');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // middleware routes

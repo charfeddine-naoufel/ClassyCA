@@ -317,6 +317,22 @@
                 });
             });
         </script>
+        <script>
+            // Renouvelle la session toutes les 10 minutes si l'utilisateur est actif
+            @if(auth()->check())
+                let lastActivity = new Date();
+                const RENEW_INTERVAL = 10 * 60 * 1000; // 10 minutes
+            
+                setInterval(() => {
+                    fetch("{{ route('session.renew') }}", {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    }).catch(console.error);
+                }, RENEW_INTERVAL);
+            @endif
+            </script>
         @yield('scripts')
 
 </body>

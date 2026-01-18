@@ -128,7 +128,7 @@
                                             <span><i class="i-Business-Mens ul-accordion__font"> </i></span>Elèves du groupe
                                         </button>
                                         <div class="dropdown-menu bg-transparent shadow-none p-0 m-0" style="width: 320px">
-                                            <div class="card">
+                                            <div class="card " style="max-height: 350px;overflow-y: auto;">
                                                 <div class="card-body">
                                                     <ul class="list-group">
                                                     

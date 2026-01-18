@@ -88,11 +88,17 @@
                                             data-target="#editModal">
                                         <i class="nav-icon i-Pen-5 font-weight-bold"></i>
                                     </button>
-
-                                    <button class="btn text-danger btn-icon mr-2 delete-btn" 
+                                    <form action="{{ route('enseignants.destroy', $teacher->id)}}" method="post" class="inline-block">
+                                      @csrf
+                                      @method('DELETE')
+                                      
+                                      <button class="btn text-danger  btn-icon  mr-2 alert-confirm"   ><i class="nav-icon i-Close-Window font-weight-bold"></i></i></button>
+              
+                                  </form>
+                                    {{-- <button class="btn text-danger btn-icon mr-2 delete-btn" 
                                             data-id="{{ $teacher->id }}">
                                         <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                                    </button>
+                                    </button> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -354,7 +360,8 @@
         toastr.info('Enseignant supprimé avec succès',"Suppression", {timeOut: 5000});
     @endif
 </script>
-
+<script src="{{asset('assets/js/vendor/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('assets/js/sweetalert.script.js')}}"></script>
 <script>
     $(document).ready(function() {
         
