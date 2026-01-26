@@ -19,7 +19,7 @@ class LiveController extends Controller
         $teacher=Auth::user()->teacher;
          // Récupérer les groupes associés à cet enseignant
          $groups = $teacher->groups;
-        
+        // dd($groups);
         $chapitres=collect();
         $courses=Course::where('teacher_id',Auth::user()->teacher->id)->get();
         foreach ($courses as $key => $course) {

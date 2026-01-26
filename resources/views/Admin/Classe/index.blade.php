@@ -645,11 +645,11 @@
                     $('#nomg').val(data.data['nomg']);
                     $('#classe_id').val(data.data['classe_id']);
                     $('#sluggr').val(data.data['slug']);
+                    $('#IdGroup').val(data.data['id']);
 
-                    $('#classegr').val(data.data.eleves['nom_fr']);
+                    $('#classegr').val(data.data.eleves['nomg']);
                     $('#classegr').trigger('change');
                     
-                    $('#IdGroup').val(data.data['id']);
 
 
 
@@ -666,7 +666,7 @@
                 
                 var id = $('#IdGroup').val();
                 var URL ="groups/"+ id;
-                console.log("url===",URL)
+                console.log("url===",id)
                 $.ajax({
                     method: "PUT",
                     url: URL,
