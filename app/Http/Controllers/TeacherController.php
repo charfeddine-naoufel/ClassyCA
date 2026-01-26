@@ -38,6 +38,7 @@ class TeacherController extends Controller
     //    dd($courses);
        $matieres=Matiere::all();
        $groups=Group::all();
+    //    dd($groups);
        $classes=Classe::all();
       return view('Teacher.courses.index',compact('courses','matieres','groups','classes'));
     }

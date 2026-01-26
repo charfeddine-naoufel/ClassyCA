@@ -132,7 +132,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label for="picker1"class="t-font-boldest">Group :</label>
+                                <label for="picker1"class="t-font-boldest">Groupe :</label>
                                 <select class="form-control form-control-rounded w-100" name="group_id">
                                     @foreach ($groups as $group)
                                     <option value="{{$group->id}}">{{$group->nomg}}</option>
@@ -158,7 +158,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editModalContent_title">Modifier Matière</h5>
+                        <h5 class="modal-title" id="editModalContent_title">Modifier Cours</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -180,7 +180,7 @@
                                     
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="col-md-6 form-group">
                                 <label for="label-course" class="col-form-label">Enseignant :</label>
                                 <input type="text" class="form-control form-control-rounded"  readonly value="{{Auth::user()->teacher->nom_fr}} {{Auth::user()->teacher->prenom_fr}}">
                                 <input type="hidden" class="form-control form-control-rounded" name="teacher_id" id="teacher_id" readonly value="{{Auth::user()->teacher->id}}">
@@ -196,7 +196,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label for="picker1"class="t-font-boldest">Group :</label>
+                                <label for="picker1"class="t-font-boldest">Groupe :</label>
                                 <select class="form-control form-control-rounded w-100" name="group_id" id="group_id">
                                     @foreach ($groups as $group)
                                     <option value="{{$group->id}}">{{$group->nom_g}}</option>
@@ -293,8 +293,35 @@
                     $('#classe_id').val(data.data['classe_id']);
                     $('#teacher_id').val(data.data['teacher_id']);
                     $('#matiere_id').val(data.data['matiere_id']);
-                    $('#group_id').val(data.data['group_id']);
+                    // $('#group_id').val(data.data['group_id']);
                     $('#IdCourse').val(data.data['id']);
+                    var $groupSelect = $('#group_id');
+                    $groupSelect.empty(); // Vider les options existantes
+                    
+                    // Ajouter une option par défaut
+                    $groupSelect.append('<option value="">Sélectionner un groupe</option>');
+                    
+                    // Vérifier si des groupes sont disponibles
+                    if (data.groups && data.groups.length > 0) {
+                        // Parcourir tous les groupes
+                        $.each(data.groups, function(index, group) {
+                            // Vérifier si ce groupe correspond au group_id du cours
+                            var isSelected = (group.id == data.data.group_id);
+                            
+                            // Créer l'option
+                            var option = $('<option>', {
+                                value: group.nomg,
+                                text: group.nomg ,
+                                selected: isSelected
+                            });
+                            
+                            // Ajouter l'option au select
+                            $groupSelect.append(option);
+                        });
+                    } else {
+                        // Aucun groupe disponible
+                        $groupSelect.append('<option value="">Aucun groupe disponible</option>');
+                    }
 
 
 

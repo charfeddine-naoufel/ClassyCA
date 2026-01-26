@@ -84,9 +84,11 @@ class CourseController extends Controller
     public function edit($id)
     { 
         $course = Course::find($id); 
+        $groups = Group::where('classe_id', $course->classe_id)->get();
                 return response()->json([
                                'success' => true,
-                                'data' => $course 
+                                'data' => $course,
+                                'groups' => $groups 
                                   ]);
     }
 
