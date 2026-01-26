@@ -118,13 +118,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="label-course" class="col-form-label">Enseignant :</label>
-                                <input type="text" class="form-control form-control-rounded"  readonly value="@php
-                                                                                                                $teacher = Auth::user()->teacher;
-                                                                                                                 $nomTeacher = $teacher ? $teacher->nom_fr : Auth::user()->name;
-                                                                                                                 $prenomTeacher = $teacher ? $teacher->prenom_fr : Auth::user()->name;
-                                                                                                                @endphp
-                            
-                                                                                                            {{ $nomTeacher }}-{{ $prenomTeacher }}">
+                                <input type="text" class="form-control form-control-rounded"  readonly value="{{Auth::user()->teacher->nom_fr}} {{Auth::user()->teacher->prenom_fr}}">                                                                                                           
                                 <input type="hidden" class="form-control form-control-rounded" name="teacher_id" readonly value="{{Auth::user()->teacher->id}}">
                             </div>
                             <div class="col-md-6 form-group mb-3">

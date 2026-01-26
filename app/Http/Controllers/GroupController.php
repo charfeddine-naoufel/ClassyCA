@@ -140,7 +140,7 @@ class GroupController extends Controller
         $group=Group::find($id);
         $group->delete();
     
-        return redirect()->route('groups.index')
-                        ->with('success','Classe supprimée avec succés');
+        return redirect()->route('classes.index')
+                        ->with('success','Groupe supprimé avec succés');
     }
 }
