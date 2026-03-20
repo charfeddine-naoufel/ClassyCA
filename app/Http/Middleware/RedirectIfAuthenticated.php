@@ -15,16 +15,40 @@ class RedirectIfAuthenticated
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+    // public function handle(Request $request, Closure $next, string ...$guards): Response
+    // {
+    //     $guards = empty($guards) ? [null] : $guards;
+
+    //     foreach ($guards as $guard) {
+    //         if (Auth::guard($guard)->check()) {
+    //             return redirect(RouteServiceProvider::HOME);
+    //         }
+    //     }
+
+    //     return $next($request);
+    // }
     public function handle(Request $request, Closure $next, string ...$guards): Response
-    {
-        $guards = empty($guards) ? [null] : $guards;
+{
+    $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+    foreach ($guards as $guard) {
+        if (Auth::guard($guard)->check()) {
+            $user = Auth::guard($guard)->user();
+            
+            // Rediriger selon le rôle de l'utilisateur
+            if ($user->role=='admin') {
+                return redirect('/admin');
+            } elseif ($user->role=='teacher') {
+                return redirect('/teacher');
+            } elseif ($user->role=='student') {
+                return redirect('/student');
             }
+            
+            // Si aucun rôle spécifique n'est trouvé, rediriger vers la page par défaut
+            return redirect('/dashboard');
         }
-
-        return $next($request);
     }
+
+    return $next($request);
+}
 }
