@@ -21,4 +21,8 @@ class Chapitre extends Model
     {
         return $this->belongsTo(Course::class);
     }
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class);
+    }
 }

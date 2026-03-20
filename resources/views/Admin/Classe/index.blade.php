@@ -135,7 +135,7 @@
                                                     
                                                         @foreach ($group ->students as $eleve )
                                                         <li class="list-group-item d-flex justify-content-between align-items-center py-0">
-                                                            {{$eleve->nom_fr}} {{$eleve->prenom_fr}}
+                                                            {{$loop->iteration}}.  {{$eleve->nom_fr}} {{$eleve->prenom_fr}}
                                                             <form method="POST" action="{{route('student.removefromgrou',['id' => $eleve->id])}}">
                                                                 @csrf
                                                                 @method('PATCH')

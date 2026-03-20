@@ -43,24 +43,7 @@ class TeacherController extends Controller
        $classes=Classe::all();
       return view('Teacher.courses.index',compact('courses','matieres','groups','classes'));
     }
-    // public function mesgroups()
-    // {
-    //     $user = Auth::user();
-
-    //     if ($user && $user->teacher) {
-    //         $courses = Course::where('teacher_id', $user->teacher->id)->get();
-    //     } else {
-    //         $courses = collect(); 
-    //     }
-        
-    //    $groups=[];
-    //    foreach ($courses as $key => $course) {
-    //        $groups[$course->group_id]=Group::where('id',$course->group_id)->get();
-    //    }
-    //   dd($groups);
-       
-    //   return view('Teacher.group.mesgroups',compact('groups'));
-    // }
+    
 
     public function mesgroups()
 {
@@ -378,7 +361,7 @@ public function toggleStatus($id)
     public function destroy(string $id)
     {
         $teacher=Teacher::find($id);
-        $user=Teacher::find($teacher->id);
+        $user=User::find($teacher->user_id);
         $teacher->delete();
         $user->delete();
     
