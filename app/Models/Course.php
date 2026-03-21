@@ -17,9 +17,9 @@ class Course extends Model
     {
         return $this->hasMany(Chapitre::class);
     }
-    public function groups()
+    public function group()
     {
-        return $this->hasMany(Group::class);
+        return $this->belongsTo(Group::class);
     }
     public function teacher()
     {

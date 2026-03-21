@@ -159,7 +159,7 @@
                                 <select class="form-control form-control-rounded w-100" name="chapitre_id" required>
                                     <option value="">Choisir un chapitre</option>
                                     @foreach ($chapitres as $chapitre)
-                                    <option value="{{$chapitre->id}}">{{$chapitre->titre}}-{{$chapitre->course->classe->slug}}-{{$chapitre->course->group->nomg}}</option>
+                                    <option value="{{$chapitre->id}}">{{$chapitre->titre}}-{{$chapitre->course->classe->slug}}</option>
                                         
                                     @endforeach
                                     

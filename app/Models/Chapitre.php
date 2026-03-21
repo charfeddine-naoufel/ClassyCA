@@ -21,8 +21,8 @@ class Chapitre extends Model
     {
         return $this->belongsTo(Course::class);
     }
-    public function classe()
+    public function group()
     {
-        return $this->belongsTo(Classe::class);
+        return $this->hasOneThrough(Group::class, Course::class, 'id', 'id', 'course_id', 'group_id');
     }
 }
