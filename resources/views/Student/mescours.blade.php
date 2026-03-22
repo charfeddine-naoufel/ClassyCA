@@ -26,7 +26,7 @@
                         <a href="#"><i class="i-Ambulance"></i> Support</a>
                     </div>
                 </div>
-                <div class="col-md-4 p-4 text-left">
+                {{-- <div class="col-md-4 p-4 text-left">
                     <p class="text-primary text--cap border-bottom-primary d-inline-block">Components</p>
                     <ul class="links">
                         <li><a href="accordion.html">Accordion</a></li>
@@ -42,7 +42,7 @@
                         <li><a href="nouislider.html">Sliders</a></li>
                         <li><a href="tabs.html">Tabs</a></li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

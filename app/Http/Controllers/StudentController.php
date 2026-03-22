@@ -109,7 +109,7 @@ class StudentController extends Controller
     public function mescours()
     {
         $student=Auth::user()->student;
-        $courses=Course::where('group_id',$student->group_id)->get();
+        $courses=Course::where('group_id',$student->classe_id)->get();
         // $mycourses=[];
         // foreach ($courses as $key => $course) {
         //     $mycourses[$course->matiere->nom_matiere]=Chapitre::where('course_id',$course->id)->get();
@@ -125,16 +125,46 @@ class StudentController extends Controller
             return view('Student.mescoursNotPaid');
         }
     }
+    // public function chapitrescours($id)
+    // {
+        
+    //     $student=Auth::user()->student;
+    //     $course=Course::find($id);
+    //     $chapitres=Chapitre::where('course_id',$id)->get();
+    //     // dd($chapitres);
+        
+    //   return view('Student.chapitres',compact('chapitres','course'));
+    // }
     public function chapitrescours($id)
-    {
-        
-        $student=Auth::user()->student;
-        $course=Course::find($id);
-        $chapitres=Chapitre::where('course_id',$id)->get();
-        // dd($chapitres);
-        
-      return view('Student.chapitres',compact('chapitres','course'));
+{
+    // Récupérer l'élève authentifié
+    $student = Auth::user()->student;
+    
+    if (!$student) {
+        abort(403, 'Vous n\'êtes pas autorisé à accéder à cette page.');
     }
+    
+    // Récupérer le cours avec sa classe
+    $course = Course::with('classe')->find($id);
+    
+    if (!$course) {
+        abort(404, 'Cours non trouvé.');
+    }
+    
+    // Vérifier si l'élève appartient à la classe du cours
+    if ($student->classe_id == $course->classe_id) {
+        // L'élève est dans la bonne classe, on lui donne accès à tous les chapitres
+        $chapitres = Chapitre::where('course_id', $id)
+            ->orderBy('trimestre')
+            ->orderBy('titre')
+            ->get();
+        // dd($chapitres);
+        return view('Student.chapitres', compact('chapitres', 'course'));
+    } else {
+        // L'élève n'est pas dans la bonne classe
+        abort(403, 'Vous n\'avez pas accès à ce cours car il n\'est pas destiné à votre classe.');
+    }
+}
     /**
      * Show the form for creating a new resource.
      */
