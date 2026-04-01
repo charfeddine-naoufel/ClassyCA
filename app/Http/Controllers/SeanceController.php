@@ -21,26 +21,26 @@ class SeanceController extends Controller
         //
     }
     public function mesSeances()
-    {
-        $teacher=Auth::user()->teacher;
-        $mesclasses=Course::where('teacher_id',$teacher->id)->get();
-        //  dd($mesclasses);
-         $meschapitres=collect();
-        $i=0;
-        foreach ($mesclasses as $key => $classe) {
-            $chapitresbyclasses[$classe->classe->slug]=$classe->chapitres;
-            $meschapitres=$meschapitres->merge($classe->chapitres);
-        }
-        
-        //  dd($meschapitres);
-        
-        $courses=Course::where('teacher_id',$teacher->id)->get();
-        
-      
-        
-       
-        return view('Teacher.seances.index',compact('courses','meschapitres','chapitresbyclasses'));
+{
+    $teacher = Auth::user()->teacher;
+
+    // Récupération des cours du professeur
+    $courses = Course::where('teacher_id', $teacher->id)->get();
+
+    // Récupération de tous les chapitres des cours du professeur
+    $meschapitres = collect();
+    $chapitresbyclasses = [];
+
+    foreach ($courses as $course) {
+        $chapitresbyclasses[$course->classe->slug] = $course->chapitres;
+        $meschapitres = $meschapitres->merge($course->chapitres);
     }
+
+    // Récupération des séances appartenant aux chapitres du professeur
+    $seances = Seance::whereIn('chapitre_id', $meschapitres->pluck('id'))->get();
+
+    return view('Teacher.seances.index', compact('courses', 'meschapitres', 'chapitresbyclasses', 'seances'));
+}
 
     /**
      * Show the form for creating a new resource.

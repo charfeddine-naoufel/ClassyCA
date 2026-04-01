@@ -1,441 +1,305 @@
 @extends('layouts.app')
-@section('title', 'Séances')
+@section('title', 'Mes Séances')
 @section('content')
-    <div class="main-content-wrap sidenav-open d-flex flex-column">
-        <div class="main-content">
-            <div class="breadcrumb">
-                <!-- <h1> Lists</h1>
-                        <ul>
-                            <li><a href="">Apps</a></li>
-                            <li>Contacts</li>
-                        </ul> -->
-            </div>
 
-            <div class="separator-breadcrumb border-top"></div>
+<div class="main-content-wrap sidenav-open d-flex flex-column">
+    <div class="breadcrumb">
+        <h1 class="mr-2">Dashboard</h1>
+        <ul>
+            <li><a href="">Mes Séances</a></li>
+        </ul>
+    </div>
 
-            <section class="contact-list">
-                <div class="row">
-                    <div class="col-md-12 mb-4">
-                        <div class="card text-left">
-                            <div class="card-header text-right bg-transparent">
-                                <button type="button" data-toggle="modal" data-target=".modal-add"
-                                    class="btn btn-primary btn-md m-1"><i class=" i-Add text-white mr-2"></i> Ajouter Séance</button>
-                            </div>
-                            <!-- begin::modal add -->
-                            <div class="ul-card-list__modal">
-                                <div class="modal fade  modal-add " tabindex="-1" role="dialog"
-                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <form method="POST" action="{{route('seances.store')}} " enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="form-group row">
-                                                        <label for="nom_off" class="col-sm-2 col-form-label">Titre: </label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control"  placeholder="Titre" name="titre">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="Description"
-                                                            class="col-sm-2 col-form-label">Description :</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control"  placeholder="Description" name="description">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="Trimestre"
-                                                            class="col-sm-2 col-form-label">URL :</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control" 
-                                                                    placeholder="URL" name="url">
-                                                            </div>
-                                                    </div>
+    <div class="separator-breadcrumb border-top"></div>
 
-                                                   
-                                                    <div class="form-group row">
-                                                        <label for="Description"
-                                                            class="col-sm-2 col-form-label">Cours :</label>
-                                                        <div class="col-sm-10">
-                                                            <select class="form-control form-control-rounded " name="course_id">
-                                                                @foreach ($courses as $course)
-                                                                <option value="{{$course->id}}">{{$course->classe->slug}}</option>
-                                                                    
-                                                                @endforeach
-                                                                
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="Description"
-                                                            class="col-sm-2 col-form-label">Chapitre :</label>
-                                                        <div class="col-sm-10">
-                                                            <select class="form-control form-control-rounded " name="chapitre_id">
-                                                                @foreach ($meschapitres as $chapitre)
-                                                                <option value="{{$chapitre->id}}">{{$chapitre->titre}}--{{$chapitre->course->classe->slug}}</option>
-                                                                    
-                                                                @endforeach
-                                                                
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-10">
-
-                                                            <button type="submit"
-                                                                class="btn btn-success">Enregistrer</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end::modal addd-->
-                            <!-- begin::modal update-->
-                            <div class="ul-card-list__modal">
-                                <div class="modal fade modaledit" id="editModalContent" tabindex="-1" role="dialog"
-                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <form   enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="form-group row">
-                                                        <label for="nom_off" class="col-sm-2 col-form-label">Titre: </label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="titre" placeholder="Titre" name="titre">
-                                                            <input type="hidden" class="form-control" id="IdSeance" name="IdSeance">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="Description"
-                                                            class="col-sm-2 col-form-label">Description :</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="description"
-                                                                placeholder="Description" name="description">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="Trimestre"
-                                                            class="col-sm-2 col-form-label">URL :</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="url"
-                                                                    placeholder="URL" name="url">
-                                                            </div>
-                                                    </div>
-
-                                                   
-                                                    <div class="form-group row">
-                                                        <label for="Description"
-                                                            class="col-sm-2 col-form-label">Cours :</label>
-                                                        <div class="col-sm-10">
-                                                            <select class="form-control form-control-rounded " name="course_id" id="course_id" >
-                                                                @foreach ($courses as $course)
-                                                                <option value="{{$course->id}}">{{$course->classe->slug}}</option>
-                                                                    
-                                                                @endforeach
-                                                                
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="Description"
-                                                            class="col-sm-2 col-form-label">Chapitre :</label>
-                                                        <div class="col-sm-10">
-                                                            <select class="form-control form-control-rounded " name="chapitre_id" id="chapitre_id">
-                                                                @foreach ($meschapitres as $chapitre)
-                                                                <option value="{{$chapitre->id}}">{{$chapitre->titre}}--{{$chapitre->course->classe->slug}} </option>
-                                                                    
-                                                                @endforeach
-                                                                
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    
-
-                                                 
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-10">
-
-                                                            <button type="submit"
-                                                                class="btn btn-success updatebtn">Modifier</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end::modal update-->
-                            {{-- begin tabs --}}
-                            @foreach ($chapitresbyclasses as $key => $chapitres)
-                                
-                           
-                            <div class="row mb-4">
-
-
-                                <div class="col-md-12 mb-4">
-                                    <div class="card text-left">
-
-                                        <div class="card-body">
-                                            <h4 class="card-title mb-3">Séances pour la classe : <span class="text-primary">{{$key}}</span> </h4>
-
-                                            <ul class="nav nav-tabs" id="myIconTab" role="tablist">
-                                                @foreach ($chapitres as  $chapitre)
-                                                    
-                                                <li class="nav-item">
-                                                    <a class="nav-link {{$loop->iteration ==  1 ? 'active' : ''  }}" id="home-icon-tab{{$chapitre->id}} " data-toggle="tab"
-                                                    href="#homeIcon{{$chapitre->id}}" role="tab" aria-controls="homeIcon{{$chapitre->id}}"
-                                                    aria-selected="true"><i class="nav-icon i-Business-Mens mr-1"></i><strong >{{$chapitre->titre}} </strong></a>
-                                                </li>
-                                                
-                                                @endforeach
-                                            </ul>
-                                            <div class="tab-content" id="myIconTabContent"style="border-left: 1px solid #993366;border-right: 1px solid #993366;border-top: 1px solid #993366;border-bottom: 1px solid #993366;">
-                                                @foreach ($chapitres as  $chapitre)
-                                                    
-                                               
-                                                <div class="tab-pane fade {{$loop->iteration ==  1 ? 'active show' : ''  }} " id="homeIcon{{$chapitre->id}}" role="tabpanel"
-                                                    aria-labelledby="home-icon-tab{{$chapitre->id}}">
-                                                    <div class="card-body">
-
-                                                        <div class="table-responsive">
-                                                            <div class="card-body">
-                                                                <h4 class="card-title mb-3"> Séances du chapitres : <strong class="text-primary">{{$chapitre->titre}}</strong></h4>
-                        
-                                                                <div class="table-responsive">
-                                                                    <table class="table ">
-                                                                        <thead class="thead-dark">
-                                        
-                                                                            <tr>
-                                                                                <th scope="col">#</th>
-                                                                                <th scope="col">Titre :</th>
-                                                                                <th scope="col">Description :</th>
-                                                                                <th scope="col">URL :</th>
-                                                                                <th scope="col">Cours :</th>
-                                                                                
-                                        
-                                        
-                                                                                <th scope="col">Action</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                        
-                                                                            @foreach($chapitre->seances as $seance)
-                                                                          
-                                                                                                                                                         
-                                                                            <tr>
-                                                                                <th scope="row">{{$loop->iteration }}</th>
-                                                                                <td><strong>{{$seance->titre}} </strong></td>
-                                                                                <td>
-                                                                                    <strong>
-                                        
-                                                                                        {{$seance->description}} 
-                                                                                    </strong>
-                                        
-                                                                                </td>
-                                                                                <td>
-                                                                                    <strong>
-                                        
-                                                                                        {{$seance->url}}
-                                                                                    </strong>
-                                        
-                                                                                </td>
-                                                                                
-                                                                                <td>
-                                                                                    <strong>
-                                        
-                                                                                       {{$seance->chapitre->course->matiere->nom_matiere}}--
-                                                                                       {{$seance->chapitre->course->classe->slug}}
-                                                                                    </strong>
-                                        
-                                                                                </td>
-                                        
-                                        
-                                                                                <td class="d-flex">
-                                                                                    <button class="btn text-success bg-transparent btn-icon  mr-2 editbtn" data-id="{{$seance->id}}"  data-toggle="modal" data-target="#editModalContent" ><i class="nav-icon i-Pen-5 font-weight-bold"></i></button>
-                                        
-                                                                                    <form action="{{ route('seances.destroy', $seance->id)}}" method="post" class="inline-block">
-                                                                                        @csrf
-                                                                                        @method('DELETE')
-                                                                                        
-                                                                                        <button class="btn text-danger  btn-icon  mr-2 alert-confirm"   ><i class="nav-icon i-Close-Window font-weight-bold"></i></i></button>
-                                        
-                                                                                    </form>
-                                        
-                                                                                </td>
-                                                                            </tr>
-                                                                           
-                                                                            @endforeach
-                                                                        </tbody>
-                                                                    </table>
-                                        
-                                                                </div>
-                        
-                        
-                                                            </div>
-                                                        </div>
-                        
-                                                    </div>
-                                                </div>
-                                                @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end of col -->
-
-
-
-
-
-                            </div>
-                            {{-- end tabs --}}
-                            
-                        </div>
-                        <div class="separator-breadcrumb border-top"></div>
-                        @endforeach
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card o-hidden mb-4">
+                <div class="card-header d-flex align-items-center border-0">
+                    <h3 class="w-50 float-left card-title m-0">Séances</h3>
+                    <div class="dropdown dropleft text-right w-50 float-right">
+                        <button type="button" class="btn btn-primary btn-icon m-1" data-toggle="modal"
+                            data-target="#addSeanceModal">
+                            <span class="ul-btn__icon"><i class="i-Add"></i></span>
+                            <span class="ul-btn__text">Ajouter une séance</span>
+                        </button>
                     </div>
                 </div>
-            </section>
 
-            <!-- content goes here -->
+                <div class="m-3">
+                    <div class="table-responsive">
+                        <table class="table ">
+                            <thead class="thead-dark">
+                                 <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">URL</th>
+                                    <th scope="col">Cours</th>
+                                    <th scope="col">Chapitre</th>
+                                    <th scope="col">Action</th>
+                                 </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($seances as $seance)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td><strong>{{ $seance->titre }}</strong></td>
+                                    <td><strong>{{ $seance->description }}</strong></td>
+                                    <td>
+                                        @if($seance->url)
+                                            <a href="{{ $seance->url }}" target="_blank">Lien</a>
+                                        @else
+                                            —
+                                        @endif
+                                    </td>
+                                    <td><strong>{{ $seance->chapitre->course->classe->slug ?? '—' }}</strong></td>
+                                    <td><strong>{{ $seance->chapitre->titre ?? '—' }}</strong></td>
+                                    <td class="d-flex">
+                                        <button class="btn text-success bg-transparent btn-icon mr-2 editbtn"
+                                            data-id="{{ $seance->id }}" data-toggle="modal"
+                                            data-target="#editSeanceModal">
+                                            <i class="nav-icon i-Pen-5 font-weight-bold"></i>
+                                        </button>
 
-
+                                        <form action="{{ route('seances.destroy', $seance->id) }}" method="post"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn text-danger btn-icon mr-2 alert-confirm">
+                                                <i class="nav-icon i-Close-Window font-weight-bold"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- end of main content -->
-
-        <!-- Footer Start -->
-        
-        <!-- fotter end -->
     </div>
+
+    <!-- Modal Ajouter Séance -->
+    <div class="ul-card-list__modal">
+        <div class="modal fade modal-add" id="addSeanceModal" tabindex="-1" role="dialog"
+            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('seances.store') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group row">
+                                <label for="titre" class="col-sm-2 col-form-label">Titre :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Titre" name="titre" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-2 col-form-label">Description :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Description" name="description">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="url" class="col-sm-2 col-form-label">URL :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="URL" name="url">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="course_id" class="col-sm-2 col-form-label">Cours :</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control form-control-rounded" name="course_id" required>
+                                        <option value="">Choisir un cours</option>
+                                        @foreach ($courses as $course)
+                                        <option value="{{ $course->id }}">{{ $course->classe->slug }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="chapitre_id" class="col-sm-2 col-form-label">Chapitre :</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control form-control-rounded" name="chapitre_id" required>
+                                        <option value="">Choisir un chapitre</option>
+                                        @foreach ($meschapitres as $chapitre)
+                                        <option value="{{ $chapitre->id }}">{{ $chapitre->titre }} -- {{ $chapitre->course->classe->slug }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10 offset-sm-2">
+                                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Modifier Séance -->
+    <div class="modal fade" id="editSeanceModal" tabindex="-1" role="dialog" aria-labelledby="editSeanceModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier la séance</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editSeanceForm">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" id="edit_id">
+                        <div class="form-group row">
+                            <label for="edit_titre" class="col-sm-2 col-form-label">Titre :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="edit_titre" name="titre" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="edit_description" class="col-sm-2 col-form-label">Description :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="edit_description" name="description">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="edit_url" class="col-sm-2 col-form-label">URL :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="edit_url" name="url">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="edit_course_id" class="col-sm-2 col-form-label">Cours :</label>
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-rounded" id="edit_course_id" name="course_id" required>
+                                    <option value="">Choisir un cours</option>
+                                    @foreach ($courses as $course)
+                                    <option value="{{ $course->id }}">{{ $course->classe->slug }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="edit_chapitre_id" class="col-sm-2 col-form-label">Chapitre :</label>
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-rounded" id="edit_chapitre_id" name="chapitre_id" required>
+                                    <option value="">Choisir un chapitre</option>
+                                    @foreach ($meschapitres as $chapitre)
+                                    <option value="{{ $chapitre->id }}">{{ $chapitre->titre }} -- {{ $chapitre->course->classe->slug }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10 offset-sm-2">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="button" class="btn btn-primary updatebtn">Enregistrer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
+
 @section('scripts')
+<script src="{{ asset('assets/js/vendor/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/js/sweetalert.script.js') }}"></script>
 <script>
     @if (Session::has('success'))
-    
-                toastr.success('Nouvelle séance ajoutée avec succes',"Success", {timeOut: 5000});
-    
-     @elseif(Session::has('Error'))   
-     toastr.error('Vérifiez les champs',"Error", {timeOut: 5000});
-     @elseif(Session::has('Delete'))   
-     toastr.info('Séance supprimée avec succés',"Delete", {timeOut: 5000});
-
+        toastr.success('Séance ajoutée avec succès', "Success", { timeOut: 5000 });
+    @elseif (Session::has('error'))
+        toastr.error('Vérifiez les champs', "Error", { timeOut: 5000 });
     @endif
-</script>
-<script src="{{asset('assets/js/vendor/sweetalert2.min.js')}}"></script>
-    <script src="{{asset('assets/js/sweetalert.script.js')}}"></script>
 
-    <script>
-        $(document).ready(function() {
-           
-            $('.alert-confirm').on('click', function(e) {
-                e.preventDefault();
-                var form = $(this).closest("form");
-                swal({
-                    title: 'Êtes vous sûr?',
-                    text: "Cet action est irréversible!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#0CC27E',
-                    cancelButtonColor: '#FF586B',
-                    confirmButtonText: 'Oui, Supprimer!',
-                    cancelButtonText: 'Non, Annuler!',
-                    confirmButtonClass: 'btn btn-success mr-5',
-                    cancelButtonClass: 'btn btn-danger',
-                    buttonsStyling: false
-                }).then(function() {
-                    form.submit();
+    $(document).ready(function () {
+        // Confirmation de suppression
+        $('.alert-confirm').on('click', function (e) {
+            e.preventDefault();
+            var form = $(this).closest("form");
+            swal({
+                title: 'Êtes-vous sûr ?',
+                text: "Cette action est irréversible !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0CC27E',
+                cancelButtonColor: '#FF586B',
+                confirmButtonText: 'Oui, supprimer !',
+                cancelButtonText: 'Non, annuler !',
+                confirmButtonClass: 'btn btn-success mr-5',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            }).then(function () {
+                form.submit();
+                swal(
+                    'Supprimée !',
+                    'La séance a bien été supprimée.',
+                    'success'
+                )
+            }, function (dismiss) {
+                if (dismiss === 'cancel') {
                     swal(
-                        'Supprimée!',
-                        'La séance a bien été supprimée.',
-                        'success'
+                        'Annulée',
+                        'La suppression est annulée.',
+                        'error'
                     )
-                }, function(dismiss) {
-                    // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-                    if (dismiss === 'cancel') {
-                        swal(
-                            'Annulée',
-                            'La supression est annulée !! :)',
-                            'error'
-                        )
-                    }
-                })
-            });
-
-            //edit button
-            $('.editbtn').on('click', function(e) {
-                e.preventDefault();
-                let id = $(this).data('id');
-
-
-                // var action ="{{ URL::to('courses') }}/"+id;
-
-
-                // var url = "{{ URL::to('courses') }}";
-
-                $.get("seances/" + id + "/edit", function(data) {
-                    console.log(data.data);
-                    $('#titre').val(data.data['titre']);
-                    $('#description').val(data.data['description']);
-                    $('#url').val(data.data['url']);
-                    $('#course_id').val(data.data['course_id']);
-                    $('#chapitre_id').val(data.data['chapitre_id']);
-                    $('#IdSeance').val(data.data['id']);
-
-
-
-                });
-
-
-
-
-            });
-            $('.updatebtn').on('click', function(e) {
-                e.preventDefault();
-                var titre = $('#titre').val();
-                var description = $('#description').val();
-                var url = $('#url').val();
-                var course_id = $('#course_id').val();
-                
-                var chapitre_id = $('#chapitre_id').val();
-                
-                var id = $('#IdSeance').val();
-                var URL ="seances/"+ id;
-                console.log("id===",id)
-                console.log("url===",URL)
-                $.ajax({
-                    method: "PUT",
-                    url: URL,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: { id: id,
-                        titre: titre,
-                        description: description ,
-                        url: url ,
-                        course_id: course_id,
-                        chapitre_id: chapitre_id },
-
-                    success: function(data) {
-                        console.log(data)
-                        $('.modaledit').modal('hide');
-                        window.location.reload();
-                        //  alert('update done')
-
-                    }
-                });
-            });
-         
+                }
+            })
         });
-    </script>
-@endsection
 
+        // Récupération des données pour l'édition
+        $('.editbtn').on('click', function (e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+
+            $.get("seances/" + id + "/edit", function (data) {
+                $('#edit_id').val(data.data.id);
+                $('#edit_titre').val(data.data.titre);
+                $('#edit_description').val(data.data.description);
+                $('#edit_url').val(data.data.url);
+                $('#edit_course_id').val(data.data.course_id);
+                $('#edit_chapitre_id').val(data.data.chapitre_id);
+            });
+        });
+
+        // Mise à jour via AJAX
+        $('.updatebtn').on('click', function (e) {
+            e.preventDefault();
+            var id = $('#edit_id').val();
+            var formData = {
+                _token: '{{ csrf_token() }}',
+                _method: 'PUT',
+                titre: $('#edit_titre').val(),
+                description: $('#edit_description').val(),
+                url: $('#edit_url').val(),
+                course_id: $('#edit_course_id').val(),
+                chapitre_id: $('#edit_chapitre_id').val()
+            };
+
+            $.ajax({
+                method: "POST", // Utilisation de POST avec _method=PUT
+                url: "seances/" + id,
+                data: formData,
+                success: function (data) {
+                    $('#editSeanceModal').modal('hide');
+                    window.location.reload();
+                },
+                error: function (xhr) {
+                    toastr.error('Erreur lors de la mise à jour', 'Erreur');
+                }
+            });
+        });
+    });
+</script>
+@endsection

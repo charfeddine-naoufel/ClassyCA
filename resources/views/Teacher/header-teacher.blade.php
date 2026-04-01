@@ -47,7 +47,7 @@
 
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
                 <!-- Submenu Dashboards -->
-                <ul class="childNav" data-parent="dashboard">
+                {{-- <ul class="childNav" data-parent="dashboard">
                     <li class="nav-item">
                         <a href="dashboard.v1.html">
                             <i class="nav-icon i-Clock-3"></i>
@@ -72,7 +72,7 @@
                             <span class="item-name">Version 4</span>
                         </a>
                     </li>
-                </ul>
+                </ul> --}}
                 <ul class="childNav" data-parent="courses">
                     <li class="nav-item">
                         <a href="{{route('teacher.mescours')}}">
