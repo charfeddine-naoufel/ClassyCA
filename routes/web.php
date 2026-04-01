@@ -46,7 +46,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin-dash');
     Route::resource('/matieres', MatiereController::class);
     Route::resource('/enseignants', TeacherController::class);
-    Route::post('enseignants/{id}/toggle-status', [TeacherController::class, 'toggleStatus'])->name('admin.enseignants.toggle-status');    Route::get('/mesSeances', [SeanceController::class,'mesSeances'])->name('teacher.messeances');
+    Route::post('enseignants/{id}/toggle-status', [TeacherController::class, 'toggleStatus'])->name('admin.enseignants.toggle-status');    
 
     Route::resource('/eleves', StudentController::class);
     Route::post('/eleves/{id}/update-group', [StudentController::class, 'updateGroup']);
