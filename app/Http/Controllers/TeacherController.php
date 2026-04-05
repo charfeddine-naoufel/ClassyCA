@@ -255,105 +255,67 @@ public function toggleStatus($id)
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        try {
-            $teacher = Teacher::findOrFail($id);
-            $user = User::findOrFail($teacher->user_id);
+{
+    $rules = array(
+        'nom_fr'       => 'required',
+        'prenom_fr'    => 'required',
+        'specialite'   => 'required',
+        'tel'          => 'required|numeric',
+        'email'        => 'required|email',
+        'status'       => 'required',
+        'photo'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // optionnel
+        'password'     => 'nullable|min:6' // si fourni, doit faire au moins 6 caractères
+    );
 
-            $rules = [
-                'nom_fr'       => 'required|string|max:255',
-                'prenom_fr'    => 'required|string|max:255',
-                'specialite'   => 'required|string|max:255',
-                'tel'          => 'required|numeric|digits_between:8,15',
-                'email'        => [
-                    'required',
-                    'email',
-                    Rule::unique('users')->ignore($user->id),
-                    Rule::unique('teachers')->ignore($teacher->id),
-                ],
-                'password'     => 'nullable|min:8',
-                'status'       => 'required|in:0,1',
-                'photo'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'nom_ar'       => 'nullable|string|max:255',
-                'prenom_ar'    => 'nullable|string|max:255',
-                'tel2'         => 'nullable|numeric|digits_between:8,15',
-                'adresse'      => 'nullable|string|max:500',
-                'bio'          => 'nullable|string',
-            ];
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+        return redirect()->route('enseignants.index')
+            ->with('Error', 'Vérifiez vos champs.');
+    } else {
+        // Récupérer l'enseignant
+        $teacher = Teacher::findOrFail($id);
+        $user = $teacher->user; // l'utilisateur lié
 
-            $messages = [
-                'email.unique' => 'Cet email est déjà utilisé.',
-                'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
-                'tel.digits_between' => 'Le numéro de téléphone doit contenir entre 8 et 15 chiffres.',
-            ];
-
-            $validator = Validator::make($request->all(), $rules, $messages);
-
-            if ($validator->fails()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Erreur de validation',
-                    'errors' => $validator->errors()
-                ], 422);
-            }
-
-            // Mise à jour utilisateur
-            $userData = [
-                'name' => $request->nom_fr,
-                'email' => $request->email,
-            ];
-
-            if ($request->filled('password')) {
-                $userData['password'] = Hash::make($request->password);
-            }
-
-            $user->update($userData);
-
-            // Mise à jour photo
-            if ($request->hasFile('photo')) {
-                if ($teacher->photo && Storage::disk('public')->exists($teacher->photo)) {
-                    Storage::disk('public')->delete($teacher->photo);
-                }
-                
-                $fileName = time() . '_' . $request->file('photo')->getClientOriginalName();
-                $photoPath = $request->file('photo')->storeAs('images/teachers/photo', $fileName, 'public');
-                $teacher->photo = $photoPath;
-            }
-
-            // Mise à jour enseignant
-            $teacherData = [
-                'nom_fr'       => $request->nom_fr,
-                'prenom_fr'    => $request->prenom_fr,
-                'nom_ar'       => $request->nom_ar,
-                'prenom_ar'    => $request->prenom_ar,
-                'specialite'   => $request->specialite,
-                'tel'          => $request->tel,
-                'tel2'         => $request->tel2,
-                'email'        => $request->email,
-                'adresse'      => $request->adresse,
-                'bio'          => $request->bio,
-                'status'       => $request->status,
-            ];
-
-            if ($request->filled('password')) {
-                $teacherData['password'] = Hash::make($request->password);
-            }
-
-            $teacher->update($teacherData);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Enseignant mis à jour avec succès',
-                'teacher' => $teacher->fresh(['user'])
-            ]);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreur lors de la mise à jour: ' . $e->getMessage()
-            ], 500);
+        // Mise à jour de l'utilisateur
+        $user->name = $request->nom_fr;
+        $user->email = $request->email;
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
         }
+        $user->save();
+
+        // Gestion de la photo
+        if ($request->hasFile('photo')) {
+            // Supprimer l'ancienne photo si elle existe
+            if ($teacher->photo && Storage::disk('public')->exists($teacher->photo)) {
+                Storage::disk('public')->delete($teacher->photo);
+            }
+            // Enregistrer la nouvelle
+            $filePath = Storage::disk('public')->put('images/teachers/photo', $request->file('photo'));
+            $teacher->photo = $filePath;
+        }
+
+        // Mise à jour des champs de l'enseignant
+        $teacher->nom_fr    = $request->nom_fr;
+        $teacher->prenom_fr = $request->prenom_fr;
+        $teacher->nom_ar    = $request->nom_ar;
+        $teacher->prenom_ar = $request->prenom_ar;
+        $teacher->specialite = $request->specialite;
+        $teacher->tel       = $request->tel;
+        $teacher->tel2      = $request->tel2;
+        $teacher->email     = $request->email;
+        $teacher->adresse   = $request->adresse;
+        $teacher->bio       = $request->bio;
+        $teacher->password  = $request->filled('password') ? $request->password : $teacher->password;
+        $teacher->status    = $request->status;
+        // attention: user_id ne change pas normalement
+        $teacher->save();
+
+        // Redirection
+        return redirect()->route('enseignants.index')
+            ->with('success', 'Enseignant modifié avec succès.');
     }
+}
 
     /**
      * Remove the specified resource from storage.

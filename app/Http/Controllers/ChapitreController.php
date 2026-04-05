@@ -137,43 +137,42 @@ class ChapitreController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        
-        
-               $rules = array(
-                'classe_id'       => 'required',
-                'teacher_id'       => 'required',
-                'matiere_id'       => 'required'
-            );
-            $validator = Validator::make($request->all(), $rules);
-            if ($validator->fails()) {
-                return redirect()->route('courses.index')
-                ->with('Error','Vérifiez vos champs.');
-            } else {
-                // update
-                $course = Course::find($id);
-                $course->classe_id = $request-> classe_id;
-                $course->teacher_id = $request-> teacher_id;
-                $course->matiere_id = $request-> matiere_id;
-                $course->save();
-        
-                // redirect
-                // return redirect()->route('matieres.index')
-                // ->with('success','Matière modifiée avec succés.');
+{
+    $rules = array(
+        'titre'       => 'required',
+        'description' => 'nullable',
+        'trimestre'   => 'required',
+        'course_id'   => 'required',
+    );
 
-                return response()->json(['success' => true,    
-                       ]); 
-            }
+    $validator = Validator::make($request->all(), $rules);
+
+    if ($validator->fails()) {
+        return redirect()->route('chapitres.index')
+            ->with('Error', 'Vérifiez vos champs.');
+    } else {
+        // Mise à jour
+        $chapitre = Chapitre::find($id);
+        $chapitre->titre       = $request->titre;
+        $chapitre->description = $request->description;
+        $chapitre->trimestre   = $request->trimestre;
+        $chapitre->course_id   = $request->course_id;
+        $chapitre->save();
+
+        // Redirection
+        return redirect()->route('chapitres.index')
+            ->with('success', 'Chapitre modifié avec succès.');
     }
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy(Chapitre $chapitre)
     {
-        $course->delete();
+        $chapitre->delete();
     
-        return redirect()->route('courses.index')
-                        ->with('success','Cours supprimé avec succés');
+        return redirect()->route('chapitres.index')
+                        ->with('success','Chapitre supprimé avec succés');
     }
 }
