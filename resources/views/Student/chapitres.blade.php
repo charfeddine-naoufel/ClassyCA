@@ -112,26 +112,19 @@
                                                                     <div class="col-lg-10">
                                                                         <div
                                                                             style="height:70vh;"class="section   embed-responsive embed-responsive-21by9 ">
-                                                                            {{-- <video  autoplay>
-                                                                            <source src="https://www.youtube.com/watch?v=jpnCos8Ff_o" >
-                                                                          Your browser does not support the video tag.
-                                                                          </video> --}}
-                                                                            {{-- <iframe src="https://player.vimeo.com/video/137857207" class="" name="player" title="Vimeo video" allowfullscreen="" ></iframe> --}}
-                                                                            {{-- <video class="embed-responsive-item"name="player" id="player" controls controlslist="nodownload">
-                                                                              <source id="playersrc" src="https://player.vimeo.com/external/325698769.sd.mp4?s=4e70164190f4b472059c9f4ca74ca0ca58056ce4&profile_id=165" type="video/mp4">
-                                                                              Your browser does not support the video tag.
-                                                                            </video> --}}
+                                                                            
 
-                                                                            <iframe id="player{{ $chapitre->id }}"
-                                                                                data-id="player{{ $chapitre->id }}"
-                                                                                width="560" height="315"
-                                                                                class="youtube-player"
-                                                                                src="https://player.vimeo.com/external/325698769.sd.mp4?s=4e70164190f4b472059c9f4ca74ca0ca58056ce4&profile_id=165"
-                                                                                frameborder="0"
-                                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                                allowfullscreen></iframe>
+                                                                            <iframe 
+                                                                                id="player{{ $chapitre->id }}"
+                                                                                src="{{ asset('assets/images/cover.jpg') }}" 
+                                                                                width="560" 
+                                                                                height="315" 
+                                                                                frameborder="0" 
+                                                                                allow="autoplay; fullscreen; picture-in-picture" 
+                                                                                allowfullscreen>
+                                                                            </iframe>
 
-
+                                                                                
                                                                         </div>
 
                                                                     </div>
