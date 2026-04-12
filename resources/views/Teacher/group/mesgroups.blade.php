@@ -72,16 +72,19 @@
                                         <td>
                                             <div class="student-list">
                                                 @if($group->students && $group->students->count() > 0)
-                                                    <div class="mb-2">
-                                                        <span class="badge badge-light">{{ $group->students->count() }} élève(s)</span>
-                                                    </div>
-                                                    <div class="max-height-150 overflow-auto">
-                                                        @foreach($group->students as $student)
-                                                        <div class="d-flex align-items-center mb-1">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <i class="text-16 i-Checked-User text-primary mr-2"></i>
-                                                            <span>{{ $student->nom_fr ?? '' }} {{ $student->prenom_fr ?? '' }}</span>
+                                                            {{ $group->students->count() }} élève(s)
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            @foreach($group->students as $student)
+                                                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                                                    <i class="text-16 i-Checked-User text-primary mr-2"></i>
+                                                                    <span>{{ $student->nom_fr ?? '' }} {{ $student->prenom_fr ?? '' }}</span>
+                                                                </a>
+                                                            @endforeach
                                                         </div>
-                                                        @endforeach
                                                     </div>
                                                 @else
                                                     <span class="text-muted">Aucun élève</span>

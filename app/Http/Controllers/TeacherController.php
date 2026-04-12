@@ -62,7 +62,7 @@ class TeacherController extends Controller
             $query->where('teacher_id', $user->teacher->id);
         }])
         ->get();
-    //  dd($groups);
+    // dd($groups);
     return view('Teacher.group.mesgroups', compact('groups'));
 }
 
