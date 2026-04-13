@@ -109,13 +109,8 @@ class StudentController extends Controller
     public function mescours()
     {
         $student=Auth::user()->student;
-        $courses=Course::where('group_id',$student->classe_id)->get();
-        // $mycourses=[];
-        // foreach ($courses as $key => $course) {
-        //     $mycourses[$course->matiere->nom_matiere]=Chapitre::where('course_id',$course->id)->get();
-        // }
+        $courses=Course::where('classe_id',$student->classe_id)->get();
         
-        // dd($mycourses);
         if ($student->status==1) {
             
             return view('Student.mescours',compact('courses'));

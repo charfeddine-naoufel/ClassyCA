@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/logo.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/styles/vendor/calendar/fullcalendar.min.css') }}">
 
