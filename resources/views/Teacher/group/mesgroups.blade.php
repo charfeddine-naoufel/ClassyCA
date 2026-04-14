@@ -77,7 +77,7 @@
                                                             <i class="text-16 i-Checked-User text-primary mr-2"></i>
                                                             {{ $group->students->count() }} élève(s)
                                                         </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-height: 200px; overflow-y: auto;">
                                                             @foreach($group->students->sortBy('nom_fr') as $student)
                                                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                                                     <i class="text-16 i-Checked-User text-primary mr-2"></i>

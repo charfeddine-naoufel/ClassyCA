@@ -61,7 +61,7 @@
 
         <section class="widget-card">
             <div class="row">
-
+                
                 @foreach ($courses as $course)
                     
                 

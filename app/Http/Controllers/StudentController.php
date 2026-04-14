@@ -108,15 +108,16 @@ class StudentController extends Controller
     }
     public function mescours()
     {
-        $student=Auth::user()->student;
-        $courses=Course::where('classe_id',$student->classe_id)->get();
+        $student = Auth::user()->student;
         
-        if ($student->status==1) {
-            
-            return view('Student.mescours',compact('courses'));
-        }
-        else {
-            
+        $courses = Course::where('classe_id', $student->classe_id)
+                        //  ->Where('group_id', $student->group_id) 
+                         ->get()
+                         ->unique('teacher_id');
+        
+        if ($student->status == 1) {
+            return view('Student.mescours', compact('courses'));
+        } else {
             return view('Student.mescoursNotPaid');
         }
     }
