@@ -14,19 +14,16 @@ class SupportController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $teacher = Auth::user()->teacher;
-        
-        // Récupérer les supports liés aux chapitres du professeur
-        $supports = Support::whereHas('chapitre', function ($query) use ($teacher) {
-            $query->where('teacher_id', $teacher->id);
-        })->get();
-        
-        // Récupérer les chapitres du professeur (si besoin dans la vue)
-        $chapitres = $teacher->chapitres;
-        
-        return view('Teacher.Documents.index', compact('supports', 'chapitres'));
-    }
+{
+    $teacher = Auth::user()->teacher;
+    
+    // Récupère tous les supports des chapitres du professeur
+    $supports = $teacher->chapitres->flatMap->supports;
+    
+    $chapitres = $teacher->chapitres;
+    
+    return view('Teacher.Documents.index', compact('supports', 'chapitres'));
+}
     
 
     /**
