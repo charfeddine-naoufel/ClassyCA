@@ -15,12 +15,19 @@ class SupportController extends Controller
      */
     public function index()
     {
-        $supports = Support::all();
-        $chapitres = Auth::user()->teacher->chapitres;
-
-        // dd($supports);
-        return view('Teacher.Documents.index',compact('supports','chapitres'));
+        $teacher = Auth::user()->teacher;
+        
+        // Récupérer les supports liés aux chapitres du professeur
+        $supports = Support::whereHas('chapitre', function ($query) use ($teacher) {
+            $query->where('teacher_id', $teacher->id);
+        })->get();
+        
+        // Récupérer les chapitres du professeur (si besoin dans la vue)
+        $chapitres = $teacher->chapitres;
+        
+        return view('Teacher.Documents.index', compact('supports', 'chapitres'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
