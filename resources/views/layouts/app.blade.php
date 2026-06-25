@@ -293,8 +293,8 @@
             </div>
         </div>
         <!-- ============ Search UI End ============= -->
-        <script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script>
-        <script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
+        {{-- <script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script> --}}
+        {{-- <script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script> --}}
         <script src="{{ asset('assets/js/vendor/perfect-scrollbar.min.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/echarts.min.js') }}"></script>
 
@@ -305,7 +305,8 @@
         <script src="{{ asset('assets/js/es5/sidebar.large.script.min.js') }}"></script>
 
         <script src="{{ asset('assets/js/form.validation.script.js') }}"></script>
-
+            
+            
         {{-- <script src="assets/js/vendor/toastr.min.js"></script> --}}
         
         {{-- <script src="assets/js/toastr.script.js"></script> --}}

@@ -69,6 +69,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [StudentController::class, 'home'])->name('student-dash');
     Route::get('/calendrier', [StudentController::class, 'calendrier'])->name('student.calendrier');
     Route::get('/MesCours', [StudentController::class, 'mescours'])->name('student.mescours');
+    Route::get('/profile', [StudentController::class, 'profile'])->name('student.profile');
+    Route::put('/profile/update', [StudentController::class, 'updateProfile'])->name('student.profile.update');
     Route::get('/MesCours/{id}/chapitres', [StudentController::class, 'chapitrescours'])->name('student.chapitrescours');
     Route::get('/calendar-events', [StudentController::class, 'calendarlives'])->name('student.lives');
   

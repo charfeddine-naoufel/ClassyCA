@@ -11,6 +11,13 @@
                     
                     
                     <li class="nav-item" >
+                        <a class="nav-item-hold" href="{{route('student.profile')}}">
+                            <i class="nav-icon i-Administrator"></i>
+                            <span class="nav-text"><strong> Mon Profil</strong></span>
+                        </a>
+                        <div class="triangle"></div>
+                    </li>
+                    <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('student.mescours')}}">
                             <i class="nav-icon i-Computer-Secure"></i>
                             <span class="nav-text"><strong> Mes Cours</strong></span>
@@ -21,6 +28,20 @@
                         <a class="nav-item-hold" href="{{route('student.calendrier')}}">
                             <i class="nav-icon  i-Calendar-4"></i>
                             <span class="nav-text"> <strong>Mon calendrier</strong></span>
+                        </a>
+                        <div class="triangle"></div>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-item-hold" href="{{route('student.calendrier')}}">
+                            <i class="nav-icon i-Library"></i>
+                            <span class="nav-text"> <strong>Offres</strong></span>
+                        </a>
+                        <div class="triangle"></div>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-item-hold" href="{{route('student.calendrier')}}">
+                            <i class="nav-icon  i-Money"></i>
+                            <span class="nav-text"> <strong>Porte Monnaie</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>

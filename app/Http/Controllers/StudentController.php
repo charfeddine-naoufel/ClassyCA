@@ -106,6 +106,39 @@ class StudentController extends Controller
         return response()->json(['events'=>$events]);
 
     }
+
+    //mon profile
+    public function profile()
+{
+    $student = Student::with(['classe','group'])
+        ->where('user_id', Auth::id())
+        ->firstOrFail();
+
+    $payments = collect(); // collection vide
+
+    return view('Student.profile', compact('student', 'payments'));
+}
+
+public function updateProfile(Request $request)
+{
+    $student = Auth::user()->student;
+
+    $student->update([
+        'tel' => $request->tel,
+        'ville' => $request->ville,
+        'adresse' => $request->adresse,
+    ]);
+
+    if ($request->hasFile('photo')) {
+        $path = $request->file('photo')->store('students', 'public');
+        $student->photo = $path;
+        $student->save();
+    }
+
+    return redirect()
+        ->route('student.profile')
+        ->with('success', 'Profil mis à jour avec succès');
+}
     public function mescours()
     {
         $student = Auth::user()->student;
