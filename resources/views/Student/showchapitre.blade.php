@@ -118,15 +118,11 @@
                                 
                                                 <h5>{{ $support->nom }}</h5>
                                 
-                                                <a href="{{ asset('storage/'.$support->chemin) }}"
-                                                   target="_blank"
-                                                   class="btn btn-primary">
-                                
-                                                    <i class="i-File mr-1"></i>
-                                
-                                                    Ouvrir le cours
-                                
-                                                </a>
+                                                <a href="{{ $support->chemin }}"
+                                                    target="_blank"
+                                                    class="btn btn-primary">
+                                                     Ouvrir
+                                                 </a>
                                 
                                             </div>
                                 
@@ -231,13 +227,11 @@
                                 
                                                 </div>
                                 
-                                                <a href="{{ asset('storage/'.$support->chemin) }}"
-                                                   target="_blank"
-                                                   class="btn btn-success">
-                                
-                                                    Télécharger
-                                
-                                                </a>
+                                                <a href="{{ $support->chemin }}"
+                                                    target="_blank"
+                                                    class="btn btn-primary">
+                                                     Ouvrir
+                                                 </a>
                                 
                                             </div>
                                 
@@ -272,13 +266,11 @@
                                 
                                                 </div>
                                 
-                                                <a href="{{ asset('storage/'.$support->chemin) }}"
-                                                   target="_blank"
-                                                   class="btn btn-info">
-                                
-                                                    Ouvrir
-                                
-                                                </a>
+                                                <a href="{{ $support->chemin }}"
+                                                    target="_blank"
+                                                    class="btn btn-primary">
+                                                     Ouvrir
+                                                 </a>
                                 
                                             </div>
                                 
