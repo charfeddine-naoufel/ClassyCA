@@ -72,6 +72,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/profile', [StudentController::class, 'profile'])->name('student.profile');
     Route::put('/profile/update', [StudentController::class, 'updateProfile'])->name('student.profile.update');
     Route::get('/MesCours/{id}/chapitres', [StudentController::class, 'chapitrescours'])->name('student.chapitrescours');
+    Route::get('/MesCours/{cours}/chapitres/{chapitre}',[StudentController::class, 'showChapitre'])->name('student.chapitre.show');
     Route::get('/calendar-events', [StudentController::class, 'calendarlives'])->name('student.lives');
   
   });

@@ -74,167 +74,51 @@
                                     class="text-20 text-warning i-Reverbnation"></i><span class="heading text-info"> Prof :
                                 </span> {{ $course->teacher->nom_fr }} </h4>
 
-
-
-                            <ul class="nav nav-tabs" id="myIconTab" role="tablist">
+                            <div class="row mt-4 ">
                                 @foreach ($chapitres as $chapitre)
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ $loop->iteration == 1 ? 'active' : '' }} "
-                                            id="home-icon-tab{{ $loop->iteration }} " data-toggle="tab"
-                                            href="#homeIcon{{ $loop->iteration }}" role="tab"
-                                            aria-controls="homeIcon{{ $loop->iteration }}" aria-selected="true"><i
-                                                class="nav-icon i-Folder-Zip mr-1"></i>{{ $chapitre->titre }}</a>
-                                    </li>
-                                @endforeach
-                                <li class="nav-item">
-                                    <a class="nav-link t-font-boldest" id="contact-icon-tab" data-toggle="tab" href="#contactIcon" role="tab" aria-controls="contactIcon" aria-selected="false"><i class="nav-icon i-Home1 mr-1"></i> Documents</a>
-                                </li>
-                            </ul>
+                                <div class="col-lg-4 mb-3">
+                                    <div class="card card-body  ul-border__bottom">
+                                        <div class="text-center">
+                                            <h5 class="heading text-primary">chapitre: {{ $chapitre->titre }}</h5>
+                                            <p class="mb-3 text-muted">Description: {{ $chapitre->description ?? '-' }}</p>
 
-                            <div class="tab-content" id="myIconTabContent"
-                                style="border-left: 1px solid #993366;border-right: 1px solid #993366;border-bottom: 1px solid #993366;border-top: 1px solid #993366;">
-                                @foreach ($chapitres as $chapitre)
-                                    <div class="tab-pane fade {{ $loop->iteration == 1 ? 'active show' : '' }}"
-                                        id="homeIcon{{ $loop->iteration }}" role="tabpanel"
-                                        aria-labelledby="home-icon-tab{{ $loop->iteration }}">
-                                        <div class="row">
-                                            <!-- begin::main column -->
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <!-- begin::basic example -->
-                                                    <div class="col-lg-12 mb-3">
-                                                        <div class="card">
-                                                            <div class="card-header bg-transparent">
-                                                                <h3 class="card-title"> Séances</h3>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-10">
-                                                                        <div
-                                                                            style="height:70vh;"class="section   embed-responsive embed-responsive-21by9 ">
-                                                                            
-
-                                                                            <iframe 
-                                                                                id="player{{ $chapitre->id }}"
-                                                                                src="{{ asset('assets/images/cover.jpg') }}" 
-                                                                                width="560" 
-                                                                                height="315" 
-                                                                                frameborder="0" 
-                                                                                allow="autoplay; fullscreen; picture-in-picture" 
-                                                                                allowfullscreen>
-                                                                            </iframe>
-
-                                                                                
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-lg-2">
-                                                                        <div class="ul-product-detail__brand-name mb-4">
-                                                                            <h5 class="heading">Séances :</h5>
-
-                                                                        </div>
-
-
-
-
-                                                                        <div class="ul-product-detail__features mt-3">
-                                                                            <ul class="m-0 p-0">
-                                                                                @foreach ($chapitre->seances as $seance)
-                                                                                    <li>
-                                                                                        <i
-                                                                                            class="i-Right1 text-primary text-15 align-middle font-weight-700">
-                                                                                        </i>
-                                                                                        <a href="#"
-                                                                                            data-target="player{{ $chapitre->id }}"
-                                                                                            data-url="{{ $seance->url }}"
-                                                                                            class="accessvideo"><span
-                                                                                                class="align-middle">{{ $seance->titre }}</span></a>
-                                                                                    </li>
-                                                                                @endforeach
-
-                                                                            </ul>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                    <!-- end::basic example -->
-
-                                                    <!-- begin::documents -->
-                                                    {{-- <div class="col-lg-3 mb-3">
-                                                        <!-- navigation -->
-                                                    <div class="card  mb-3">
-                                                    <div class="card-header font-weight-bold dropdown-toggle" onClick="customToggle3()">Documents</div>
-                                                    <div class="card-body" id="custom-toggle3">
-
-
-                                                        <div class="list-group">
-                                                            <a href="#" class="list-group-item list-group-item-action active">
-                                                                <span class="custom-font"><i class="i-Add-Window">  </i></span>Télécharger Document
-                                                            </a>
-                                                            <a href="#" class="list-group-item list-group-item-action "><i class="i-Download-from-Cloud"> </i> Document 1</a>
-                                                            <a href="#" class="list-group-item list-group-item-action"><i class="i-Download-from-Cloud"> </i> Document 2</a>
-                                                            <a href="#" class="list-group-item list-group-item-action"><i class="i-Download-from-Cloud"> </i> Document 3</a>
-                                                            <a href="#" class="list-group-item list-group-item-action disabled"><i class="i-Download-from-Cloud"> </i> Document 4 </a>
-                                                        </div>
-                                                        <div class="mb-4"></div>
-                                                        
-                                                    </div>
-                                                </div>
-                                                <!-- end of navigation -->
-                                                </div> --}}
-                                                    <!-- end::documents -->
-                                                </div>
-                                                <!-- end of row -->
-
-
-                                            </div>
-                                            <!-- end::main-column -->
+                                            <a class="btn btn-primary " href="{{ route('student.chapitre.show', ['cours' => $course->id,'chapitre' => $chapitre->id]) }}" >
+                                                Consulter
+                                            </a>
                                         </div>
-                                    </div>
-                                @endforeach
-                                <div class="tab-pane fade" id="contactIcon" role="tabpanel" aria-labelledby="contact-icon-tab" >
-                                  <div class="row">
-                                      @foreach ( $chapitres as $chapitre )
-                                          
-                                     
-                                    <div class="col-md-3">
 
-                                        <div class="card mb-4">
-                                            <div class="card-header teal-600 text-purple-600">
-                                                 {{ $chapitre->titre }}
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">Téléchargement</h5>
-                                                
-                                                <ul class="list-group list-group-flush">
-                                                    @foreach ( $chapitre->supports as $document )
-                                                    <li class="list-group-item"><a href="{{$document->chemin}}" target="_blank"><i class="text-20 i-Download"></i> {{$document->nom}}</a> </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>     
+                                        
                                     </div>
-                                     @endforeach
-                                  </div>
                                 </div>
+                                @endforeach
+                                
                             </div>
-                        </div>
-                    </div>
 
+
+
+                        </div>
+                        <!-- end::documents -->
+                    </div>
+                    <!-- end of row -->
 
 
                 </div>
-        </section>
+                <!-- end::main-column -->
+            </div>
+    </div>
 
-        <!-- Footer Start -->
-        @include('layouts.footer')
-        <!-- fotter end -->
+
+    </div>
+    </div>
+
+
+
+    </div>
+    </section>
+
+    <!-- Footer Start -->
+    @include('layouts.footer')
+    <!-- fotter end -->
     </div>
 
 @endsection
@@ -244,8 +128,8 @@
         $(document).ready(function() {
             $('.accessvideo').on('click', function(e) {
                 e.preventDefault();
-                $('iframe').each(function(index){
-                    $(this).attr('src',$(this).attr('src'));
+                $('iframe').each(function(index) {
+                    $(this).attr('src', $(this).attr('src'));
                     return false;
                 })
                 var targetId = $(this).attr('data-target');

@@ -194,6 +194,47 @@ public function updateProfile(Request $request)
         abort(403, 'Vous n\'avez pas accès à ce cours car il n\'est pas destiné à votre classe.');
     }
 }
+public function showChapitre($coursId, $chapitreId)
+{
+    // Élève connecté
+    $student = Auth::user()->student;
+
+    if (!$student) {
+        abort(403, 'Vous n\'êtes pas autorisé à accéder à cette page.');
+    }
+
+    // Récupérer le cours
+    $course = Course::with('classe')->findOrFail($coursId);
+
+    // Vérifier que l'élève appartient à la classe du cours
+    if ($student->classe_id != $course->classe_id) {
+        abort(403, 'Vous n\'avez pas accès à ce cours.');
+    }
+
+    // Récupérer le chapitre avec ses vidéos et ses supports
+    $chapitre = Chapitre::with(['seances', 'supports'])
+        ->where('id', $chapitreId)
+        ->where('course_id', $coursId)
+        ->firstOrFail();
+
+    // Filtrer les supports
+    $cours = $chapitre->supports->where('type', 'cours')->values();
+
+    $series = $chapitre->supports->where('type', 'serie')->values();
+
+    $documents = $chapitre->supports
+        ->whereNotIn('type', ['cours', 'serie'])
+        ->values();
+
+    return view('Student.showchapitre', compact(
+        'student',
+        'course',
+        'chapitre',
+        'cours',
+        'series',
+        'documents'
+    ));
+}
     /**
      * Show the form for creating a new resource.
      */
