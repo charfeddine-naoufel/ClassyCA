@@ -67,9 +67,8 @@
 
                         <div class="card-body">
 
-                            <h4 class="card-title mb-3">
-                                {{ $chapitre->titre }}
-                            </h4>
+                            <h4 class="heading text-success">{{ $chapitre->titre }}</h4>
+                            
 
                             <ul class="nav nav-pills" id="myPillTab" role="tablist">
 

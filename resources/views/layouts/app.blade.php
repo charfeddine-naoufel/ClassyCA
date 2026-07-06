@@ -293,8 +293,9 @@
             </div>
         </div>
         <!-- ============ Search UI End ============= -->
-        {{-- <script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script> --}}
-        {{-- <script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script> --}}
+        <script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script> 
+         <script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
+
         <script src="{{ asset('assets/js/vendor/perfect-scrollbar.min.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/echarts.min.js') }}"></script>
 
@@ -336,7 +337,7 @@
             @endif
             </script>
         @yield('scripts')
-
+            
 </body>
 
 </html>

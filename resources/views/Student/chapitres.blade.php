@@ -75,22 +75,48 @@
                                 </span> {{ $course->teacher->nom_fr }} </h4>
 
                             <div class="row mt-4 ">
-                                @foreach ($chapitres as $chapitre)
+                                @php
+                                $colors = [
+                                    'primary',
+                                    'success',
+                                    'danger',
+                                    'warning',
+                                    'info',
+                                    'secondary',
+                                    'dark'
+                                ];
+                            @endphp
+                            
+                            @foreach ($chapitres as $chapitre)
+                            
+                                @php
+                                    $color = $colors[$loop->index % count($colors)];
+                                @endphp
+                            
                                 <div class="col-lg-4 mb-3">
-                                    <div class="card card-body  ul-border__bottom">
+                                    <div class="card card-body ul-border__bottom">
+                            
                                         <div class="text-center">
-                                            <h5 class="heading text-primary">chapitre: {{ $chapitre->titre }}</h5>
-                                            <p class="mb-3 text-muted">Description: {{ $chapitre->description ?? '-' }}</p>
-
-                                            <a class="btn btn-primary " href="{{ route('student.chapitre.show', ['cours' => $course->id,'chapitre' => $chapitre->id]) }}" >
+                            
+                                            <h5 class="heading text-{{ $color }}">
+                                                Chapitre : {{ $chapitre->titre }}
+                                            </h5>
+                            
+                                            <p class="mb-3 text-muted">
+                                                Description : {{ $chapitre->description ?? '-' }}
+                                            </p>
+                            
+                                            <a class="btn btn-outline-{{ $color }}"
+                                               href="{{ route('student.chapitre.show', ['cours' => $course->id, 'chapitre' => $chapitre->id]) }}">
                                                 Consulter
                                             </a>
+                            
                                         </div>
-
-                                        
+                            
                                     </div>
                                 </div>
-                                @endforeach
+                            
+                            @endforeach
                                 
                             </div>
 

@@ -310,12 +310,6 @@
 
 @endsection
 @section('scripts')
-<script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/calendar/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/calendar/moment.min.js') }}"></script>
 
-    <script src="{{ asset('assets/js/vendor/calendar/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/calendar.script.js') }}"></script>
 
 @endsection
