@@ -22,6 +22,39 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function home()
+{
+    $student = Auth::user()->student;
+    $courses = Course::with(['teacher'])
+    ->where('classe_id', $student->classe_id)
+    ->latest()
+    ->take(6)
+    ->get();
+    
+
+    $nbCours = $courses->count();
+
+    $nbChapitres = \App\Models\Chapitre::whereHas('course', function ($q) use ($student) {
+        $q->where('classe_id', $student->classe_id);
+    })->count();
+
+    $nbVideos = \App\Models\Seance::whereHas('chapitre.course', function ($q) use ($student) {
+        $q->where('classe_id', $student->classe_id);
+    })->count();
+
+    $nbDocuments = \App\Models\Support::whereHas('chapitre.course', function ($q) use ($student) {
+        $q->where('classe_id', $student->classe_id);
+    })->count();
+
+    return view('Student.home', compact(
+        'student',
+        'courses',
+        'nbCours',
+        'nbChapitres',
+        'nbVideos',
+        'nbDocuments'
+    ));
+}
     public function index()
     {
        $eleves=Student::all(); 
@@ -30,11 +63,11 @@ class StudentController extends Controller
 
       return view('Admin.Eleve.index',compact('eleves','groups','classes'));
     }
-     public function home()
-    {
-        $user = Auth::user();
-      return view('Student.home',compact('user'));
-    }
+    //  public function home()
+    // {
+    //     $user = Auth::user();
+    //   return view('Student.home',compact('user'));
+    // }
 
     public function updateGroup(Request $request, $id)
 {
@@ -234,6 +267,10 @@ public function showChapitre($coursId, $chapitreId)
         'series',
         'documents'
     ));
+}
+public function offres()
+{
+    return view('Student.offres');
 }
     /**
      * Show the form for creating a new resource.

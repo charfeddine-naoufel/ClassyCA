@@ -74,7 +74,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/MesCours/{id}/chapitres', [StudentController::class, 'chapitrescours'])->name('student.chapitrescours');
     Route::get('/MesCours/{cours}/chapitres/{chapitre}',[StudentController::class, 'showChapitre'])->name('student.chapitre.show');
     Route::get('/calendar-events', [StudentController::class, 'calendarlives'])->name('student.lives');
-  
+    Route::get('/offres', [StudentController::class, 'offres'])->name('student.offres');
   });
   // Teacher routes
   Route::middleware('teacher')->prefix('teacher')->group(function () {

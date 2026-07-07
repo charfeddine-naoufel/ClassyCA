@@ -31,10 +31,12 @@
                         </a>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item" >
-                        <a class="nav-item-hold" href="{{route('student.calendrier')}}">
+                    <li class="nav-item">
+                        <a class="nav-item-hold" href="{{ route('student.offres') }}">
                             <i class="nav-icon i-Library"></i>
-                            <span class="nav-text"> <strong>Offres</strong></span>
+                            <span class="nav-text">
+                                <strong>Offres</strong>
+                            </span>
                         </a>
                         <div class="triangle"></div>
                     </li>

@@ -60,6 +60,7 @@
         <div class="separator-breadcrumb border-top"></div>
 
         <section class="ul-contact-detail">
+            
             <div class="row">
                 <div class="col-lg-4 col-xl-4">
                     <div class="card">
@@ -145,27 +146,69 @@
                 </div>
                 <div class="col-lg-8 col-xl-8">
                     <!-- begin::basic-tab -->
-                    <div class="card mb-4 mt-4">
-                        <div class="card-header bg-transparent">Mon Profile</div>
-                        <div class="card-body">
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active show" id="nav-home-tab" data-toggle="tab"
-                                        href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Mes paiements</a>
-                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                        role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
-                                        href="#nav-contact" role="tab" aria-controls="nav-contact"
-                                        aria-selected="false">Editer Mes infos</a>
-                                </div>
-                            </nav>
-                            <div class="tab-content ul-tab__content" id="nav-tabContent">
-                                <div class="tab-pane fade active show" id="nav-home" role="tabpanel"
-                                    aria-labelledby="nav-home-tab">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
+                    <div class="card text-left">
 
-                                            <thead>
+                        <div class="card-body">
+                    
+                            <h4 class="card-title mb-3">
+                                Mon Profil
+                            </h4>
+                    
+                            <ul class="nav nav-tabs" id="myIconTab" role="tablist">
+                    
+                                <li class="nav-item">
+                                    <a class="nav-link active"
+                                        id="paiements-icon-tab"
+                                        data-toggle="tab"
+                                        href="#paiementsTab"
+                                        role="tab">
+                    
+                                        <i class="nav-icon i-Money-2 mr-1"></i>
+                                        Mes paiements
+                    
+                                    </a>
+                                </li>
+                    
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        id="profil-icon-tab"
+                                        data-toggle="tab"
+                                        href="#profilTab"
+                                        role="tab">
+                    
+                                        <i class="nav-icon i-MaleFemale mr-1"></i>
+                                        Mon Profil
+                    
+                                    </a>
+                                </li>
+                    
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        id="edit-icon-tab"
+                                        data-toggle="tab"
+                                        href="#editTab"
+                                        role="tab">
+                    
+                                        <i class="nav-icon i-Pen-2 mr-1"></i>
+                                        Modifier
+                    
+                                    </a>
+                                </li>
+                    
+                            </ul>
+                    
+                            <div class="tab-content pt-3" id="myIconTabContent">
+                    
+                                <!-- Paiements -->
+                                <div class="tab-pane fade show active"
+                                    id="paiementsTab"
+                                    role="tabpanel">
+                    
+                                    <div class="table-responsive">
+                    
+                                        <table class="table table-bordered table-hover">
+                    
+                                            <thead class="thead-light">
                                                 <tr>
                                                     <th>Date</th>
                                                     <th>Montant</th>
@@ -174,129 +217,160 @@
                                                     <th>Statut</th>
                                                 </tr>
                                             </thead>
-
+                    
                                             <tbody>
-
+                    
                                                 @forelse($payments as $payment)
+                    
                                                     <tr>
+                    
                                                         <td>{{ $payment->created_at->format('d/m/Y') }}</td>
+                    
                                                         <td>{{ $payment->montant }} DT</td>
+                    
                                                         <td>{{ $payment->mois }}</td>
+                    
                                                         <td>{{ $payment->mode_paiement }}</td>
-
+                    
                                                         <td>
                                                             <span class="badge badge-success">
                                                                 Payé
                                                             </span>
                                                         </td>
+                    
                                                     </tr>
-
+                    
                                                 @empty
-
+                    
                                                     <tr>
                                                         <td colspan="5" class="text-center">
-                                                            Aucun paiement enregistré
+                                                            Aucun paiement enregistré.
                                                         </td>
                                                     </tr>
+                    
                                                 @endforelse
-
+                    
                                             </tbody>
-
+                    
                                         </table>
+                    
                                     </div>
+                    
                                 </div>
-                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                    aria-labelledby="nav-profile-tab">
+                    
+                                <!-- Profil -->
+                                <div class="tab-pane fade"
+                                    id="profilTab"
+                                    role="tabpanel">
+                    
                                     <div class="row">
-
+                    
                                         <div class="col-md-6">
-
+                    
                                             <div class="ul-contact-detail__inner-profile">
                                                 <h4>Nom</h4>
                                                 <span>{{ $student->nom_fr }}</span>
                                             </div>
-
+                    
                                             <div class="ul-contact-detail__inner-profile">
                                                 <h4>Prénom</h4>
                                                 <span>{{ $student->prenom_fr }}</span>
                                             </div>
-
+                    
                                             <div class="ul-contact-detail__inner-profile">
                                                 <h4>Email</h4>
                                                 <span>{{ $student->email }}</span>
                                             </div>
-
+                    
                                             <div class="ul-contact-detail__inner-profile">
                                                 <h4>Téléphone</h4>
                                                 <span>{{ $student->tel }}</span>
                                             </div>
-
+                    
                                         </div>
-
+                    
                                         <div class="col-md-6">
-
+                    
                                             <div class="ul-contact-detail__inner-profile">
                                                 <h4>Ville</h4>
                                                 <span>{{ $student->ville }}</span>
                                             </div>
-
+                    
                                             <div class="ul-contact-detail__inner-profile">
                                                 <h4>Adresse</h4>
                                                 <span>{{ $student->adresse ?? '-' }}</span>
                                             </div>
-
+                    
                                             <div class="ul-contact-detail__inner-profile">
                                                 <h4>Classe</h4>
                                                 <span>{{ $student->classe->slug ?? '-' }}</span>
                                             </div>
-
+                    
                                             <div class="ul-contact-detail__inner-profile">
                                                 <h4>Groupe</h4>
                                                 <span>{{ $student->group->nomg ?? '-' }}</span>
                                             </div>
-
+                    
                                         </div>
-
+                    
                                     </div>
+                    
                                 </div>
-                                <div class="tab-pane fade" id="nav-contact" role="tabpanel"
-                                    aria-labelledby="nav-contact-tab">
-                                    <form method="POST" action="{{ route('student.profile.update') }}"
+                    
+                                <!-- Modifier -->
+                                <div class="tab-pane fade"
+                                    id="editTab"
+                                    role="tabpanel">
+                    
+                                    <form method="POST"
+                                        action="{{ route('student.profile.update') }}"
                                         enctype="multipart/form-data">
-
+                    
                                         @csrf
                                         @method('PUT')
-
+                    
                                         <div class="form-group">
                                             <label>Téléphone</label>
-                                            <input type="text" class="form-control" name="tel"
+                                            <input type="text"
+                                                class="form-control"
+                                                name="tel"
                                                 value="{{ $student->tel }}">
                                         </div>
-
+                    
                                         <div class="form-group">
                                             <label>Ville</label>
-                                            <input type="text" class="form-control" name="ville"
+                                            <input type="text"
+                                                class="form-control"
+                                                name="ville"
                                                 value="{{ $student->ville }}">
                                         </div>
-
+                    
                                         <div class="form-group">
                                             <label>Adresse</label>
-                                            <textarea class="form-control" name="adresse">{{ $student->adresse }}</textarea>
+                                            <textarea class="form-control"
+                                                name="adresse">{{ $student->adresse }}</textarea>
                                         </div>
-
+                    
                                         <div class="form-group">
                                             <label>Photo</label>
-                                            <input type="file" class="form-control" name="photo">
+                                            <input type="file"
+                                                class="form-control"
+                                                name="photo">
                                         </div>
-
+                    
                                         <button class="btn btn-primary">
-                                            Enregistrer
+                                            <i class="i-Yes mr-1"></i>
+                                            Enregistrer les modifications
                                         </button>
-
+                    
                                     </form>
+                    
                                 </div>
+                    
                             </div>
+                    
                         </div>
+                    
                     </div>
                     <!-- end::basic-tab -->
                 </div>
@@ -310,6 +384,7 @@
 
 @endsection
 @section('scripts')
-
+{{-- <script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script> 
+<script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script> --}}
 
 @endsection
