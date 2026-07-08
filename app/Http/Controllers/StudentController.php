@@ -14,6 +14,7 @@ use App\Models\Course;
 use App\Models\Chapitre;
 use App\Models\Live;
 use App\Models\User;
+use App\Models\Offre;
 use Auth;
 use Jubaer\Zoom\Facades\Zoom;
 
@@ -268,9 +269,13 @@ public function showChapitre($coursId, $chapitreId)
         'documents'
     ));
 }
+
+
 public function offres()
 {
-    return view('Student.offres');
+    $offres = Offre::orderBy('id')->get();
+
+    return view('Student.offres', compact('offres'));
 }
     /**
      * Show the form for creating a new resource.

@@ -12,109 +12,108 @@
 
     <div class="separator-breadcrumb border-top"></div>
 
+    @php
+
+        $colors = [
+            'secondary',
+            'primary',
+            'warning',
+            'success',
+            'danger',
+            'info'
+        ];
+
+    @endphp
+
     <div class="row">
 
-        <!-- Offre Bronze -->
-        <div class="col-lg-4">
+        @forelse($offres as $offre)
 
-            <div class="card text-center shadow mb-4">
+            @php
+                $color = $colors[$loop->index % count($colors)];
+            @endphp
 
-                <div class="card-header bg-secondary text-white">
-                    <h3 class="text-white">Seme7</h3>
-                </div>
+            <div class="col-lg-4 mb-4">
 
-                <div class="card-body">
+                <div class="card text-center shadow h-100">
 
-                    <h1 class="display-4">
-                        20 DT
-                    </h1>
+                    <div class="card-header bg-{{ $color }}">
 
-                    <p>/ mois</p>
+                        <h3 class="text-white">
 
-                    <hr>
+                            {{ $offre->nom_off }}
 
-                    <p>✔ Accès aux cours</p>
-                    <p>✔ Documents PDF</p>
-                    <p>✖ Vidéos HD</p>
-                    <p>✖ Séries corrigées</p>
+                        </h3>
 
-                    <button class="btn btn-secondary btn-block">
-                        Choisir
-                    </button>
+                    </div>
 
-                </div>
+                    <div class="card-body">
 
-            </div>
+                        <h5 class="text-muted">
 
-        </div>
+                            Offre {{ $loop->iteration }}
 
-        <!-- Offre Silver -->
-        <div class="col-lg-4">
+                        </h5>
 
-            <div class="card text-center shadow-lg border-primary mb-4">
+                        <hr>
 
-                <div class="card-header bg-primary text-white">
-                    <h3 class="text-white">Seme7 Pro</h3>
-                </div>
+                        <p>
 
-                <div class="card-body">
+                            {!! nl2br(e($offre->descr_off)) !!}
 
-                    <h1 class="display-4">
-                        35 DT
-                    </h1>
+                        </p>
 
-                    <p>/ mois</p>
+                        <hr>
 
-                    <hr>
+                        @if($offre->date_deb)
 
-                    <p>✔ Accès aux cours</p>
-                    <p>✔ Vidéos HD</p>
-                    <p>✔ Documents PDF</p>
-                    <p>✔ Séries corrigées</p>
+                            <p>
 
-                    <button class="btn btn-primary btn-block">
-                        Choisir
-                    </button>
+                                <strong>Début :</strong>
 
-                </div>
+                                {{ \Carbon\Carbon::parse($offre->date_deb)->format('d/m/Y') }}
 
-            </div>
+                            </p>
 
-        </div>
+                        @endif
 
-        <!-- Offre Gold -->
-        <div class="col-lg-4">
+                        @if($offre->date_fin)
 
-            <div class="card text-center shadow mb-4">
+                            <p>
 
-                <div class="card-header bg-warning text-white">
-                    <h3 class="text-white">Seme7 Pro Max</h3>
-                </div>
+                                <strong>Fin :</strong>
 
-                <div class="card-body">
+                                {{ \Carbon\Carbon::parse($offre->date_fin)->format('d/m/Y') }}
 
-                    <h1 class="display-4">
-                        50 DT
-                    </h1>
+                            </p>
 
-                    <p>/ mois</p>
+                        @endif
 
-                    <hr>
+                        <button class="btn btn-{{ $color }} btn-block">
 
-                    <p>✔ Tous les cours</p>
-                    <p>✔ Toutes les vidéos</p>
-                    <p>✔ Tous les documents</p>
-                    <p>✔ Assistance prioritaire</p>
+                            Choisir cette offre
 
-                    <button class="btn btn-warning btn-block">
-                        Choisir
-                    </button>
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+        @empty
+
+            <div class="col-12">
+
+                <div class="alert alert-warning">
+
+                    Aucune offre disponible.
+
+                </div>
+
+            </div>
+
+        @endforelse
 
     </div>
 
