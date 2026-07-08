@@ -11,7 +11,7 @@
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('matieres.index')}}">
                             <i class="nav-icon i-Library"></i>
-                            <span class="nav-text"><strong>Matiere</strong></span>
+                            <span class="nav-text"><strong>Matieres</strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -25,7 +25,7 @@
                     <li class="nav-item" >
                         <a class="nav-item-hold" href="{{route('payments.index')}}">
                             <i class="nav-icon  i-Billing"></i>
-                            <span class="nav-text"><strong>Payements</strong></span>
+                            <span class="nav-text"><strong>Paiements </strong></span>
                         </a>
                         <div class="triangle"></div>
                     </li>

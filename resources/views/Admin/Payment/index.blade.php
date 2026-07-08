@@ -51,8 +51,18 @@
                                         <td><strong>{{$payment->student->nom_fr}} {{$payment->student->prenom_fr}} </strong></td>
                                         <td>
                                             <strong>
+                                                @if($payment->student && $payment->student->classe && $payment->student->group)
 
-                                                {{$payment->student->classe->slug}}-{{$payment->student->group->nomg}}
+                                                    {{ $payment->student->classe->slug }}
+                                                    -
+                                                    {{ $payment->student->group->nomg }}
+
+                                                @else
+
+                                                    Non affecté
+
+                                                @endif
+
                                             </strong>
 
                                         </td>

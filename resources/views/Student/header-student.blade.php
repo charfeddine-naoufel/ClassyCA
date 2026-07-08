@@ -2,7 +2,7 @@
             <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
                 <ul class="navigation-left">
                     <li class="nav-item active" >
-                        <a class="nav-item-hold" href="#">
+                        <a class="nav-item-hold" href="{{route('student-dash')}}">
                             <i class="nav-icon i-Bar-Chart"></i>
                             <span class="nav-text"><strong>Dashboard <br> Elève</strong></span>
                         </a>
