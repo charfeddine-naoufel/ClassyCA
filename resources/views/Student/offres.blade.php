@@ -35,7 +35,7 @@
 
             <div class="col-lg-4 mb-4">
 
-                <div class="card text-center shadow h-100">
+                <div class="card rounded text-center shadow h-100">
 
                     <div class="card-header bg-{{ $color }}">
 
@@ -51,7 +51,7 @@
 
                         <h5 class="text-muted">
 
-                            Offre {{ $loop->iteration }}
+                            
 
                         </h5>
 

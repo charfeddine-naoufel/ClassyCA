@@ -15,6 +15,7 @@ use App\Models\Chapitre;
 use App\Models\Live;
 use App\Models\User;
 use App\Models\Offre;
+use App\Models\Payment;
 use Auth;
 use Jubaer\Zoom\Facades\Zoom;
 
@@ -218,8 +219,8 @@ public function updateProfile(Request $request)
     if ($student->classe_id == $course->classe_id) {
         // L'élève est dans la bonne classe, on lui donne accès à tous les chapitres
         $chapitres = Chapitre::where('course_id', $id)
+            ->orderBy('created_at')
             ->orderBy('trimestre')
-            ->orderBy('titre')
             ->get();
         // dd($chapitres);
         return view('Student.chapitres', compact('chapitres', 'course'));
@@ -479,7 +480,19 @@ public function toggleStatus($id)
     
     return response()->json(['success' => false], 404);
 }
-    
+public function porteMonnaie()
+{
+    $student = Auth::user()->student;
+
+    $payments = Payment::where('student_id', $student->id)
+                ->latest()
+                ->get();
+
+    return view('Student.portemonnaie', compact(
+        'student',
+        'payments'
+    ));
+}   
 
     /**
      * Remove the specified resource from storage.

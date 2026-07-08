@@ -106,8 +106,7 @@
                                                 Description : {{ $chapitre->description ?? '-' }}
                                             </p>
                             
-                                            <a class="btn btn-outline-{{ $color }}"
-                                               href="{{ route('student.chapitre.show', ['cours' => $course->id, 'chapitre' => $chapitre->id]) }}">
+                                            <a class="btn btn-{{ $color }}" href="{{ route('student.chapitre.show', ['cours' => $course->id, 'chapitre' => $chapitre->id]) }}">
                                                 Consulter
                                             </a>
                             

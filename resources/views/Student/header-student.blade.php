@@ -40,10 +40,12 @@
                         </a>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item" >
-                        <a class="nav-item-hold" href="{{route('student.calendrier')}}">
-                            <i class="nav-icon  i-Money"></i>
-                            <span class="nav-text"> <strong>Porte Monnaie</strong></span>
+                    <li class="nav-item">
+                        <a class="nav-item-hold" href="{{ route('student.portemonnaie') }}">
+                            <i class="nav-icon i-Money"></i>
+                            <span class="nav-text">
+                                <strong>Porte Monnaie</strong>
+                            </span>
                         </a>
                         <div class="triangle"></div>
                     </li>
