@@ -15,12 +15,13 @@
     @php
 
         $colors = [
-            'secondary',
+            
             'primary',
             'warning',
             'success',
             'danger',
-            'info'
+            'info',
+            'secondary'
         ];
 
     @endphp
@@ -32,37 +33,12 @@
             @php
                 $color = $colors[$loop->index % count($colors)];
             @endphp
-
-            <div class="col-lg-4 mb-4">
-
-                <div class="card rounded text-center shadow h-100">
-
-                    <div class="card-header bg-{{ $color }}">
-
-                        <h3 class="text-white">
-
-                            {{ $offre->nom_off }}
-
-                        </h3>
-
-                    </div>
-
+            {{-- card --}}
+            <div class="col-lg-4  mt-3">
+                <div class="card text-center shadow h-100">
+                    <img class="d-block w-100 rounded rounded" src="{{ asset("assets/images/packs/{$offre->nom_off}.jpg") }}" alt="First slide">
                     <div class="card-body">
-
-                        <h5 class="text-muted">
-
-                            
-
-                        </h5>
-
-                        <hr>
-
-                        <p>
-
-                            {!! nl2br(e($offre->descr_off)) !!}
-
-                        </p>
-
+                        <h5 class="card-title mb-2">{!! nl2br(e($offre->descr_off)) !!}</h5>
                         <hr>
 
                         @if($offre->date_deb)
@@ -88,18 +64,17 @@
                             </p>
 
                         @endif
-
-                        <button class="btn btn-{{ $color }} btn-block">
+                        <button class="btn btn-{{ $color }} btn-block btn-rounded">
 
                             Choisir cette offre
 
                         </button>
 
                     </div>
-
                 </div>
-
             </div>
+            {{-- card --}}
+            
 
         @empty
 
