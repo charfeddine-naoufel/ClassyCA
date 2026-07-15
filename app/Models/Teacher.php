@@ -26,9 +26,10 @@ class Teacher extends Model
     {
         return $this->hasOne(Matiere::class);
     }
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
-       }
+    }
 
     public function courses()
     {

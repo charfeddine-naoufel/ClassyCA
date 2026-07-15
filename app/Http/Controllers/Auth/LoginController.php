@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Student;
+use App\Models\Teacher;
 
 class LoginController extends Controller
 {
@@ -41,36 +43,77 @@ class LoginController extends Controller
     }
 
     protected function login(Request $request)
-    {
-    //   dd($request->input('password'));
-      $credentials = $request -> validate([
-        'email' =>'required|email',
-        'password' =>'required'
-      ]);
+{
+    $request->validate([
+        'login' => 'required',
+        'password' => 'required',
+    ]);
 
-      if (Auth::attempt($credentials))
-      {
-          $user = Auth::user()->role;
-        //   dd($user);
-          switch($user)
-          {
-            case 'admin':
-              return redirect('/admin');break;
-            case 'student':
-              return redirect('/student');break;
-            case 'teacher':
-              return redirect('/teacher');break;
-            default:
+    $login = trim($request->login);
 
-              Auth::logout();
-              return redirect('/login')->with('error',"Erreur d'authentification");
+    // Cas 1 : Email
+    if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
 
+        $credentials = [
+            'email' => $login,
+            'password' => $request->password,
+        ];
 
-          }
-      }
-      else
-        {
-          return redirect('/login');
+    } else {
+
+        // Cas 2 : Téléphone
+
+        $student = Student::where('tel', $login)->first();
+        $teacher = Teacher::where('tel', $login)->first();
+
+        if ($student) {
+
+            $credentials = [
+                'email' => $student->user->email,
+                'password' => $request->password,
+            ];
+
+        } elseif ($teacher) {
+
+            $credentials = [
+                'email' => $teacher->user->email,
+                'password' => $request->password,
+            ];
+
+        } else {
+
+            return back()
+                ->withInput()
+                ->with('error', 'Téléphone ou email introuvable.');
+
         }
-      }
+    }
+
+    if (Auth::attempt($credentials)) {
+
+        $request->session()->regenerate();
+
+        switch (Auth::user()->role) {
+
+            case 'admin':
+                return redirect('/admin');
+
+            case 'student':
+                return redirect('/student');
+
+            case 'teacher':
+                return redirect('/teacher');
+
+            default:
+                Auth::logout();
+
+                return redirect('/login')
+                    ->with('error', "Erreur d'authentification");
+        }
+    }
+
+    return back()
+        ->withInput()
+        ->with('error', 'Mot de passe incorrect.');
+}
 }
