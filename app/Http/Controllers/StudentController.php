@@ -251,14 +251,14 @@ public function showChapitre($coursId, $chapitreId)
         ->where('id', $chapitreId)
         ->where('course_id', $coursId)
         ->firstOrFail();
-
+        
     // Filtrer les supports
-    $cours = $chapitre->supports->where('type', 'cours')->values();
+    $cours = $chapitre->supports->where('type', 'Cours')->values();
 
-    $series = $chapitre->supports->where('type', 'serie')->values();
+    $series = $chapitre->supports->where('type', "Série d'exercices")->values();
 
     $documents = $chapitre->supports
-        ->whereNotIn('type', ['cours', 'serie'])
+        ->whereNotIn('type', ['cours', "Série d'exercices"])
         ->values();
 
     return view('Student.showchapitre', compact(
@@ -283,7 +283,7 @@ public function offres()
      */
     public function create()
     {
-        //
+        return view('auth.register');
     }
 
     /**

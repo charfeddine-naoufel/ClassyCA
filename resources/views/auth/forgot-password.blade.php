@@ -29,12 +29,13 @@
                                 </div>
                             @endif
 
-                            <form action="">
+                            <form method="POST" action="{{ route('password.email') }}">
+                                @csrf
                                 <div class="form-group">
                                     <label for="email">Adresse Email</label>
-                                    <input id="email" class="form-control form-control-rounded" type="email">
+                                    <input id="email" name="email" class="form-control form-control-rounded" type="email">
                                 </div>
-                                <button class="btn btn-primary btn-block btn-rounded mt-3">Reset Password</button>
+                                <button class="btn btn-primary btn-block btn-rounded mt-3">Initialiser</button>
 
                             </form>
 

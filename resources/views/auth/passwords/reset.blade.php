@@ -1,65 +1,69 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en" dir="">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/css/themes/lite-purple.min.css">
+</head>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+<body class="text-left">
+    <div class="auth-layout-wrap"
+        style="background-image: url({{ asset('assets/images/bgback.jpg') }});background-size:cover">
+        {{-- <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/back.jpg')}});background-size:cover"> --}}
+        <div class="auth-content">
+            <div class="card o-hidden " style="box-shadow: 4px 7px 24px -4px rgba(252, 250, 250, 0.62);">
+                <div class="row">
+                    <div class="col-md-6" style="background-size: cover;background-image: url(./assets/images/bgr.jpg)">
+                        <div class="p-4">
+                            <div class="auth-logo text-center mb-4">
+                                <img src="{{ asset('assets/images/logo.png') }}" alt="">
                             </div>
+                            <h1 class="mb-3 text-18">S'identifier </h1>
+                            @if (Session::has('error'))
+                                <div class="alert alert-danger">
+                                    {{ Session::get('error') }}
+                                </div>
+                            @endif
+
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input id="email" class="form-control form-control-rounded" type="email">
+                                </div>
+                                <button class="btn btn-primary btn-block btn-rounded mt-3">Reset Password</button>
+
+                            </form>
+
+                            
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                    </div>
+                    <div class="col-md-6 text-center "
+                        style="background-size: cover;background-image: url(./assets/images/bgr.jpg)">
+                        <div class="pr-3 auth-right">
+                            <a class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text"
+                                href="#">
+                                <i class="i-Mail-with-At-Sign"></i> Sign up avec Email
+                            </a>
+                            <a class="btn btn-rounded btn-outline-google btn-block btn-icon-text">
+                                <i class="i-Google-Plus"></i> Sign up avec Google
+                            </a>
+                            <a class="btn btn-rounded btn-block btn-icon-text btn-outline-facebook">
+                                <i class="i-Facebook-2"></i> Sign up avec Facebook
+                            </a>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+    <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/es5/script.min.js"></script>
+</body>
+
+</html>

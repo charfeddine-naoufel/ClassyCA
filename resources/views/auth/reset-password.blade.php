@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/styles/css/themes/lite-purple.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/styles/css/themes/lite-purple.min.css') }}">
 </head>
 
 <body class="text-left">
@@ -22,25 +22,33 @@
                             <div class="auth-logo text-center mb-4">
                                 <img src="{{ asset('assets/images/logo.png') }}" alt="">
                             </div>
-                            <h1 class="mb-3 text-18">Initialiser Mot de Passe </h1>
+                            <h1 class="mb-3 text-18">Nouveau mot de passe </h1>
                             @if (Session::has('error'))
                                 <div class="alert alert-danger">
                                     {{ Session::get('error') }}
                                 </div>
                             @endif
 
-                            <form action="">
+                            <form method="POST" action="{{ route('password.update') }}">
+
+                                @csrf
+                                <input type="hidden" name="token" value="{{ $token }}">
+                                <input type="hidden" name="email" value="{{ $email }}">
                                 <div class="form-group">
-                                    <label for="email">Adresse Email</label>
-                                    <input id="email" class="form-control form-control-rounded" type="email">
+                                    <label for="Password">Nouveau mot de passe</label>
+                                    <input id="password" name="password" class="form-control form-control-rounded"
+                                        type="password">
                                 </div>
-                                <button class="btn btn-primary btn-block btn-rounded mt-3">Reset Password</button>
+                                <div class="form-group">
+                                    <label for="password_confirmation">Nouveau mot de passe</label>
+                                    <input id="password_confirmation" name="password_confirmation" class="form-control form-control-rounded"
+                                        type="password">
+                                </div>
+                                <button class="btn btn-primary btn-block btn-rounded mt-3">Modifier</button>
 
                             </form>
 
-                            <div class="mt-3 text-center">
-                                <a class="text-muted" href="{{ route('login') }}"><u>Se connecter</u></a>
-                            </div>
+
                         </div>
                     </div>
                     <div class="col-md-6 text-center "

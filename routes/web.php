@@ -15,6 +15,10 @@ use App\Http\Controllers\LiveController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 /*
@@ -31,15 +35,41 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/logout', [LoginController::class, 'logout'])
+    ->name('logout');
 Route::post('/eleves', [StudentController::class,'store'])->name('eleves.registerEl');
-Auth::routes();
+Route::middleware('guest')->group(function () {
+
+  // Login
+  Route::get('/login', [LoginController::class, 'showLoginForm'])
+  ->name('login');
+
+Route::post('/login', [LoginController::class, 'login']);
+
+// Register (uniquement si tu as une page d'inscription)
+ Route::get('/register', [StudentController::class, 'create'])
+   ->name('register');
+
+  //Route::post('/register', [StudentController::class, 'store']);
+  Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
+      ->name('password.request');
+
+  Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+      ->name('password.email');
+
+  Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])
+      ->name('password.reset');
+
+  Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
+      ->name('password.update');
+});
 Route::post('/session/renew', function () {
   // Juste toucher la session pour la renouveler
   session()->reflash();
   return response()->json(['status' => 'ok']);
 })->name('session.renew')->middleware('auth');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+// Auth::routes();
 // middleware routes
 // Admin routes
 Route::middleware('admin')->prefix('admin')->group(function () {
@@ -75,7 +105,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/MesCours/{cours}/chapitres/{chapitre}',[StudentController::class, 'showChapitre'])->name('student.chapitre.show');
     Route::get('/calendar-events', [StudentController::class, 'calendarlives'])->name('student.lives');
     Route::get('/offres', [StudentController::class, 'offres'])->name('student.offres');
-    Route::get('/porte-monnaie', [StudentController::class, 'porteMonnaie'])->name('student.portemonnaie');
+    Route::get('
+    /porte-monnaie', [StudentController::class, 'porteMonnaie'])->name('student.portemonnaie');
   });
   // Teacher routes
   Route::middleware('teacher')->prefix('teacher')->group(function () {
