@@ -254,20 +254,25 @@ public function showChapitre($coursId, $chapitreId)
         
     // Filtrer les supports
     $cours = $chapitre->supports->where('type', 'Cours')->values();
+    
 
     $series = $chapitre->supports->where('type', "Série d'exercices")->values();
 
-    $documents = $chapitre->supports
-        ->whereNotIn('type', ['cours', "Série d'exercices"])
-        ->values();
+    $videos = $chapitre->seances->values();
+    
 
+    $documents = $chapitre->supports
+        ->whereNotIn('type', ['Cours', "Série d'exercices"])
+        ->values();
+        
     return view('Student.showchapitre', compact(
         'student',
         'course',
         'chapitre',
         'cours',
         'series',
-        'documents'
+        'documents',
+        'videos'
     ));
 }
 

@@ -136,8 +136,7 @@
                                     
                                     <option value="Cours">Cours</option>
                                     <option value="Série d'exercices">Série d'exercices</option>
-                                    <option value="Résumé">Résumé</option>
-                                    <option value="Devoir">Devoir</option>
+                                    
                                     <option value="Autres">Autres</option>
                                         
                                    
