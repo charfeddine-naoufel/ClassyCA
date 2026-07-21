@@ -80,7 +80,7 @@
                                                         <a href="{{ $support->chemin }}"
                                                             target="_blank"
                                                             class="btn ">
-                                                        <i class="i-Folder-Download text-primary "></i>
+                                                        <i class="i-Download text-primary "></i>
                                                         </a>
                                                     </div>
                                                     <div class="ul-widget__content">
