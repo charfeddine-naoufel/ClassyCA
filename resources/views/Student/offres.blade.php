@@ -1,97 +1,77 @@
 @extends('layouts.app')
 
-@section('title','Nos Offres')
+@section('title', 'Nos Offres')
 
 @section('content')
+    <div class="main-content-wrap sidenav-open d-flex flex-column">
+        <div class="main-content">
+            <div class="breadcrumb">
+                <h1>Pricing Table</h1>
+                <ul>
+                    <li><a href="">Pages</a></li>
+                    <li>Pricing Table</li>
+                </ul>
+            </div>
 
-<div class="main-content-wrap sidenav-open d-flex flex-column">
+            <div class="separator-breadcrumb border-top"></div>
 
-    <div class="breadcrumb">
-        <h1>Nos Offres</h1>
-    </div>
+            <section class="ul-pricing-table">
+                <div class="row">
+                    <div class="col-lg-12 col-xl-12">
 
-    <div class="separator-breadcrumb border-top"></div>
 
-    @php
 
-        $colors = [
-            
-            'primary',
-            'warning',
-            'success',
-            'danger',
-            'info',
-            'secondary'
-        ];
+                        <div class="card">
+                            <div class="card-header bg-transparent">
+                                <h5>Nos Offres</h5>
+                            </div>
+                            <div class="card-body mb-4">
+                                <div class="row">
+                                    <div class="col-md-4 mt-3">
+                                        <div class="card bg-dark text-white o-hidden mb-4">
+                                            <img class="card-img" src="{{asset('assets/images/packs/p1.jpeg')}}" alt="Card image">
 
-    @endphp
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <div class="card bg-dark text-white o-hidden mb-4">
+                                            <img class="card-img" src="{{asset('assets/images/packs/p4.jpeg')}}" alt="Card image">
 
-    <div class="row">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <div class="card bg-dark text-white o-hidden mb-4">
+                                            <img class="card-img" src="{{asset('assets/images/packs/p3.jpeg')}}" alt="Card image">
 
-        @forelse($offres as $offre)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <div class="card bg-dark text-white o-hidden mb-4">
+                                            <img class="card-img" src="{{asset('assets/images/packs/p2.jpeg')}}" alt="Card image">
 
-            @php
-                $color = $colors[$loop->index % count($colors)];
-            @endphp
-            {{-- card --}}
-            <div class="col-lg-4  mt-3">
-                <div class="card text-center shadow h-100">
-                    <img class="d-block w-100 rounded rounded" src="{{ asset("assets/images/packs/{$offre->nom_off}.jpg") }}" alt="First slide">
-                    <div class="card-body">
-                        <h5 class="card-title mb-2">{!! nl2br(e($offre->descr_off)) !!}</h5>
-                        <hr>
+                                        </div>
+                                    </div>
+                                    
 
-                        @if($offre->date_deb)
 
-                            <p>
 
-                                <strong>Début :</strong>
+                                </div>
+                            </div>
+                        </div>
 
-                                {{ \Carbon\Carbon::parse($offre->date_deb)->format('d/m/Y') }}
-
-                            </p>
-
-                        @endif
-
-                        @if($offre->date_fin)
-
-                            <p>
-
-                                <strong>Fin :</strong>
-
-                                {{ \Carbon\Carbon::parse($offre->date_fin)->format('d/m/Y') }}
-
-                            </p>
-
-                        @endif
-                        <button class="btn btn-{{ $color }} btn-block btn-rounded">
-
-                            Choisir cette offre
-
-                        </button>
 
                     </div>
                 </div>
-            </div>
-            {{-- card --}}
-            
 
-        @empty
+            </section>
 
-            <div class="col-12">
+            <!-- content goes here -->
 
-                <div class="alert alert-warning">
 
-                    Aucune offre disponible.
+        </div>
+        <!-- end of main content -->
 
-                </div>
-
-            </div>
-
-        @endforelse
-
+        
     </div>
-
-</div>
 
 @endsection
