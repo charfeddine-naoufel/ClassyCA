@@ -174,21 +174,23 @@ public function updateProfile(Request $request)
         ->route('student.profile')
         ->with('success', 'Profil mis à jour avec succès');
 }
-    public function mescours()
-    {
-        $student = Auth::user()->student;
-        
-        $courses = Course::where('classe_id', $student->classe_id)
-                        //  ->Where('group_id', $student->group_id) 
-                         ->get()
-                         ->unique('teacher_id');
-        
-        if ($student->status == 1) {
-            return view('Student.mescours', compact('courses'));
-        } else {
-            return view('Student.mescoursNotPaid');
-        }
+public function mescours()
+{
+    $student = Auth::user()->student;
+
+    if ($student->status != 1) {
+        return view('Student.mescoursNotPaid');
     }
+
+    $courses = Course::with(['teacher', 'matiere'])
+    ->where('classe_id', $student->classe_id)
+    ->where(function ($query) use ($student) {
+        $query->where('group_id', $student->group_id)
+              ->orWhereNull('group_id');
+    })
+    ->get();
+    return view('Student.mescours', compact('courses'));
+}
     // public function chapitrescours($id)
     // {
         

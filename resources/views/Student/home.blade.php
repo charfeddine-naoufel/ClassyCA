@@ -762,6 +762,9 @@
                             <div class="row">
                         
                                 @forelse($courses as $course)
+                                @php
+                                    $chapitre = $course->chapitres->first();
+                                @endphp
                         
                                     <div class="col-xl-3 col-lg-3 col-md-6 mb-4">
                         
@@ -785,7 +788,7 @@
                                             @endif
                         
                                             {{-- Corps --}}
-                                            <div class="card-body">
+                                            {{-- <div class="card-body">
                         
                                                 <h5 class="card-title text-primary">
                         
@@ -799,10 +802,17 @@
                         
                                                 </p>
                         
-                                            </div>
+                                            </div> --}}
                         
                                             {{-- Informations --}}
                                             <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <i class="i-Book text-warning mr-2"></i>
+                                                    <strong>Cours :</strong>
+                                                    {{ $course->matiere->nom_matiere }}
+                                                </li>
+                                                
+                                
                         
                                                 <li class="list-group-item">
                         
