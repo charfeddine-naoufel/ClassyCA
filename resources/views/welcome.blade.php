@@ -185,6 +185,7 @@
                     </ol>
                 </div>
             </div>
+            
         </section>
         <!-- end slider section -->
     </div>
@@ -193,6 +194,30 @@
 
     <section class="about_section layout_padding" id="about">
         <div class="container">
+          <div class="row">
+            <div id="trailer" class="section d-flex justify-content-center embed-responsive embed-responsive-4by3">
+              <video class="embed-responsive-item" controls>
+                <source src="{{asset('assets/images/packs/sema7c.mp4')}}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="row">
+            <div id="trailer" class="section d-flex justify-content-center embed-responsive embed-responsive-4by3">
+              <video class="embed-responsive-item" controls>
+                <source src="{{asset('assets/images/packs/sema7proc.mp4')}}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="row">
+            <div id="trailer" class="section d-flex justify-content-center embed-responsive embed-responsive-4by3">
+              <video class="embed-responsive-item" controls>
+                <source src="{{asset('assets/images/packs/sema7promaxc.mp4')}}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
             <div class="row">
                 <div class="col-md-6 px-0">
                     <div class="img_container">
@@ -220,6 +245,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </section>
 
