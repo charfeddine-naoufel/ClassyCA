@@ -15,6 +15,7 @@ use App\Http\Controllers\LiveController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -68,8 +69,8 @@ Route::post('/session/renew', function () {
   session()->reflash();
   return response()->json(['status' => 'ok']);
 })->name('session.renew')->middleware('auth');
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Auth::routes();
+//contact routes
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 // middleware routes
 // Admin routes
 Route::middleware('admin')->prefix('admin')->group(function () {

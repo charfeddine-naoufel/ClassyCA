@@ -492,7 +492,8 @@
             <div class="">
                 <div class="row">
                     <div class="col-md-7 mx-auto">
-                        <form action="#">
+                      <form action="{{ route('contact.store') }}" method="POST">
+                        @csrf
                             <div class="contact_form-container">
                                 <div>
                                     <div>
