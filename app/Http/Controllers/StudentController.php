@@ -29,8 +29,7 @@ class StudentController extends Controller
     $student = Auth::user()->student;
     $courses = Course::with(['teacher'])
     ->where('classe_id', $student->classe_id)
-    ->latest()
-    ->take(6)
+    ->distinct()
     ->get();
     
 
@@ -149,7 +148,9 @@ class StudentController extends Controller
         ->where('user_id', Auth::id())
         ->firstOrFail();
 
-    $payments = collect(); // collection vide
+    $payments = Payment::where('student_id', $student->id)
+    ->orderByDesc('date_pay')
+    ->get();
 
     return view('Student.profile', compact('student', 'payments'));
 }
