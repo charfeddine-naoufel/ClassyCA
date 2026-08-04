@@ -27,9 +27,10 @@ class StudentController extends Controller
     public function home()
 {
     $student = Auth::user()->student;
-    $courses = Course::with(['teacher'])
+    $courses = Course::with(['teacher', 'matiere'])
     ->where('classe_id', $student->classe_id)
-    ->distinct()
+    ->where('group_id', $student->group_id)
+    ->latest()
     ->get();
     
 
