@@ -57,7 +57,20 @@
                                 Tél : 29 099 632
                             </span>
                         </a>
-                        <a href="" class="contact_link3">
+                        <div style="display: flex;">
+                            <a href="https://www.facebook.com/profile.php?id=100095494262350" class="contact_link2 px-2">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a href="" class="contact_link2 px-2">
+                              <i class="fa fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@ClassyAcademy-tn" class="contact_link2 px-2">
+                              <i class="fa fa-youtube" aria-hidden="true"></i>
+                            </a>
+                            
+
+                        </div>
+                        <a href="" class="contact_link3 ">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
                                 classyacademy@gmail.com
@@ -185,7 +198,7 @@
                     </ol>
                 </div>
             </div>
-            
+
         </section>
         <!-- end slider section -->
     </div>
@@ -194,7 +207,7 @@
 
     <section class="about_section layout_padding" id="about">
         <div class="container">
-          
+
             <div class="row">
                 <div class="col-md-6 px-0">
                     <div class="img_container">
@@ -222,7 +235,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
 
@@ -427,23 +440,23 @@
                         </div>
                     </div>
                     <div class="col-md-3 mt-3">
-                      <div class="card bg-dark text-white o-hidden mb-4">
-                          <img class="card-img" src="{{ asset('assets/images/packs/p3.jpeg') }}" alt="Card image">
+                        <div class="card bg-dark text-white o-hidden mb-4">
+                            <img class="card-img" src="{{ asset('assets/images/packs/p3.jpeg') }}" alt="Card image">
 
-                      </div>
-                  </div>
-                  <div class="col-md-3 mt-3">
-                    <div class="card bg-dark text-white o-hidden mb-4">
-                        <img class="card-img" src="{{ asset('assets/images/packs/p2.jpeg') }}" alt="Card image">
-
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3 mt-3">
-                  <div class="card bg-dark text-white o-hidden mb-4">
-                      <img class="card-img" src="{{ asset('assets/images/packs/p1.jpeg') }}" alt="Card image">
+                    <div class="col-md-3 mt-3">
+                        <div class="card bg-dark text-white o-hidden mb-4">
+                            <img class="card-img" src="{{ asset('assets/images/packs/p2.jpeg') }}" alt="Card image">
 
-                  </div>
-              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <div class="card bg-dark text-white o-hidden mb-4">
+                            <img class="card-img" src="{{ asset('assets/images/packs/p1.jpeg') }}" alt="Card image">
+
+                        </div>
+                    </div>
 
 
 
@@ -469,8 +482,8 @@
             <div class="">
                 <div class="row">
                     <div class="col-md-7 mx-auto">
-                      <form action="{{ route('contact.store') }}" method="POST">
-                        @csrf
+                        <form action="{{ route('contact.store') }}" method="POST">
+                            @csrf
                             <div class="contact_form-container">
                                 <div>
                                     <div>
