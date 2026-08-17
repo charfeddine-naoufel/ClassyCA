@@ -23,6 +23,8 @@
         rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Almarai:wght@300;400;700;800&display=swap"
         rel="stylesheet">
@@ -61,11 +63,14 @@
                             <a href="https://www.facebook.com/profile.php?id=100095494262350" class="contact_link2 px-2">
                                 <i class="fa fa-facebook" aria-hidden="true"></i>
                             </a>
-                            <a href="" class="contact_link2 px-2">
+                            <a href="https://www.instagram.com/classyacademy536?igsh=MTc1Y2R2ZWJ5NXBtaw==" class="contact_link2 px-2">
                               <i class="fa fa-instagram" aria-hidden="true"></i>
                             </a>
                             <a href="https://www.youtube.com/@ClassyAcademy-tn" class="contact_link2 px-2">
                               <i class="fa fa-youtube" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@classyacademy5" class="contact_link2 px-2">
+                              <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
                             </a>
                             
 
