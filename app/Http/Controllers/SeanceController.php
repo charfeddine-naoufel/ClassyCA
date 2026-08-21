@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Teacher;
 use App\Models\Course;
 use App\Models\Chapitre;
+use App\Models\Support;
 
 use Auth;
 
@@ -39,7 +40,12 @@ class SeanceController extends Controller
     // Récupération des séances appartenant aux chapitres du professeur
     $seances = Seance::whereIn('chapitre_id', $meschapitres->pluck('id'))->get();
 
-    return view('Teacher.seances.index', compact('courses', 'meschapitres', 'chapitresbyclasses', 'seances'));
+    $supports = Support::whereIn(
+        'chapitre_id',
+        $meschapitres->pluck('id')
+    )->get();
+
+    return view('Teacher.seances.index', compact('courses', 'meschapitres', 'chapitresbyclasses', 'seances','supports'));
 }
 
     /**
@@ -62,6 +68,7 @@ class SeanceController extends Controller
         'url'       => 'required',
         'course_id'       => 'required',
         'chapitre_id'       => 'required',
+        'support_id'       => 'nullable',
         
     );
     $validator = Validator::make($request->all(), $rules);
@@ -76,6 +83,7 @@ class SeanceController extends Controller
         $seance->url      =  $request-> url;
         $seance->course_id      =  $request-> course_id;
         $seance->chapitre_id      =  $request-> chapitre_id;
+        $seance->support_id      =  $request-> support_id;
         $seance->save();
 
         // redirect
@@ -112,10 +120,11 @@ class SeanceController extends Controller
        
         $rules = array(
             'titre'       => 'required',
-            'description'       => 'required',
+            'description'       => 'nullable',
             'url'       => 'required',
             'course_id'       => 'required',
             'chapitre_id'       => 'required',
+            'support_id'       => 'nullable',
         );
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -133,6 +142,7 @@ class SeanceController extends Controller
             $seance->url      =  $request-> url;
             $seance->course_id      =  $request-> course_id;
             $seance->chapitre_id      =  $request-> chapitre_id;
+            $seance->support_id      =  $request-> support_id;
             $seance->save();
     
             // redirect

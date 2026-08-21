@@ -43,7 +43,7 @@
                                 <li class="nav-item ">
                                     <a class="nav-link" id="video-pill" data-toggle="pill" href="#video" role="tab">
                                         <i class="nav-icon i-Video mr-1"></i>
-                                        Vidéos
+                                        Lives
                                     </a>
                                 </li>
 
@@ -142,8 +142,89 @@
                                         <div class="col-lg-3">
 
                                             <div class="list-group">
+                                                @foreach($videos as $seance)
 
-                                                @foreach ($videos as $seance)
+    <div class="card mb-4 shadow">
+
+        <div class="card-body">
+
+            <h4>
+                {{ $seance->titre }}
+            </h4>
+
+            {{-- Vidéo --}}
+            @php
+                preg_match(
+                    '/(?:v=|youtu\.be\/|embed\/)([^&?\/]+)/',
+                    $seance->url,
+                    $matches
+                );
+
+                $videoId = $matches[1] ?? null;
+            @endphp
+
+            @if($videoId)
+
+                <div class="embed-responsive embed-responsive-16by9">
+
+                    <iframe
+                        class="embed-responsive-item"
+                        src="https://www.youtube.com/embed/{{ $videoId }}"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+            @endif
+
+
+            {{-- PDF correspondant --}}
+            @if($seance->support)
+
+                <div class="mt-3 p-3 border rounded">
+
+                    <div class="d-flex align-items-center">
+
+                        <i class="i-File-PDF text-danger mr-3"
+                           style="font-size: 30px;">
+                        </i>
+
+                        <div>
+                            <small class="text-muted">
+                                Cours PDF
+                            </small>
+
+                            <h5 class="mb-0">
+                                {{ $seance->support->nom }}
+                            </h5>
+                        </div>
+
+                        <div class="ml-auto">
+
+                            <a href="{{ $seance->support->chemin }}"
+                               target="_blank"
+                               class="btn btn-primary">
+
+                                <i class="i-Eye mr-1"></i>
+                                Consulter
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            @endif
+
+        </div>
+
+    </div>
+
+@endforeach
+
+                                                {{-- @foreach ($videos as $seance)
                                                     @php
 
                                                         preg_match('/(?:v=|youtu\.be\/)([^&]+)/', $seance->url, $m);
@@ -165,7 +246,7 @@
                                                         </h6>
 
                                                     </a>
-                                                @endforeach
+                                                @endforeach --}}
 
                                             </div>
 

@@ -13,4 +13,9 @@ class Support extends Model
     {
         return $this->belongsTo(Chapitre::class);
     }
+
+    public function seances()
+    {
+        return $this->hasMany(Seance::class);
+    }
 }

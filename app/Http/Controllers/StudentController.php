@@ -251,10 +251,10 @@ public function showChapitre($coursId, $chapitreId)
     }
 
     // Récupérer le chapitre avec ses vidéos et ses supports
-    $chapitre = Chapitre::with(['seances', 'supports'])
-        ->where('id', $chapitreId)
-        ->where('course_id', $coursId)
-        ->firstOrFail();
+    $chapitre = Chapitre::with(['seances.support','supports'])
+    ->where('id', $chapitreId)
+    ->where('course_id', $coursId)
+    ->firstOrFail();
         
     // Filtrer les supports
     $cours = $chapitre->supports->where('type', 'Cours')->values();

@@ -131,6 +131,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="document_id" class="col-sm-2 col-form-label">Document :</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control form-control-rounded" name="support_id" >
+                                        <option value="">Choisir un document</option>
+                                        @foreach ($supports as $support)
+                                        <option value="{{ $support->id }}">{{ $support->nom }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-sm-10 offset-sm-2">
                                     <button type="submit" class="btn btn-success">Enregistrer</button>
                                 </div>
@@ -194,6 +205,17 @@
                                     <option value="">Choisir un chapitre</option>
                                     @foreach ($meschapitres as $chapitre)
                                     <option value="{{ $chapitre->id }}">{{ $chapitre->titre }} -- {{ $chapitre->course->classe->slug }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="edit_support_id" class="col-sm-2 col-form-label">Document :</label>
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-rounded" id="edit_support_id" >
+                                    <option value="">Choisir un document</option>
+                                    @foreach ($supports as $support)
+                                    <option value="{{ $support->id }}">{{ $support->nom }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -270,6 +292,7 @@
                 $('#edit_url').val(data.data.url);
                 $('#edit_course_id').val(data.data.course_id);
                 $('#edit_chapitre_id').val(data.data.chapitre_id);
+                $('#edit_support_id').val(data.data.support_id);
             });
         });
 
@@ -285,6 +308,7 @@
                 url: $('#edit_url').val(),
                 course_id: $('#edit_course_id').val(),
                 chapitre_id: $('#edit_chapitre_id').val()
+                support_id: $('#edit_support_id').val()
             };
 
             $.ajax({
