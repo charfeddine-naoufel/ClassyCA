@@ -307,7 +307,7 @@
                 description: $('#edit_description').val(),
                 url: $('#edit_url').val(),
                 course_id: $('#edit_course_id').val(),
-                chapitre_id: $('#edit_chapitre_id').val()
+                chapitre_id: $('#edit_chapitre_id').val(),
                 support_id: $('#edit_support_id').val()
             };
 
