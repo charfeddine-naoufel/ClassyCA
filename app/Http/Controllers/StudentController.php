@@ -349,7 +349,7 @@ public function offres()
                 'password' => Hash::make($plainPassword),
                 'role' => 'student',
             ]);
-    
+            $visiteur = Group::where('nomg', 'Visiteur')->firstOrFail();
             $eleve = Student::create([
                 'nom_fr' => $request->nom_fr,
                 'prenom_fr' => $request->prenom_fr,
@@ -361,6 +361,7 @@ public function offres()
                 'classe_id' => $request->classe_id,
                 'password' => Hash::make($plainPassword),
                 'user_id' => $user->id,
+                'group_id' => $visiteur->id,
             ]);
     
             // 🔑 ENVOYER L'EMAIL DE BIENVENUE
